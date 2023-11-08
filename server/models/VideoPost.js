@@ -18,18 +18,18 @@ const videoPostSchema = new Schema({
     required: true,
   },
   postedBy: {
-    type: String,
-    ref: "Profile",
+    type: {
+      type: Schema.Types.ObjectId,
+      ref: "Profile",
+    },
+    required: true,
   },
   videoSRC: {
     type: String,
     required: true,
   },
-  dateCreated: {
-    type: Date,
-    default: Date.now(),
-  },
-//   comments: [commentSchema],
+}, {
+  timestamps: true,
 });
 
 const VideoPost = model('VideoPost', videoPostSchema)

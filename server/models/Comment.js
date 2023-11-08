@@ -10,18 +10,14 @@ const commentSchema = new Schema({
     maxlength: 280,
   },
   postedBy: {
-    type: {
-      type: Schema.Types.ObjectId,
-      ref: "Profile",
-    },
+    type: Schema.Types.ObjectId,
+    ref: "Profile",
     required: true,
   },
   postedTo: {
-    type: {
-      type: Schema.Types.ObjectId,
-      ref: "VideoPost"
-   },
-   required: true,
+    type: Schema.Types.ObjectId,
+    ref: "VideoPost",
+    required: true,
   },
 }, {
   timestamps: true,

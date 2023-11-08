@@ -1,78 +1,62 @@
 [
   {
-    "name": "Brian Kernighan",
+    "username": "Brian Kernighan",
     "email": "bkernighan@techfriends.dev",
     "password": "password01",
-    "skills": ["AWK", "AMPL", "Unix"]
+    "uploadedVideos": []
   },
   {
-    "name": "Max Kanat-Alexander",
+    "username": "Max Kanat-Alexander",
     "email": "mkanatalexander@techfriends.dev",
     "password": "password02",
-    "skills": ["Java", "Perl", "Apache", "Python"]
+    "uploadedVideos": []
   },
   {
-    "name": "Amiko",
+    "username": "Amiko",
     "email": "amiko@techfriends.dev",
     "password": "password03",
-    "skills": ["NodeJS", "MySQL", "MongoDB", "React", "CSS-in-JS"]
+    "uploadedVideos": []
   },
   {
-    "name": "Kent Beck",
+    "username": "Kent Beck",
     "email": "kbeck@techfriends.dev",
     "password": "password04",
-    "skills": [
-      "Test-Driven Development",
-      "Extreme Programming",
-      "Software Design Patterns",
-      "JUnit"
-    ]
+    "uploadedVideos": []
   },
   {
-    "name": "Edward V. Berard",
+    "username": "Edward V. Berard",
     "email": "evberard@techfriends.dev",
     "password": "password05",
-    "skills": ["Object-Oriented Design"]
+    "uploadedVideos": []
   },
   {
-    "name": "Alan Kay",
+    "username": "Alan Kay",
     "email": "akay@techfriends.dev",
     "password": "password06",
-    "skills": [
-      "Graphical User Interface (GUI) Design",
-      "Jazz Guitar",
-      "Education"
-    ]
+    "uploadedVideos": []
   },
   {
-    "name": "C.A.R. Hoare",
+    "username": "C.A.R. Hoare",
     "email": "choare@techfriends.dev",
     "password": "password07",
-    "skills": ["Algorithms", "Quicksort", "Hoare Logic"]
+    "uploadedVideos": []
   },
   {
-    "name": "David Thomas",
+    "username": "David Thomas",
     "email": "dthomas@techfriends.dev",
     "password": "password08",
-    "skills": ["Author", "Code Kata", "Ruby", "Pragmatic Programming"]
+    "uploadedVideos": []
   },
   {
-    "name": "Donald Knuth",
+    "username": "Donald Knuth",
     "email": "dknuth@techfriends.dev",
     "password": "password09",
-    "skills": ["TeX Computer Typesetting", "Algorithms", "Author"]
+    "uploadedVideos": []
   },
   {
-    "name": "Lernantino",
+    "username": "Lernantino",
     "email": "lernantino@techfriends.dev",
     "password": "password10",
-    "skills": [
-      "JavaScript",
-      "CSS",
-      "HTML",
-      "Design Systems",
-      "Typescript",
-      "PWAs"
-    ]
+    "uploadedVideos": []
   }
 ]

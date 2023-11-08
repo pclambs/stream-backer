@@ -10,7 +10,7 @@ const videoPostSchema = new Schema({
   description: {
     type: String,
     trim: true,
-    maxlength: 500,
+    maxlength: 800,
   },
   thumbnail: {
     // TODO Check about auto-generating
@@ -18,10 +18,8 @@ const videoPostSchema = new Schema({
     required: true,
   },
   postedBy: {
-    type: {
-      type: Schema.Types.ObjectId,
-      ref: "Profile",
-    },
+    type: Schema.Types.ObjectId,
+    ref: "Profile",
     required: true,
   },
   videoSRC: {

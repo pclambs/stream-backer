@@ -39,7 +39,7 @@
     "username": "C.A.R. Hoare",
     "email": "choare@techfriends.dev",
     "password": "password07",
-    "uploadedVideos": ["Algorithms", "Quicksort", "Hoare Logic"]
+    "uploadedVideos": []
   },
   {
     "username": "David Thomas",

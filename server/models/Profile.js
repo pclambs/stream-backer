@@ -1,8 +1,10 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const videoPostSchema = require('./VideoPost')
+const commentSchema = require('./Comment')
 
 const profileSchema = new Schema({
-  name: {
+  username: {
     type: String,
     required: true,
     unique: true,
@@ -12,19 +14,17 @@ const profileSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    match: [/.+@.+\..+/, 'Must match an email address!'],
+    match: [/.+@.+\..+/, "Must match an email address!"],
   },
   password: {
     type: String,
     required: true,
     minlength: 5,
   },
-  skills: [
-    {
-      type: String,
-      trim: true,
-    },
-  ],
+  uploadedVideos: [ videoPostSchema ],
+
+  comments: [ commentSchema ],
+  
 });
 
 // set up pre-save middleware to create password

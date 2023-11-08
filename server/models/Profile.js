@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const videoPostSchema = require('./VideoPost')
+const VideoPost = require('./VideoPost')
 const commentSchema = require('./Comment')
 
 const profileSchema = new Schema({
@@ -21,9 +21,13 @@ const profileSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  uploadedVideos: [ videoPostSchema ],
-
-  comments: [ commentSchema ],
+  uploadedVideos: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: "VideoPost"
+    }
+  ],
+  // comments: [ commentSchema ],
   
 });
 

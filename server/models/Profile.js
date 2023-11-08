@@ -21,14 +21,15 @@ const profileSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  uploadedVideos: [
-    {
-    type: Schema.Types.ObjectId,
-    ref: "VideoPost"
-    }
-  ],
-  // comments: [ commentSchema ],
-  
+  uploadedVideos: {
+    type: [
+      {
+      type: Schema.Types.ObjectId,
+      ref: "VideoPost"
+      }
+    ],
+    default: [],
+  },
 });
 
 // set up pre-save middleware to create password

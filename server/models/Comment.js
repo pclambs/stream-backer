@@ -17,7 +17,7 @@ const commentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Profile",
   },
-  videoPostedTo: {
+  postedTo: {
     type: Schema.Types.ObjectId,
     ref: "VideoPost"
   }

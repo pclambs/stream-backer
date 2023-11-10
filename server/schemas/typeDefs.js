@@ -4,7 +4,7 @@ const typeDefs = `
     username: String!
     email: String!
     password: String!
-    uploadedVideos: [ID]!
+    uploadedVideos: [VideoPost]!
   }
 
   type VideoPost {
@@ -15,6 +15,7 @@ const typeDefs = `
     postedBy: String
     videoSRC: String!
     createdAt: String
+    comments: [Comment]!
   }
 
   type Comment {
@@ -35,7 +36,6 @@ const typeDefs = `
     videoPosts(profileId: ID): [VideoPost]!
     videoPost(videoPostId: ID!): VideoPost
     comments(videoPostId: ID): [Comment]!
-    #comment(commentId: ID!): Comment
   }
 
   type Mutation {

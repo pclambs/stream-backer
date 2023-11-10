@@ -4,19 +4,19 @@ const { signToken, AuthenticationError } = require('../utils/auth')
 const resolvers = {
   Query: {
     profiles: async () => {
-      return await Profile.find()
+      return await Profile.find().populate("uploadedVideos")
     },
     profile: async (parent, { profileId }) => {
-      return await Profile.findOne({ _id: profileId })
+      return await Profile.findOne({ _id: profileId }).populate("uploadedVideos")
     },
     videoPosts: async () => {
-      return await VideoPost.find()
+      return await VideoPost.find().populate("comments")
     },
     videoPost: async (parent, { videoPostId }) => {
-      return await VideoPost.findOne({ _id: videoPostId })
+      return await VideoPost.findOne({ _id: videoPostId }).populate("comments")
     },
     comments: async (parent, { videoPostId }) => {
-      return await Comment.find({ _id: videoPostId })
+      return await Comment.find({ postedTo: videoPostId })
     },
   },
 

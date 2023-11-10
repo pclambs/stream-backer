@@ -14,7 +14,7 @@ const Footer = () => {
             &larr; Go Back
           </button>
         )}
-        <h4>&copy; {new Date().getFullYear()} - Tech Friends</h4>
+        <h4>&copy; {new Date().getFullYear()} - Adam Baker, Paul Lambert, Max Rice, & Lindsay Shank-Kirchner</h4>
       </div>
     </footer>
   );

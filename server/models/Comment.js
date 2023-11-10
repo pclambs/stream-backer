@@ -21,8 +21,7 @@ const commentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "VideoPost"
   }
-  
-});
+})
   
 
 const Comment = model('Comment', commentSchema)

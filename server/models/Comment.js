@@ -9,20 +9,20 @@ const commentSchema = new Schema({
     trim: true,
     maxlength: 280,
   },
+  dateCreated: {
+    type: Date,
+    default: Date.now(),
+  },
   postedBy: {
     type: Schema.Types.ObjectId,
     ref: "Profile",
-    required: true,
   },
-  postedTo: {
+  videoPostedTo: {
     type: Schema.Types.ObjectId,
-    ref: "VideoPost",
-    required: true,
-  },
-}, {
-  timestamps: true,
-});
-
+    ref: "VideoPost"
+  }
+})
+  
 
 const Comment = model('Comment', commentSchema)
 

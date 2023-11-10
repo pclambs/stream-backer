@@ -28,12 +28,19 @@ db.once('open', async () => {
     for ( const comment of commentSeeds) {
 
       const randomVideo = videos[Math.floor(Math.random() * videos.length)]
-
-      await Comment.create({
+      const createdComment = await Comment.create({
         ...comment,
         postedBy: randomVideo.postedBy,
         postedTo: randomVideo._id
       })
+      
+      console.log(createdComment)
+
+      await VideoPost.findByIdAndUpdate(
+        randomVideo._id, 
+        { $push: { comments: createdComment._id } },
+        { new: true }
+      )
     }
 
     console.log('all done!')

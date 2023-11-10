@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose')
-const commentSchema = require('./Comment')
+// const commentSchema = require('./Comment')
 
 const videoPostSchema = new Schema({
   title: {
@@ -26,6 +26,7 @@ const videoPostSchema = new Schema({
     type: String,
     required: true,
   },
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 }, {
   timestamps: true,
 });

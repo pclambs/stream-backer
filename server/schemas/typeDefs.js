@@ -52,6 +52,12 @@ const typeDefs = `
     addComment(commentBody: String!, postedBy: ID!, postedTo: ID!): Comment
 
     removeComment(commentId: ID!): Comment
+
+    updateProfile(profileId: ID!, username: String, email: String, password: String): Profile
+
+    updateVideoPost(videoPostId: ID!, title: String, description: String, thumbnail: String, videoSRC: String): VideoPost
+
+    updateComment(commentId: ID!, commentBody: String): Comment
   }
 `
 

@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose')
-const commentSchema = require('./Comment')
+// const commentSchema = require('./Comment')
 
 const videoPostSchema = new Schema({
   title: {

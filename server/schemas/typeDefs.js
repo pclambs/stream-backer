@@ -1,6 +1,4 @@
-import { gql } from "@apollo/server"
-
-const typeDefs = gql`
+const typeDefs = `
   type Profile {
     _id: ID
     username: String!
@@ -42,6 +40,8 @@ const typeDefs = gql`
 
   type Mutation {
     addProfile(username: String!, email: String!, password: String!): Auth
+
+    removeProfile(profileId: ID!): Profile
     
     login(email: String!, password: String!): Auth
 
@@ -52,8 +52,6 @@ const typeDefs = gql`
     addComment(commentBody: String!, postedBy: ID!, postedTo: ID!): Comment
 
     removeComment(commentId: ID!): Comment
-    
-    removeProfile(profileId: ID!): Profile
   }
 `
 

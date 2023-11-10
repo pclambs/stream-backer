@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const VideoPost = require('./VideoPost')
-const commentSchema = require('./Comment')
+// const VideoPost = require('./VideoPost')
+// const commentSchema = require('./Comment')
 
 const profileSchema = new Schema({
   username: {

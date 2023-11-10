@@ -1,4 +1,3 @@
-import './App.css';
 import {
   ApolloClient,
   InMemoryCache,
@@ -8,7 +7,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 
-import Header from './components/Header';
+import Header from './components/Header/';
 import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint

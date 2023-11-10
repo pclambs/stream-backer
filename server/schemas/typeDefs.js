@@ -58,6 +58,8 @@ const typeDefs = `
     updateVideoPost(videoPostId: ID!, title: String, description: String, thumbnail: String, videoSRC: String): VideoPost
 
     updateComment(commentId: ID!, commentBody: String): Comment
+
+    testUpload: String
   }
 `
 

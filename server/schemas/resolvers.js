@@ -1,5 +1,9 @@
 const { Profile, VideoPost, Comment } = require('../models')
 const { signToken, AuthenticationError } = require('../utils/auth')
+const cloudinary = require('cloudinary').v2
+const path = require('path')
+
+cloudinary.config()
 
 const resolvers = {
   Query: {
@@ -70,7 +74,19 @@ const resolvers = {
     removeComment: async (parent, { commentId }) => {
       return await Comment.findOneAndDelete({ _id: commentId })
     },
-    
+    testUpload: async () =>{
+      try {
+        const imagePath = path.join(__dirname, '../../client/src/assets/stream-backer-logo.svg')
+        const result = await cloudinary.uploader.upload(imagePath)
+
+        console.log(result)
+        return 'success'
+      } catch (err) {
+        console.log(err)
+        return 'failure'
+      }
+
+    },
   },
 }
 

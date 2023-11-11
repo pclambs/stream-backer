@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ErrorPage from './pages/Error';
+import Video from './pages/Video.jsx'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,9 @@ const router = createBrowserRouter([
       }, {
         path: '/profiles/:profileId',
         element: <Profile />
+      }, {
+        path: '/video',
+        element: <Video />
       }
     ]
   },

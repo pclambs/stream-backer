@@ -52,6 +52,16 @@ body {
   color: #e7ecef3b;
 }
 
+.back-btn {
+  position: fixed !important;
+  bottom: 4rem !important;
+  transform: translateX(-50%) !important;
+  border-radius: 50% !important;
+  min-width: 40px !important;
+  height: 40px !important;
+  left: 50% !important;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -64,3 +74,20 @@ form {
   gap: .5rem;
   width: 20rem;
 }
+
+.login-link,
+.signup-link {
+  text-align: center;
+}
+
+.login-link a,
+.signup-link a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+  &:hover {
+    color: var(--accent-dark);
+    text-decoration: underline;
+  }
+}
+

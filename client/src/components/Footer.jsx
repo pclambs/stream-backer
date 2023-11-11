@@ -14,12 +14,12 @@ const Footer = () => {
             color="primary" 
             size='small'
             className='back-btn'
-            sx={{
-              borderRadius: '50%', 
-              minWidth: '40px',    
-              height: '40px',     
-              padding: '10px',    
-            }}
+            // sx={{
+            //   borderRadius: '50%', 
+            //   minWidth: '40px',    
+            //   height: '40px',     
+            //   padding: '10px',    
+            // }}
           >
             &larr;
           </Button>

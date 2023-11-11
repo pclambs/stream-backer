@@ -54,38 +54,48 @@ const Login = (props) => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
-                <CustomTextField
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                  variant='outlined'
-                  label='email'
-                  margin='normal'
-                />
-                <CustomTextField
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                  variant='outlined'
-                  label='password'
-                  margin='normal'
-                />
-                <Button 
-                  variant="contained" 
-                  color="primary" 
-                  type="submit" 
-                  size='large'
-                  sx={{
-                    width: '100%',
-                    marginTop: '1rem'
-                  }}
-                >
-                  Submit
-                </Button>
-              </form>
+              <div>
+                <form onSubmit={handleFormSubmit}>
+                  <CustomTextField
+                    name="email"
+                    type="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                    variant='outlined'
+                    label='Email'
+                    margin='normal'
+                  />
+                  <CustomTextField
+                    name="password"
+                    type="password"
+                    value={formState.password}
+                    onChange={handleChange}
+                    variant='outlined'
+                    label='Password'
+                    margin='normal'
+                  />
+                  <Button 
+                    variant="contained" 
+                    color="primary" 
+                    type="submit" 
+                    size='large'
+                    sx={{
+                      width: '100%',
+                      marginTop: '1rem'
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </form>
+                <div className="signup-link">
+                  <p>
+                    Don't have an account yet?{' '}
+                    <Link to="/signup">
+                      Sign up!
+                    </Link>
+                  </p>
+                </div>
+              </div>
             )}
 
             {error && (

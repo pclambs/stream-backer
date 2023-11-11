@@ -17,7 +17,10 @@ const Header = () => {
         </Link>
         <div className='log-sign-btn-div'>
           {Auth.loggedIn() ? (
-            <Button onClick={logout}>
+            <Button 
+              variant='text'
+              color='primary'
+              onClick={logout}>
               Logout
             </Button>
           ) : (
@@ -27,14 +30,14 @@ const Header = () => {
                 color='primary'
                 component={Link}
                 to="/login">
-                Login
+                Log in
               </Button>
               <Button 
                 variant='text'
                 color='secondary'
                 component={Link}
                 to="/signup">
-                Signup
+                Sign up
               </Button>
             </>
           )}

@@ -24,7 +24,7 @@ const Footer = () => {
             &larr;
           </Button>
         )}
-        <h4 className='footer-text'>&copy; {new Date().getFullYear()} - Adam Baker, Paul Lambert, Max Rice, & Lindsay Shank-Kirchner</h4>
+        <p className='footer-text'>&copy; {new Date().getFullYear()} - Adam Baker, Paul Lambert, Max Rice, & Lindsay Shank-Kirchner</p>
       </div>
     </footer>
   )

@@ -1,15 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-
 import { useMutation } from '@apollo/client'
 import { ADD_PROFILE } from '../utils/mutations'
+import Auth from '../utils/auth'
 
-// import TextField from '@mui/material/TextField'
 import CustomTextField from '../components/CustomTextField'
-
 import Button from '@mui/material/Button'
 
-import Auth from '../utils/auth'
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -47,8 +44,8 @@ const Signup = () => {
 
   return (
     <main>
-      <div className="sign-up-div">
-        <h4>Sign Up</h4>
+      <div className="card">
+        <h2>Sign Up</h2>
         <div>
           {data ? (
             <p>
@@ -88,6 +85,11 @@ const Signup = () => {
                 variant="contained" 
                 color="primary" 
                 type="submit" 
+                size='large'
+                  sx={{
+                    width: '100%',
+                    marginTop: '1rem'
+                  }}
               >
                 Submit
               </Button>

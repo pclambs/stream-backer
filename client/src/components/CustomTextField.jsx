@@ -15,6 +15,18 @@ const CustomTextField = styled(TextField)({
     },
     '& .MuiInputBase-input': {
       color: theme.palette.secondary.main, // input text color
+      '&:-webkit-autofill': {
+        WebkitBoxShadow: '0 0 0 100px #131313 inset',
+        WebkitTextFillColor: 'white',
+      },
+      '&:-webkit-autofill:hover': {
+        WebkitBoxShadow: '0 0 0 100px #131313 inset',
+        WebkitTextFillColor: 'white',
+      },
+      '&:-webkit-autofill:focus': {
+        WebkitBoxShadow: '0 0 0 100px #131313 inset',
+        WebkitTextFillColor: 'white',
+      },
     },
   },
   '& .MuiInputLabel-root': {

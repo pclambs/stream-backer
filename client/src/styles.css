@@ -8,6 +8,7 @@
 body {
   background-color: var(--dark);
   color: var(--light);
+  font-family: 'Roboto', sans-serif;
 }
 
 .logo {
@@ -47,5 +48,19 @@ body {
   bottom: 0;
   width: 100%;
   text-align: center;
+  font-weight: 300;
   color: #e7ecef3b;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  width: 20rem;
 }

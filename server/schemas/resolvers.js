@@ -33,7 +33,7 @@ const resolvers = {
       return { token, profile }
     },
     updateProfile: async (parent, {profileId, username, email, password}) => {
-      return await Profile.findByIdAndUpdate(profileId, {username,email,password}, {new: true})
+      return await Profile.findByIdAndUpdate(profileId, { username, email, password }, { new: true })
     },
     removeProfile: async (parent, { profileId }) => {
       return Profile.findOneAndDelete({ _id: profileId })
@@ -58,8 +58,8 @@ const resolvers = {
       const videoPost = await VideoPost.create({ title, description, thumbnail, postedBy, videoSRC })
       return videoPost
     },
-    updateVideoPost: async (parent, {videoPostId, title, description, thumbnail, videoSRC}) => {
-      return await VideoPost.findByIdAndUpdate(videoPostId, {title, description, thumbnail, videoSRC}, {new: true})
+    updateVideoPost: async (parent, { videoPostId, title, description, thumbnail, videoSRC }) => {
+      return await VideoPost.findByIdAndUpdate(videoPostId, { title, description, thumbnail, videoSRC }, { new: true })
     },
     removeVideoPost: async (parent, { videoPostId }) => {
       return await VideoPost.findOneAndDelete({ _id: videoPostId })
@@ -68,8 +68,8 @@ const resolvers = {
       const comment = await Comment.create({ commentBody, postedBy, postedTo })
       return comment
     },
-    updateComment: async (parent, {commentId, commentBody}) => {
-      return await Comment.findByIdAndUpdate(commentId, {commentBody}, {new:true})
+    updateComment: async (parent, { commentId, commentBody }) => {
+      return await Comment.findByIdAndUpdate(commentId, { commentBody }, { new:true })
     },
     removeComment: async (parent, { commentId }) => {
       return await Comment.findOneAndDelete({ _id: commentId })

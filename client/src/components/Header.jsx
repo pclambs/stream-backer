@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
-
+import logo from '../assets/stream-backer.png'
 import Auth from '../utils/auth';
+
+import Button from '@mui/material/Button'
 
 const Header = () => {
   const logout = (event) => {
@@ -9,29 +11,31 @@ const Header = () => {
   };
   return (
     <header>
-      <div>
+      <div className='header-div'>
         <Link to="/">
-          <h1>
-            Stream Backer
-          </h1>
+          <img src={logo} alt='logo' className='logo'/>
         </Link>
-        <div>
+        <div className='log-sign-btn-div'>
           {Auth.loggedIn() ? (
-            <button onClick={logout}>
+            <Button onClick={logout}>
               Logout
-            </button>
+            </Button>
           ) : (
             <>
-              <Link 
-                className='btn-link'
+              <Button 
+                variant='contained'
+                color='primary'
+                component={Link}
                 to="/login">
                 Login
-              </Link>
-              <Link 
-                className='btn-link'
+              </Button>
+              <Button 
+                variant='text'
+                color='secondary'
+                component={Link}
                 to="/signup">
                 Signup
-              </Link>
+              </Button>
             </>
           )}
         </div>

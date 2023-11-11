@@ -8,7 +8,6 @@ export const LOGIN_USER = gql`
         _id
         username
         email
-        password
       }
     }
   }
@@ -22,7 +21,6 @@ export const ADD_PROFILE = gql`
         _id
         username
         email
-        password
       }
     }
   }
@@ -36,21 +34,19 @@ export const UPDATE_PROFILE = gql`
         _id
         username
         email
-        password
       }
     }
   }
 `
 
 export const REMOVE_PROFILE = gql`
-  mutation updateProfile($profileId: ID!) {
+  mutation removeProfile($profileId: ID!) {
     removeProfile(profileId: $profileId) {
       token
         profile {
         _id
         username
         email
-        password
       }
     }
   }

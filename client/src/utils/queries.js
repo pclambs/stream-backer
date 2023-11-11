@@ -6,7 +6,6 @@ export const QUERY_PROFILES = gql`
       _id
       username
       email
-      password
       uploadedVideos
     }
 }
@@ -18,7 +17,6 @@ export const QUERY_SINGLE_PROFILE = gql`
       _id
       username
       email
-      password
       uploadedVideos
     }
 }

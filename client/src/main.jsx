@@ -9,6 +9,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ErrorPage from './pages/Error';
 import Video from './pages/Video.jsx'
+// import Upload from './pages/Upload.jsx'
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
       }, {
         path: '/video',
         element: <Video />
+      }, {
+        // path: '/upload',
+        // element: <Upload />
       }
+
     ]
   },
 ]);

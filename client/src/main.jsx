@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         path: '/profiles/:profileId',
         element: <Profile />
       }, {
-        path: '/video',
+        path: '/video/:videoPostId',
         element: <Video />
       }, {
         // path: '/upload',

@@ -1,0 +1,1 @@
+//Card for displaying an individual comment

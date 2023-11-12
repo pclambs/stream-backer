@@ -1,14 +1,19 @@
 import { useQuery } from '@apollo/client';
 import { QUERY_PROFILES } from '../utils/queries'
+import NavBar from '../components/NavBar'
+import Video from '../components/Video'
+
+
 
 const Home = () => {
 
   return (
-    <main>
-      <h2> Hello World! </h2>
-      
-    </main>
-  )
+    <div>
+      <NavBar />
+      <Video />
+  
+    </div>
+  );
 }
 
 export default Home;

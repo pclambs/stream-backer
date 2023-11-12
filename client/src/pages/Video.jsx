@@ -1,4 +1,12 @@
-import { useQuery } from '@apollo/client'
+import NavBar from "../components/NavBar";
 
 
-export default Video
+
+const Video = () => {
+  return <div>
+    <NavBar />
+    <Video />
+
+  </div>;
+};
+export default Video;

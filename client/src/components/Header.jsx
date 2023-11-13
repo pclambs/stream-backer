@@ -1,6 +1,8 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
+
+import SearchBar from './SearchBar'
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -25,10 +27,18 @@ const logout = (event) => {
 
 function Header() {
 
-  const pages = ["Profile", "Video Feed", "Supporters"];
+  const [search, setSearch] = useState("")
+  const pages = ["Liked Videos", "Video Feed", "Supporters"];
   const settings = Auth.loggedIn()
-    ? ["Profile", "Account", "Dashboard", { title: "Logout", action: logout }]
-    : [{ title: "Log in", link: "/login" }, { title: "Sign up", link: "/signup" }]
+    ? [
+      { title: "Profile", link: "/profile"},
+      { title: "Account", link: "/account"},
+      { title: "Upload", link: "/upload"},
+      { title: "Log out", action: logout }
+    ] : [
+      { title: "Log in", link: "/login" }, 
+      { title: "Sign up", link: "/signup" }
+    ]
   
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -53,10 +63,17 @@ function Header() {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+
+            {/* Left-aligned items */}
+            <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
               <Link to="/">
-                <img src={playLogo} alt='logo' className='play-logo'/>
-              </Link>
+                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                  <img src={logo} alt='Main Logo' className='logo'/>
+                </Box>
+                <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+                  <img src={playLogo} alt='Play Logo' className='play-logo'/>
+                </Box>
+              </Link>       
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -82,7 +99,7 @@ function Header() {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: "block",
                 }}
               >
                 {pages.map((page) => (
@@ -92,22 +109,14 @@ function Header() {
                 ))}
               </Menu>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              <Link to="/">
-              <img src={logo} alt='logo' className='logo'/>
-              </Link>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
-              ))}
+            
+            {/* Centered SearchBar */}
+            <Box sx={{ flexGrow: 0, display: 'flex', justifyContent: 'center', width: '100%' }}>
+              <SearchBar search={search} setSearch={setSearch} />
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            {/* Right-aligned items */}
+            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -145,6 +154,7 @@ function Header() {
                 ))}
               </Menu>
             </Box>
+
           </Toolbar>
         </Container>
       </AppBar>

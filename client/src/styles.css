@@ -15,35 +15,16 @@ body {
   max-width: 7rem;
   width: 7rem;
   filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
-  padding: .5rem 0 0 0;
-  transition: all .2s ease-in-out;
+  padding: 0 .3rem 0 0;
 }
 
 .play-logo {
   max-width: 2.5rem;
+  width: 2.5rem;
   margin-bottom: .2rem;
-  width: 3rem;
   filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
-  padding: .4rem 0 0 0;
-  transition: all .2s ease-in-out;
+  padding: .4rem .4rem 0 0;
 }
-
-/* header div that contains .logo and .log-sign-btn-div */
-.header-div {
-  display: flex; 
-  justify-content: space-between;
-  /* align-items: center; */
-  padding: 0;
-}
-
-/* login/signup/logout btn on top right */
-.log-sign-btn-div {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  gap: .5rem;
-}
-
 
 .footer-text {
   position: fixed;

@@ -23,6 +23,8 @@ const VideoPlayer = ({videoPost}) => {
   }
 
   const {title, thumbnail, postedBy, videoSRC, createdAt} = videoPost
+  const v = JSON.stringify(videoPost, null, 2)
+  console.log(v)
 
   return (
     <Card sx={{ display: "flex" }}>

@@ -17,7 +17,7 @@ const resolvers = {
       return await VideoPost.find().populate("comments")
     },
     videoPost: async (parent, { videoPostId }) => {
-      return await VideoPost.findOne({ _id: videoPostId }).populate("comments").populate('postedBy')
+      return await VideoPost.findOne({ _id: videoPostId }).populate("comments")
     },
     comments: async (parent, { videoPostId }) => {
       return await Comment.find({ postedTo: videoPostId })

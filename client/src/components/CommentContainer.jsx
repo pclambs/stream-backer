@@ -2,7 +2,7 @@
 //Displays "Submit Comment" or "login now" depending on login status
 //Contains CommentCards
 
-import CommentCard from "./CommentCard"
+import CommentCard from "./CommentCard.jsx"
 
 const CommentContainer = ({comments}) => {
 

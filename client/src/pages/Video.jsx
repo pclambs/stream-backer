@@ -6,8 +6,6 @@ import VideoPlayer from "../components/VideoPlayer"
 import CommentContainer from "../components/CommentContainer"
 
 
-
-
 const Video = () => {
 
   // TODO add comment variable
@@ -20,15 +18,14 @@ const Video = () => {
   
 
   useEffect(() => {
-    // set comment state to comment array
-    if (data && data.videoPost.comments) {
-      setComments(data.videoPost.comments)
+    
+    // set videoPost state to videoPost variable to use with VideoPlayer
+    if (data?.videoPost) {
       setVideoPost(data.videoPost)
-    }
+      // set comment state to comment array or blank array
+        setComments(data.videoPost.comments || []) 
+    }    
   }, [data])
-
-  // set variable to pass videoPost into VideoPlayer
- 
 
   return (
     <div>
@@ -37,9 +34,9 @@ const Video = () => {
     {/* display loading */}
     {loading && <p>Loading...</p>}
     {/* create video player and pass in videoPost object */}
-    <VideoPlayer videoPost={videoPost}/>
+    <VideoPlayer videoPost={videoPost ? videoPost : ''}/>
     {/* create comment container and pass in comment state */}
-    <CommentContainer comments={comments} />
+    <CommentContainer comments={comments ? comments : ''} />
   </div>
   )
 }

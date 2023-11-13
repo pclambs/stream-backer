@@ -15,8 +15,8 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 
 const VideoPlayer = ({videoPost}) => {
   const theme = useTheme();
-  const vp = JSON.stringify(videoPost, null, 2)
-  console.log(vp)
+  // const vp = JSON.stringify(videoPost, null, 2)
+  // console.log(vp)
 
   if (!videoPost) {
     return <p>No video found</p>

@@ -9,7 +9,6 @@ const CommentContainer = ({comments}) => {
 
     return (
         <div className="container comment-container">
-
             {comments.map((comment, index) => (
                 <CommentCard key={index} comment={comment} />
             ))}

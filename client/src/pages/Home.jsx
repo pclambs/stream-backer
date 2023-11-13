@@ -20,25 +20,29 @@ const Home = () => {
     setSelectedTags(['all'])
   }, [setSelectedTags])
 
-  const handleToggleTag = (tagId) => {
-    setSelectedTags((prevSelectedTags) => {
-      if (prevSelectedTags.includes(tagId)) {
-        return prevSelectedTags.filter((id) => id !== tagId)
-      } else {
-        return [...prevSelectedTags, tagId]
-      }
-    })
+  const handleToggleTag = (tag) => {
+    if (tag.id === 'all') {
+      setSelectedTags(['all'])
+      return
+    } else {
+      setSelectedTags((prevSelectedTags) => {
+        if (prevSelectedTags.includes(tag.id)) {
+          return prevSelectedTags.filter((id) => id !== tag.id)
+        } else {
+          return [...prevSelectedTags.filter((id) => id !== 'all'), tag.id]
+        }
+      })
+    }
   }
 
   return (
     <div>
       <div>
-      <FilterTags
-        tags={tags}
-        selectedTags={selectedTags}
-        onToggleTag={(tag) => handleToggleTag(tag.id)}
-      />
-
+        <FilterTags
+          tags={tags}
+          selectedTags={selectedTags}
+          onToggleTag={handleToggleTag}
+        />
       </div>
 
       <VideoPlayer />

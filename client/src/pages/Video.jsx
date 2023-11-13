@@ -15,13 +15,14 @@ const Video = () => {
     const {videoPostId} = useParams()
     const {loading, error, data} = useQuery(QUERY_SINGLE_VIDEOPOST, {variables: {videoPostId}})
 
-  
+    console.log(data, error)
 
   useEffect(() => {
     
     // set videoPost state to videoPost variable to use with VideoPlayer
     if (data?.videoPost) {
       setVideoPost(data.videoPost)
+      console.log(data.videoPost)
       // set comment state to comment array or blank array
         setComments(data.videoPost.comments || []) 
     }    

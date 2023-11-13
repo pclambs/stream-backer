@@ -27,7 +27,10 @@ export const QUERY_VIDEOPOSTS = gql`
       _id
       createdAt
       description
-      postedBy
+      postedBy {
+        _id
+        username
+      }
       thumbnail
       title
       videoSRC
@@ -41,10 +44,17 @@ export const QUERY_SINGLE_VIDEOPOST = gql`
       _id
       createdAt
       description
-      postedBy
+      postedBy {
+        _id
+        username
+      }
       thumbnail
       title
       videoSRC
+      comments {
+        _id
+        commentBody
+      }
     }
 }
 `

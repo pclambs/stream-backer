@@ -11,7 +11,7 @@ const typeDefs = `
     title: String!
     description: String
     thumbnail: String!
-    postedBy: String
+    postedBy: Profile
     videoSRC: String!
     createdAt: String
     comments: [Comment]!

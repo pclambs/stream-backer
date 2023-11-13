@@ -8,7 +8,7 @@ const CommentContainer = ({comments}) => {
 
     // returns an array of CommentCards populated with comment data
     return (
-        <div className="container comment-container">
+        <div className="comment-container">
             {comments.map((comment, index) => (
                 <CommentCard key={index} comment={comment} />
             ))}

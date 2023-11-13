@@ -6,7 +6,7 @@ import CommentCard from "./CommentCard"
 
 const CommentContainer = ({comments}) => {
 
-
+    // returns an array of CommentCards populated with comment data
     return (
         <div className="container comment-container">
             {comments.map((comment, index) => (

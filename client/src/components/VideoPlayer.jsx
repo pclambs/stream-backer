@@ -1,4 +1,7 @@
 import * as React from "react";
+
+import {useState} from 'react'
+
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -12,6 +15,7 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 
 export default function MediaControlCard() {
   const theme = useTheme();
+  const [videoPost, setVideoPost] = useState(null)
 
   return (
     <Card sx={{ display: "flex" }}>

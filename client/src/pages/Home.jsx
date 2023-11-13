@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSearch } from '../contexts/SearchContext'
 import FilterTags from '../components/FilterTags'
-import VideoPlayer from '../components/VideoPlayer'
+import ThumbnailCard from '../components/ThumbnailCard'
+import { Container, Grid } from "@mui/material"
 
 const tags = [
   { name: 'All', id: 'all' },
@@ -45,7 +46,16 @@ const Home = () => {
         />
       </div>
 
-      <VideoPlayer />
+      <Container sx={{marginY: 5}}>
+        <Grid container spacing={5}>
+          <ThumbnailCard />
+          <ThumbnailCard />
+          <ThumbnailCard />
+          <ThumbnailCard />
+          <ThumbnailCard />
+          <ThumbnailCard />
+        </Grid>
+      </Container>
   
     </div>
   )

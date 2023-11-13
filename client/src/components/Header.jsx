@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
-
 import SearchBar from './SearchBar'
+import UserAvatar from './UserAvatar'
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,8 +12,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -112,14 +110,20 @@ function Header() {
             
             {/* Centered SearchBar */}
             <Box sx={{ flexGrow: 0, display: 'flex', justifyContent: 'center', width: '100%' }}>
-              <SearchBar search={search} setSearch={setSearch} />
+              <SearchBar 
+                search={search} 
+                setSearch={setSearch} 
+                sx={{ 
+                  maxWidth: { xs: 300, sm: 400, md: 500, lg: 600 }
+                }}
+              />
             </Box>
 
             {/* Right-aligned items */}
-            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
+            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end', marginLeft: '1rem' }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <UserAvatar />
                 </IconButton>
               </Tooltip>
               <Menu

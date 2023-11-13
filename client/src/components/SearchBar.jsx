@@ -1,20 +1,19 @@
 import { TextField } from "@mui/material"
 
-const SearchBar = ({ search, setSearch }) => {
+const SearchBar = ({ search, setSearch, sx }) => {
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
 
   return (
-    <div className="search-bar">
       <TextField
           type="text"
           placeholder="Search"
           value={search}
           onChange={handleChange}
-          variant="standard"      
+          variant="standard"
+          sx={{ width: '100%', ...sx }}
       />
-    </div>
   )
 }
 

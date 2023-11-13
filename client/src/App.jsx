@@ -1,10 +1,10 @@
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { Outlet } from 'react-router-dom'
-import theme from './utils/theme'
-
+import { SearchProvider } from './contexts/SearchContext'
 import Header from './components/Header/'
 import Footer from './components/Footer'
+import theme from './utils/theme'
 import { ThemeProvider } from '@emotion/react'
 
 // Construct our main GraphQL API endpoint
@@ -35,9 +35,11 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
+        <SearchProvider>
           <Header />
             <Outlet />
           <Footer />
+        </SearchProvider>
       </ThemeProvider>
     </ApolloProvider>
   )

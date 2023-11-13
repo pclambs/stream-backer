@@ -1,22 +1,54 @@
-import { useQuery } from '@apollo/client';
-import { QUERY_VIDEOPOSTS } from '../utils/queries';
-import VideoPlayer from '../components/VideoPlayer';
+import React, { useEffect } from 'react'
+import { useSearch } from '../contexts/SearchContext'
+import FilterTags from '../components/FilterTags'
+import VideoPlayer from '../components/VideoPlayer'
+
+const tags = [
+  { name: 'All', id: 'all' },
+  { name: 'Art', id: 'art' },
+  { name: 'Music', id: 'music' },
+  { name: 'Gaming', id: 'gaming' },
+  { name: 'Podcasts', id: 'podcasts' },
+  { name: 'DIY', id: 'diy' },
+]
+
 
 const Home = () => {
-  const { loading, error, data } = useQuery(QUERY_VIDEOPOSTS)
+  const { selectedTags, setSelectedTags } = useSearch()
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error.message}</p>
-  
-  //creates random post to display
-  const randomPost = data.videoPosts[Math.floor(Math.random() * data.videoPosts.length)]
+  useEffect(() => {
+    setSelectedTags(['all'])
+  }, [setSelectedTags])
 
-    //displays random post
+  const handleToggleTag = (tag) => {
+    if (tag.id === 'all') {
+      setSelectedTags(['all'])
+      return
+    } else {
+      setSelectedTags((prevSelectedTags) => {
+        if (prevSelectedTags.includes(tag.id)) {
+          return prevSelectedTags.filter((id) => id !== tag.id)
+        } else {
+          return [...prevSelectedTags.filter((id) => id !== 'all'), tag.id]
+        }
+      })
+    }
+  }
+
   return (
     <div>
-      <VideoPlayer videoPost={randomPost} />
+      <div>
+        <FilterTags
+          tags={tags}
+          selectedTags={selectedTags}
+          onToggleTag={handleToggleTag}
+        />
+      </div>
+
+      <VideoPlayer />
+  
     </div>
-  );
-};
+  )
+}
 
 export default Home

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import SearchBar from './SearchBar'
+import { useSearch } from '../contexts/SearchContext'
 import UserAvatar from './UserAvatar'
 
 import AppBar from "@mui/material/AppBar";

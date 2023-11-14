@@ -5,14 +5,6 @@ const path = require('path')
 
 cloudinary.config()
 
-VideoPost.find()
-      .populate({
-        path: "comments",
-        populate: {
-          path: "postedBy",
-          model: 'Profile'
-        }
-      }).then((v) => console.log(JSON.stringify(v, null, 2)))
 
 const resolvers = {
   Query: {

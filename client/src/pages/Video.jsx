@@ -9,9 +9,6 @@ import { Box } from "@mui/material"
 
 const Video = () => {
 
-  // TODO add comment variable
-    // const [comments, setComments] = useState([])
-    // const [videoPost, setVideoPost] = useState([{}])
     const location = useLocation()
     const {videoPostId} = useParams()
     const {loading, error, data} = useQuery(QUERY_SINGLE_VIDEOPOST, {variables: {videoPostId}})
@@ -19,17 +16,6 @@ const Video = () => {
     const videoPost = data?.videoPost || {}
     const comments = videoPost?.comments || []
 
-
-  // useEffect(() => {
-    
-  //   // set videoPost state to videoPost variable to use with VideoPlayer
-  //   if (data?.videoPost) {
-  //     setVideoPost(data.videoPost)
-  //     console.log(data.videoPost)
-  //     // set comment state to comment array or blank array
-  //       setComments(data.videoPost.comments || []) 
-  //   }    
-  // }, [data])
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" sx={{margin: 5}}>

@@ -1,6 +1,7 @@
 import { Box, TextField } from '@mui/material'
 import { Button } from '@mui/material'
 
+
 const mainColor = "secondary"
 
 const submitComment = () => {
@@ -23,14 +24,15 @@ const CommentForm = () => {
         id="outlined-helperText"
         label="Type your comment"
         defaultValue="Be nice!"
+        multiline
         helperText=""
       />
       <Button
-      variant="outlined"
+      variant="contained"
       color= {mainColor}
-      endIcon={<SendIcon />}
+      
       onClick = {submitComment}
-      >Send Comment</Button>
+      >Submit</Button>
       </Box>
     )
 }

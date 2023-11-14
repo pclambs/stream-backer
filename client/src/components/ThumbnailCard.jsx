@@ -1,9 +1,14 @@
 import UserAvatar from "./UserAvatar"
 import { useNavigate } from "react-router-dom"
 import { Paper, Grid, Box, Typography, Tooltip, IconButton, Button } from "@mui/material"
+import { formatDistanceToNow } from "date-fns"
 
 const ThumbnailCard = ({ videoPost }) => {
     const { thumbnail, title, createdAt, postedBy } = videoPost
+
+    const timestamp = Number(createdAt)
+    const date = new Date(timestamp)
+    const relativeTime = formatDistanceToNow(date, { addSuffix: true })
 
     const navigate = useNavigate()
     const videoPath = () => {
@@ -55,7 +60,7 @@ const ThumbnailCard = ({ videoPost }) => {
                                     color: "grey"
                                 }}
                             >
-                                5 hours ago
+                                {relativeTime}
                             </Typography>
                         </Box>
                         <Tooltip title={postedBy.username}>

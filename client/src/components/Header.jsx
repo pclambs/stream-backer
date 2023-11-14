@@ -124,7 +124,14 @@ function Header() {
             </Box>
 
             {/* Right-aligned items */}
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', margin: '0 .5rem 0 1rem' }}>
+            <Box sx={{
+                display: 'flex', 
+                justifyContent: 'flex-end', 
+                margin: { 
+                  xs: '0 .44rem 0 1rem', // xs to sm breakpoint
+                  sm: '0 .8rem 0 1rem'  // md breakpoint and up
+                }
+            }}>
               <Tooltip title="Open settings"  >
                 <UserAvatar onClick={handleOpenUserMenu}/>
               </Tooltip>

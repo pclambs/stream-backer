@@ -44,7 +44,7 @@ const Home = () => {
   const videoPosts = data?.videoPosts || []
 
   return (
-    <div>
+    <Container disableGutters>
       <div>
         <FilterTags
           tags={tags}
@@ -53,8 +53,8 @@ const Home = () => {
         />
       </div>
 
-      <Container sx={{marginY: 5}}>
-        <Grid container spacing={5}>
+      <Container disableGutters sx={{marginY: 1.2}}>
+        <Grid container spacing={2}>
           {videoPosts.map((videoPost) => {
             return (
               <ThumbnailCard videoPost={videoPost} key={videoPost._id}/>
@@ -64,7 +64,7 @@ const Home = () => {
         </Grid>
       </Container>
   
-    </div>
+    </Container>
   )
 }
 

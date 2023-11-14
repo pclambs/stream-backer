@@ -18,8 +18,8 @@ const ThumbnailCard = ({ videoPost }) => {
 
 
     return (
-        <Grid item xs={4} sx={{ }}>
-            <Paper square elevation={3}>
+        <Grid item xs={12} sm={6} md={4}>
+            <Paper elevation={3} sx={{ p: 0 }}>
                 <Button onClick={videoPath}
                     sx={{
                         padding: 0
@@ -46,7 +46,8 @@ const ThumbnailCard = ({ videoPost }) => {
                                     whiteSpace: 'nowrap',
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
-                                    maxWidth: '100%', // Ensure that the Typography component has a max-width.
+                                    maxWidth: '100%',
+                                    lineHeight: "2rem",
                                   }}
                             >
                                 {title}
@@ -57,7 +58,11 @@ const ThumbnailCard = ({ videoPost }) => {
                                 component="p"
                                 sx={{
                                     fontStyle: 'italic',
-                                    color: "grey"
+                                    color: "grey",
+                                    fontSize: "0.8rem",
+                                    lineHeight: "1rem",
+                                    padding: '0 0 .2rem 0',
+                                    transform: 'translateY(-.2rem)',
                                 }}
                             >
                                 {relativeTime}

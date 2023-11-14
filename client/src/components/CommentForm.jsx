@@ -1,43 +1,21 @@
-import React, { useState } from 'react'
-import { useMutation } from '@apollo/client'
-import { ADD_COMMENT } from '../utils/mutations'
-import { useParams } from 'react-router-dom'
-import { Box, TextField, Button } from '@mui/material'
+// CommentForm.jsx
+import React, { useState, useEffect } from 'react'
+import { Button, TextField, Box } from '@mui/material'
 
-const mainColor = "secondary"
+const CommentForm = ({ initialValue, onSubmit, onCancel, isEditing }) => {
+  const [commentBody, setCommentBody] = useState(initialValue)
 
-const CommentForm = () => {
-  const { videoPostId } = useParams();
-  const [commentBody, setCommentBody] = useState("Be Nice!")
+  useEffect(() => {
+    setCommentBody(initialValue)
+  }, [initialValue])
 
-  const [addComment] = useMutation(ADD_COMMENT)
-
-  const submitComment = async () => {
-    
-      
-      
-      try {
-        if (!commentBody) {
-          return alert('Must include a comment')
-        }
-
-        const newComment = {
-          commentBody,
-          postedBy: "test",
-          postedTo: videoPostId,
-        }
-
-        console.log(newComment)
-
-        await addComment({
-            variables: newComment,
-      })
-
-      setCommentBody('');
-      alert('Comment submitted successfully!')
-    } catch (error) {
-      console.error('Error submitting comment:', error)
+  const submitComment = () => {
+    if (!commentBody) {
+      return alert('Must include a comment')
     }
+
+    onSubmit(commentBody)
+    setCommentBody('')
   }
 
   return (
@@ -57,15 +35,20 @@ const CommentForm = () => {
         multiline
         helperText=""
       />
-      <Button
-        variant="text"
-        color={mainColor}
-        onClick={submitComment}
-      >
+      <Button 
+      variant="outlined" 
+      color="success" 
+      onClick={submitComment}>
         Submit
       </Button>
+      {isEditing && <Button 
+      variant="text" 
+      color="error" 
+      onClick={onCancel}>
+        Cancel
+      </Button>}
     </Box>
-  );
-};
+  )
+}
 
-export default CommentForm;
+export default CommentForm

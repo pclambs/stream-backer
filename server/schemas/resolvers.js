@@ -5,6 +5,15 @@ const path = require('path')
 
 cloudinary.config()
 
+VideoPost.find()
+      .populate({
+        path: "comments",
+        populate: {
+          path: "postedBy",
+          model: 'Profile'
+        }
+      }).then((v) => console.log(JSON.stringify(v, null, 2)))
+
 const resolvers = {
   Query: {
     profiles: async () => {
@@ -14,10 +23,28 @@ const resolvers = {
       return await Profile.findOne({ _id: profileId }).populate("uploadedVideos")
     },
     videoPosts: async () => {
-      return await VideoPost.find().populate("comments")
+      return await VideoPost.find()
+      .populate("postedBy")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "postedBy",
+          model: 'Profile'
+        }
+    })
+      .populate('postedBy')
     },
     videoPost: async (parent, { videoPostId }) => {
-      return await VideoPost.findOne({ _id: videoPostId }).populate("comments")
+      return await VideoPost.findOne({ _id: videoPostId })
+      .populate("postedBy")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "postedBy",
+          model: 'Profile'
+        }
+      })
+    
     },
     comments: async (parent, { videoPostId }) => {
       return await Comment.find({ postedTo: videoPostId })

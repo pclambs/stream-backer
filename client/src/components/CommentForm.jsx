@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button, TextField, Box } from '@mui/material'
 
-const CommentForm = ({ initialValue, onSubmit, onCancel, isEditing }) => {
+const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditing }) => {
   const [commentBody, setCommentBody] = useState(initialValue)
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const CommentForm = ({ initialValue, onSubmit, onCancel, isEditing }) => {
       return alert('Must include a comment')
     }
 
-    onSubmit(commentBody)
+    onSubmit(initialComment, commentBody)
     
   }
 

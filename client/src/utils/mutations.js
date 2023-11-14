@@ -99,7 +99,9 @@ export const ADD_COMMENT = gql`
     addComment(commentBody: $commentBody, postedBy: $postedBy, postedTo: $postedTo) {
       _id
       commentBody
-      postedBy
+      postedBy {
+        _id
+      }
       postedTo
     }
   }
@@ -110,7 +112,10 @@ export const UPDATE_COMMENT = gql`
     updateComment(commentId: $commentId, commentBody: $commentBody) {
       _id
       commentBody
-      postedBy
+      postedBy {
+        _id
+        username
+      }
       postedTo
     }
   }

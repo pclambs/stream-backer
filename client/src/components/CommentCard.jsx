@@ -15,8 +15,8 @@ const CommentCard = ({ comment }) => {
     try {
       await updateComment({
         variables: {
-          commentId: comment._id,
-          commentBody: updatedCommentBody
+            ...comment,
+            commentBody: updatedCommentBody
         }
       })
 
@@ -48,11 +48,11 @@ const CommentCard = ({ comment }) => {
   return (
     <div className="comment-card" sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
-
       }}>
       {isEditing ? (
         <CommentForm
           initialValue={comment.commentBody}
+          comment={comment}
           onSubmit={(updatedCommentBody) => handleUpdate(updatedCommentBody)}
           onCancel={() => setIsEditing(false)}
           isEditing={isEditing}

@@ -1,16 +1,26 @@
 import UserAvatar from "./UserAvatar"
-
+import { useNavigate } from "react-router-dom"
 import { Paper, Grid, Box, Typography, Tooltip, IconButton, Button } from "@mui/material"
 
-const ThumbnailCard = () => {
+const ThumbnailCard = ({videoPost}) => {
+    const { thumbnail, title, createdAt, postedBy } = videoPost
+
+    const navigate = useNavigate()
+const videoPath = () => {
+    let path = `/video/${videoPost._id}`
+    navigate(path)
+}
+
+
     return (
         <Grid item xs={4}>
             <Paper square elevation={3}>
-                <Button 
+                <Button onClick={videoPath}
                     sx={{
                     padding: 0
                     }}
                 >
+                    {/* TODO: Add thumbnails to data */}
                     <img src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" />
                 </Button>
                 <Box paddingX={1}>
@@ -26,7 +36,7 @@ const ThumbnailCard = () => {
                             variant="h6" 
                             component="h2"
                         >
-                            Video Title Super Awesome
+                            {title}
                         </Typography>
                         <Typography 
                             marginY={0} 
@@ -37,10 +47,10 @@ const ThumbnailCard = () => {
                                 color: "grey"
                             }}
                         >
-                            58k views - 5 hours ago
+                            5 hours ago
                         </Typography>
                         </Box>
-                        <Tooltip title="Username">
+                        <Tooltip title={postedBy.username}>
                             <IconButton>
                                 <UserAvatar />
                             </IconButton>

@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
+import { useQuery, gql } from "@apollo/client"
 import { useSearch } from '../contexts/SearchContext'
 import FilterTags from '../components/FilterTags'
 import ThumbnailCard from '../components/ThumbnailCard'
 import { Container, Grid } from "@mui/material"
+import { QUERY_VIDEOPOSTS } from "../utils/queries"
+
 
 const tags = [
   { name: 'All', id: 'all' },
@@ -36,6 +39,11 @@ const Home = () => {
     }
   }
 
+  const { loading, error, data } = useQuery(QUERY_VIDEOPOSTS)
+  console.log(data)
+
+  const videoPosts = data?.videoPosts || []
+
   return (
     <div>
       <div>
@@ -48,12 +56,12 @@ const Home = () => {
 
       <Container sx={{marginY: 5}}>
         <Grid container spacing={5}>
-          <ThumbnailCard />
-          <ThumbnailCard />
-          <ThumbnailCard />
-          <ThumbnailCard />
-          <ThumbnailCard />
-          <ThumbnailCard />
+          {videoPosts.map((videoPost) => {
+            return (
+              <ThumbnailCard videoPost={videoPost} key={videoPost._id}/>
+            )
+          })}
+         
         </Grid>
       </Container>
   

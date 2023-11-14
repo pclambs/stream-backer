@@ -7,6 +7,8 @@ import CommentForm from "./CommentForm.jsx"
 
 const CommentContainer = ({comments}) => {
 
+
+
     // returns an array of CommentCards populated with comment data
     return (
         <div className="comment-container">

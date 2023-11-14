@@ -6,6 +6,10 @@ import VideoPlayer from "../components/VideoPlayer"
 import CommentContainer from "../components/CommentContainer"
 import { Box, Container } from "@mui/material"
 
+import auth from "../utils/auth"
+
+const loggedIn = auth.loggedIn()
+
 const Video = () => {
 
     const location = useLocation()

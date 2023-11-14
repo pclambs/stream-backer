@@ -15,7 +15,7 @@ const CommentForm = ({ initialValue, onSubmit, onCancel, isEditing }) => {
     }
 
     onSubmit(commentBody)
-    setCommentBody('')
+    
   }
 
   return (

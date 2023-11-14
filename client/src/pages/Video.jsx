@@ -21,13 +21,20 @@ const Video = () => {
 
   return (
     <Container disableGutters>
-      <Box display="flex" justifyContent="center" alignItems="center" sx={{marginTop: 1}}>
+      <Box 
+      display="flex"
+      flexDirection="column" 
+      justifyContent="center" 
+      alignItems="center" 
+      sx={{marginTop: 1}}>
         {/* display error */}
         {error && <p>{error.message}</p>}
         {/* display loading */}
         {loading && <p>Loading...</p>}
         {/* create video player and pass in videoPost object */}
-        {Object.keys(videoPost).length > 0 && <VideoPlayer videoPost={videoPost}/>}
+        {Object.keys(videoPost).length > 0 && 
+        <VideoPlayer videoPost={videoPost}/>}
+
         <CommentContainer comments={comments} />
       </Box>
     </Container>

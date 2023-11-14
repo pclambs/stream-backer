@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_PROFILE } from '../utils/queries';
+import ProfileCard from '../components/ProfileCard';
 
 const Profile = () => {
   const { profileId } = useParams();
@@ -15,6 +16,7 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
   return (
+    <ProfileCard />,
     <div>
       <h2>
         {/* change this back to name if it doesn't work */}

@@ -11,8 +11,6 @@ const CommentCard = ({ comment }) => {
 
   const [isEditing, setIsEditing] = useState(false)
 
-
-    // TODO make comment actually update
   const handleUpdate = async (updatedCommentBody) => {
     try {
 
@@ -25,12 +23,9 @@ const CommentCard = ({ comment }) => {
       await updateComment({
         variables: newComment
       })
-
-      setIsEditing(false);
-      alert('Comment updated!')
-      setTimeout(() => {
-        window.location.reload();
-      }, 500)
+      //closes the update form
+      setIsEditing(false)
+      
     } catch (error) {
       console.error('Error updating comment:', error)
     }
@@ -41,8 +36,10 @@ const CommentCard = ({ comment }) => {
       await removeComment({
         variables: { commentId: comment._id }
       });
+      //TODO replace alert with ebtter option
       alert("Comment deleted successfully!")
       // Refreshes the page after 2 seconds
+      //TODO replace this with better option
       setTimeout(() => {
         window.location.reload();
       }, 500)
@@ -52,8 +49,16 @@ const CommentCard = ({ comment }) => {
   };
 
   return (
-    <div className="comment-card" sx={{
+    <Box 
+    component="div" 
+    className="comment-card" 
+    sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
+        border: 1,
+        borderColor: 'primary.main',
+        borderRadius: "16px",
+        py: "20px",
+        px: "50px"
       }}>
       {isEditing ? (
         <CommentForm
@@ -101,7 +106,7 @@ const CommentCard = ({ comment }) => {
         </Box>
         </>
       )}
-    </div>
+    </Box>
   )
 }
 

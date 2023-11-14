@@ -5,7 +5,9 @@ import CommentForm from './CommentForm'
 import { Button, Box } from '@mui/material'
 import { useMutation } from '@apollo/client'
 import { ADD_COMMENT } from '../utils/mutations'
+import { QUERY_SINGLE_VIDEOPOST } from "../utils/queries"
 import {useParams} from "react-router-dom"
+import { useQuery } from '@apollo/client'
 
 
 const CommentContainer = ({ comments }) => {
@@ -23,6 +25,9 @@ const CommentContainer = ({ comments }) => {
 
     const handleCommentSubmit = async (newCommentBody) => {
         // TODO push comment to VidoPost comments array
+
+       
+        //creats new comment object
         const newComment = {
             commentBody: newCommentBody,
             postedTo: videoPostId,
@@ -33,14 +38,14 @@ const CommentContainer = ({ comments }) => {
              await addComment({
                 variables: newComment
             })
+            //TODO replace alert with better option
             alert('Comment Added!')
+            //TODO replace this with better option
             setTimeout(() => {
                 window.location.reload();
               }, 500)
-
         } catch (error) {
             console.log(error)
-
         }
     }
 

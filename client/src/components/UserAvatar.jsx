@@ -1,6 +1,6 @@
 import React from "react"
 import Auth from "../utils/auth"
-import Avatar from "@mui/material/Avatar"
+import { Avatar, IconButton } from "@mui/material"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 
 const UserAvatar = () => {
@@ -11,8 +11,10 @@ const UserAvatar = () => {
     // if logged in, display avatar with users initial
     const initial = profile.data.username.charAt(0).toUpperCase()
     return (
-      <Avatar sx={{ width: 38, height: 38, fontSize: '1.2rem', backgroundColor: '#bd279f'}}>
-        {initial}
+      <Avatar sx={{ width: 38, height: 38, backgroundColor: '#bd279f'}}>
+        <IconButton sx={{ width: 38, height: 38, fontSize: '1.1rem'}}>
+          {initial}
+        </IconButton>
       </Avatar>
     )
   } else {

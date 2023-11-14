@@ -5,6 +5,7 @@ import SearchBar from './SearchBar'
 import { useSearch } from '../contexts/SearchContext'
 import UserAvatar from './UserAvatar'
 
+import { Button } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -60,7 +61,7 @@ function Header() {
   return (
     <header>
       <AppBar position="static">
-        <Container maxWidth="xl">
+        <Container disableGutters maxWidth="xl">
           <Toolbar disableGutters>
 
             {/* Left-aligned items */}
@@ -115,7 +116,7 @@ function Header() {
                 search={search} 
                 setSearch={setSearch} 
                 sx={{ 
-                  maxWidth: { xs: 300, sm: 400, md: 500, lg: 600 }
+                  maxWidth: { xs: 300, sm: 400, md: 500 }
                 }}
               />
             </Box>
@@ -123,9 +124,7 @@ function Header() {
             {/* Right-aligned items */}
             <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end', marginLeft: '1rem' }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <UserAvatar />
-                </IconButton>
+                <UserAvatar />
               </Tooltip>
               <Menu
                 sx={{ mt: "45px" }}

@@ -23,18 +23,20 @@ const ThumbnailCard = ({ videoPost }) => {
                     {/* TODO: Add thumbnails to data */}
                     <img src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" />
                 </Button>
-                <Box paddingX={1}>
+                <Box paddingX={2}>
                     <Box
                         sx={{
                             display: "flex",
                             alignItems: "center",
-                            justifyContent: "space-between"
+                            justifyContent: "space-between",
+                            padding: 0
                         }}
                     >
                         <Box paddingY={1}>
                             <Typography
                                 variant="h6"
                                 component="h2"
+                                padding={0}
                             >
                                 {title}
                             </Typography>
@@ -51,9 +53,7 @@ const ThumbnailCard = ({ videoPost }) => {
                             </Typography>
                         </Box>
                         <Tooltip title={postedBy.username}>
-                            <IconButton>
-                                <UserAvatar />
-                            </IconButton>
+                            <UserAvatar />
                         </Tooltip>
                     </Box>
                 </Box>

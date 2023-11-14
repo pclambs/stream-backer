@@ -23,7 +23,7 @@ const ThumbnailCard = ({ videoPost }) => {
                     {/* TODO: Add thumbnails to data */}
                     <img src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" />
                 </Button>
-                <Box paddingX={2}>
+                <Box paddingX={1}>
                     <Box
                         sx={{
                             display: "flex",
@@ -32,11 +32,17 @@ const ThumbnailCard = ({ videoPost }) => {
                             padding: 0
                         }}
                     >
-                        <Box paddingY={1}>
+                        <Box sx={{ maxWidth: 'calc(100% - 50px)'}}>
                             <Typography
                                 variant="h6"
                                 component="h2"
                                 padding={0}
+                                sx={{
+                                    whiteSpace: 'nowrap',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    maxWidth: '100%', // Ensure that the Typography component has a max-width.
+                                  }}
                             >
                                 {title}
                             </Typography>

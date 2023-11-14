@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import CommentCard from './CommentCard'
 import CommentForm from './CommentForm'
-import { Button } from '@mui/material'
+import { Button, Box } from '@mui/material'
 
 const CommentContainer = ({ comments }) => {
   const [isEditingForm, setIsEditingForm] = useState(false)
@@ -16,7 +16,10 @@ const CommentContainer = ({ comments }) => {
   }
 
   return (
-    <div className="comment-container">
+    <Box 
+    component="div"
+    className="comment-container"
+    textAlign="center">
       {!isEditingForm && (
         <Button 
         variant="text" 
@@ -39,9 +42,12 @@ const CommentContainer = ({ comments }) => {
         </>
       )}
       {comments.map((comment, index) => (
-        <CommentCard key={index} comment={comment} />
+        <CommentCard 
+        key={index} 
+        comment={comment} 
+        />
       ))}
-    </div>
+    </Box>
   )
 }
 

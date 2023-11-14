@@ -46,18 +46,39 @@ const CommentCard = ({ comment }) => {
   };
 
   return (
-    <div className="comment-card">
+    <div className="comment-card" sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+
+      }}>
       {isEditing ? (
         <CommentForm
           initialValue={comment.commentBody}
           onSubmit={(updatedCommentBody) => handleUpdate(updatedCommentBody)}
           onCancel={() => setIsEditing(false)}
           isEditing={isEditing}
+          
         />
       ) : (
         <>
-          <h3>{comment.commentBody}</h3>
-          <h4>Posted by: {comment.postedBy.username}</h4>
+         <Box
+      component= "div"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center" 
+      }}>
+      <h3>{comment.commentBody}</h3>
+      <h4>Posted by: {comment.postedBy.username}</h4>
+      </Box>
+        <Box
+      component= "div"
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center" 
+      }}>
+        
           <Button 
           variant="outlined" 
           color="success" 
@@ -71,6 +92,7 @@ const CommentCard = ({ comment }) => {
           onClick={handleDelete}
           >Delete
           </Button>
+        </Box>
         </>
       )}
     </div>

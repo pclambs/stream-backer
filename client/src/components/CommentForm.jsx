@@ -26,7 +26,12 @@ const CommentForm = ({ initialValue, onSubmit, onCancel, isEditing }) => {
       }}
       noValidate
       autoComplete="off"
+      
     >
+        <Box
+        sx={{
+            textAlign: "center"
+        }}>
       <TextField
         id="comment-input"
         label="Type your comment"
@@ -35,6 +40,16 @@ const CommentForm = ({ initialValue, onSubmit, onCancel, isEditing }) => {
         multiline
         helperText=""
       />
+      </Box>
+    
+      <Box
+      component= "div"
+      sx={{
+        display:'flex',
+       
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
       <Button 
       variant="outlined" 
       color="success" 
@@ -47,6 +62,8 @@ const CommentForm = ({ initialValue, onSubmit, onCancel, isEditing }) => {
       onClick={onCancel}>
         Cancel
       </Button>}
+      </Box>
+
     </Box>
   )
 }

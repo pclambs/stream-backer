@@ -24,6 +24,7 @@ const resolvers = {
     },
     videoPosts: async () => {
       return await VideoPost.find()
+      .populate("postedBy")
       .populate({
         path: "comments",
         populate: {
@@ -35,6 +36,7 @@ const resolvers = {
     },
     videoPost: async (parent, { videoPostId }) => {
       return await VideoPost.findOne({ _id: videoPostId })
+      .populate("postedBy")
       .populate({
         path: "comments",
         populate: {

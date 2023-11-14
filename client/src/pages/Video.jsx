@@ -38,10 +38,10 @@ const Video = () => {
     {/* display loading */}
     {loading && <p>Loading...</p>}
     {/* create video player and pass in videoPost object */}
-    {/* {Object.keys(videoPost).length > 0 && <VideoPlayer videoPost={videoPost}/>}
+    {Object.keys(videoPost).length > 0 && <VideoPlayer videoPost={videoPost}/>}
     
 
-    <CommentContainer comments={comments} /> */}
+    <CommentContainer comments={comments} />
   </div>
   )
 }

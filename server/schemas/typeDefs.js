@@ -20,7 +20,7 @@ const typeDefs = `
   type Comment {
     _id: ID
     commentBody: String!
-    postedBy: ID
+    postedBy: Profile
     postedTo: ID
   }
 

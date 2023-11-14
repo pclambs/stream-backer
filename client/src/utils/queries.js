@@ -34,6 +34,14 @@ export const QUERY_VIDEOPOSTS = gql`
       thumbnail
       title
       videoSRC
+      comments {
+        _id
+        commentBody
+        postedBy {
+          _id
+          username
+        }
+      }
     }
 }
 `
@@ -54,9 +62,13 @@ export const QUERY_SINGLE_VIDEOPOST = gql`
       comments {
         _id
         commentBody
+        postedBy {
+          _id
+          username
+        }
       }
     }
-}
+  }
 `
 
 export const QUERY_COMMENTS = gql`

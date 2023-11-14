@@ -23,8 +23,6 @@ const VideoPlayer = ({videoPost}) => {
   }
 
   const {title, thumbnail, postedBy, videoSRC, createdAt} = videoPost
-  
-  console.log(postedBy)
 
   return (
     <Card sx={{ display: "flex" }}>
@@ -38,7 +36,7 @@ const VideoPlayer = ({videoPost}) => {
             color="text.secondary"
             component="div"
           >
-            {postedBy}
+            {postedBy.username}
           </Typography>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
@@ -65,7 +63,7 @@ const VideoPlayer = ({videoPost}) => {
         component="img"
         sx={{ width: 151 }}
         image={thumbnail}
-        alt={`Cover for ${title} posted by ${postedBy}`}
+        alt={`Cover for ${title} posted by ${postedBy.username}`}
       />
     </Card>
   );

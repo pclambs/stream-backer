@@ -9,24 +9,27 @@ import CommentContainer from "../components/CommentContainer"
 const Video = () => {
 
   // TODO add comment variable
-    const [comments, setComments] = useState([])
-    const [videoPost, setVideoPost] = useState([{}])
+    // const [comments, setComments] = useState([])
+    // const [videoPost, setVideoPost] = useState([{}])
     const location = useLocation()
     const {videoPostId} = useParams()
     const {loading, error, data} = useQuery(QUERY_SINGLE_VIDEOPOST, {variables: {videoPostId}})
 
+    const videoPost = data?.videoPost || {}
+    const comments = videoPost?.comments || []
+
     console.log(data, error)
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    // set videoPost state to videoPost variable to use with VideoPlayer
-    if (data?.videoPost) {
-      setVideoPost(data.videoPost)
-      console.log(data.videoPost)
-      // set comment state to comment array or blank array
-        setComments(data.videoPost.comments || []) 
-    }    
-  }, [data])
+  //   // set videoPost state to videoPost variable to use with VideoPlayer
+  //   if (data?.videoPost) {
+  //     setVideoPost(data.videoPost)
+  //     console.log(data.videoPost)
+  //     // set comment state to comment array or blank array
+  //       setComments(data.videoPost.comments || []) 
+  //   }    
+  // }, [data])
 
   return (
     <div>
@@ -35,9 +38,10 @@ const Video = () => {
     {/* display loading */}
     {loading && <p>Loading...</p>}
     {/* create video player and pass in videoPost object */}
-    <VideoPlayer videoPost={videoPost ? videoPost : ''}/>
-    {/* create comment container and pass in comment state */}
-    <CommentContainer comments={comments ? comments : ''} />
+    {/* {Object.keys(videoPost).length > 0 && <VideoPlayer videoPost={videoPost}/>}
+    
+
+    <CommentContainer comments={comments} /> */}
   </div>
   )
 }

@@ -121,7 +121,10 @@ export const REMOVE_COMMENT = gql`
     removeComment(commentId: $commentId) {
       _id
       commentBody
-      postedBy
+      postedBy {
+        _id
+        username
+      }
       postedTo
     }
   }

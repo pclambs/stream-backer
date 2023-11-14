@@ -14,20 +14,25 @@ const CommentForm = () => {
 
   const submitComment = async () => {
     
-    if (!commentBody) {
-      return alert('Must include a comment')
-    }
+      
+      
+      try {
+        if (!commentBody) {
+          return alert('Must include a comment')
+        }
 
-    const newComment = {
-      commentBody,
-      postedBy: "test",
-      postedTo: videoPostId,
-    }
+        const newComment = {
+          commentBody,
+          postedBy: "test",
+          postedTo: videoPostId,
+        }
 
-    try {
-      await addComment({
-        variables: { newComment },
+        console.log(newComment)
+
+        await addComment({
+            variables: newComment,
       })
+
       setCommentBody('');
       alert('Comment submitted successfully!')
     } catch (error) {

@@ -13,7 +13,7 @@ const ThumbnailCard = ({ videoPost }) => {
 
 
     return (
-        <Grid item xs={4}>
+        <Grid item xs={4} sx={{ }}>
             <Paper square elevation={3}>
                 <Button onClick={videoPath}
                     sx={{

@@ -5,7 +5,6 @@ import SearchBar from './SearchBar'
 import { useSearch } from '../contexts/SearchContext'
 import UserAvatar from './UserAvatar'
 
-import { Button } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -61,11 +60,15 @@ function Header() {
   return (
     <header>
       <AppBar position="static">
-        <Container disableGutters maxWidth="xl">
-          <Toolbar disableGutters>
+        <Container disableGutters maxWidth="xl" sx={{ minHeight: '50px'}}>
+          <Toolbar disableGutters sx={{ 
+            alignItems: 'center',
+            minHeight: '50px',
+            maxHeight: '50px',
+          }}>
 
             {/* Left-aligned items */}
-            <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', minHeight: '50px' }}>
               <Link to="/">
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                   <img src={logo} alt='Main Logo' className='logo'/>
@@ -75,7 +78,6 @@ function Header() {
                 </Box>
               </Link>       
               <IconButton
-                size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
@@ -111,7 +113,7 @@ function Header() {
             </Box>
             
             {/* Centered SearchBar */}
-            <Box sx={{ flexGrow: 0, display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
               <SearchBar 
                 search={search} 
                 setSearch={setSearch} 
@@ -122,9 +124,9 @@ function Header() {
             </Box>
 
             {/* Right-aligned items */}
-            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end', marginLeft: '1rem' }}>
-              <Tooltip title="Open settings">
-                <UserAvatar />
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', margin: '0 .5rem 0 1rem' }}>
+              <Tooltip title="Open settings"  >
+                <UserAvatar onClick={handleOpenUserMenu}/>
               </Tooltip>
               <Menu
                 sx={{ mt: "45px" }}

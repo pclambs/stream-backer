@@ -1,16 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useMutation } from '@apollo/client'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Button, Typography, Container, Paper } from '@mui/material'
 import CustomTextField from '../components/CustomTextField'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import { ADD_VIDEO_POST, UPDATE_VIDEO_POST } from '../utils/mutations'
 
 
 //Page to upload a new video or edit existing one
 const Upload = () => {
-	const [formState, setFormState] = useState({
-		title: '',
-    description: '',
-    tags: '',
-  });
+	const [formState, setFormState] = useState({ title: '', description: '', tags: '', })
+		// { error }
+	const [addVideoPost] = useMutation(ADD_VIDEO_POST)
+	const [updateVideoPost] = useMutation(UPDATE_VIDEO_POST)
+
+	const { videoPostId } = useParams()
+	const history = useNavigate()
+
+	useEffect(() => {
+		if (videoPostId) {
+			const videoPost = videoPosts.find((videoPost) => videoPost._id === videoPostId)
+			setFormState({
+				title: videoPost.title,
+				description: videoPost.description,
+				tags: videoPost.tags,
+			})
+		}
+	})
 
 	const handleChange = (event) => {
 		const { name, value } = event.target
@@ -20,20 +36,32 @@ const Upload = () => {
 			[name]: value,
 		})
 	}
+
+	const handleFormSubmit = async (event) => {
+		event.preventDefault()
+		const { title, description, tags } = formState
+
+		if (videoPostId) {
+			await updateVideoPost({ variables: { title, description, tags } })
+		} else {
+			await addVideoPost({ variables: { title, description, tags } })
+		}
+	}
 	
 	return (
-		<Container disableGutters sx={{marginY: 1.2}}>
-			<Paper>
-				<Typography variant="h3" sx={{}}>Upload a New Video</Typography>
-					<form>
+		<Container disableGutters sx={{marginY: 1.2, display: 'flex', gap: '.75rem'}}>
+			<Paper sx={{ borderRadius: 0 }}>
+				<Typography variant="h3" sx={{ padding: '0 .5rem 0 .5rem'}}>Upload a New Video</Typography>
+			</Paper>
+			<Paper sx={{ padding: '.5rem',  borderRadius: 0 }}>
+					<form onSubmit={handleFormSubmit}>
 						<CustomTextField
 							name="title"
-							type="tet"
+							type="text"
 							value={formState.title}
 							onChange={handleChange}
 							variant='standard'
-							label='Title'
-							margin='normal'
+							label='Title (required)'
 						/>
 						<CustomTextField
 							name="description"
@@ -44,7 +72,6 @@ const Upload = () => {
 							rows={4}
 							multiline
 							label='Description'
-							margin='normal'
 						/>
 						<CustomTextField
 							name="tags"
@@ -53,7 +80,6 @@ const Upload = () => {
 							onChange={handleChange}
 							variant='standard'
 							label='Tags'
-							margin='normal'
 						/>
 						<Button 
 							variant="contained" 

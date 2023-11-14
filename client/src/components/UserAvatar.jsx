@@ -20,7 +20,7 @@ const UserAvatar = React.forwardRef((props, ref) => {
   } else {
     // if not logged in, display default user icon
     return (
-      <AccountCircleIcon ref={ref} sx={{ width: 38, height: 38 }} />
+      <AccountCircleIcon ref={ref} {...props} sx={{ width: 38, height: 38 }} />
     )
   }
 })

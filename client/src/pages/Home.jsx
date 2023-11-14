@@ -40,7 +40,6 @@ const Home = () => {
   }
 
   const { loading, error, data } = useQuery(QUERY_VIDEOPOSTS)
-  console.log(data)
 
   const videoPosts = data?.videoPosts || []
 

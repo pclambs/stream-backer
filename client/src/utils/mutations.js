@@ -112,11 +112,6 @@ export const UPDATE_COMMENT = gql`
     updateComment(commentId: $commentId, commentBody: $commentBody) {
       _id
       commentBody
-      postedBy {
-        _id
-        username
-      }
-      postedTo
     }
   }
 `

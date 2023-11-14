@@ -14,7 +14,7 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
       return alert('Must include a comment')
     }
 
-    onSubmit(initialComment, commentBody)
+    onSubmit(commentBody)
     
   }
 

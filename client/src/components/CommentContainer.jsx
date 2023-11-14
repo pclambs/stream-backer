@@ -21,8 +21,8 @@ const CommentContainer = ({ comments }) => {
         setIsEditingForm(false)
     }
 
-    const handleCommentSubmit = async (comment, newCommentBody) => {
-
+    const handleCommentSubmit = async (newCommentBody) => {
+        // TODO push comment to VidoPost comments array
         const newComment = {
             commentBody: newCommentBody,
             postedTo: videoPostId,

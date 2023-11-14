@@ -11,13 +11,19 @@ const CommentCard = ({ comment }) => {
 
   const [isEditing, setIsEditing] = useState(false)
 
+
+    // TODO make comment actually update
   const handleUpdate = async (updatedCommentBody) => {
     try {
-      await updateComment({
-        variables: {
+
+        const newComment = {
             ...comment,
+            commentId: comment._id,
             commentBody: updatedCommentBody
         }
+        
+      await updateComment({
+        variables: newComment
       })
 
       setIsEditing(false);

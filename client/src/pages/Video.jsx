@@ -4,8 +4,7 @@ import {useLocation, useParams} from 'react-router-dom'
 import {QUERY_SINGLE_VIDEOPOST} from '../utils/queries'
 import VideoPlayer from "../components/VideoPlayer"
 import CommentContainer from "../components/CommentContainer"
-import { Box } from "@mui/material"
-
+import { Box, Container } from "@mui/material"
 
 const Video = () => {
 
@@ -16,19 +15,19 @@ const Video = () => {
     const videoPost = data?.videoPost || {}
     const comments = videoPost?.comments || []
 
-
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" sx={{margin: 5}}>
-      {/* display error */}
-    {error && <p>{error.message}</p>}
-    {/* display loading */}
-    {loading && <p>Loading...</p>}
-    {/* create video player and pass in videoPost object */}
-    {Object.keys(videoPost).length > 0 && <VideoPlayer videoPost={videoPost}/>}
-    
-
-    <CommentContainer comments={comments} />
-    </Box>
+    <Container disableGutters>
+      <Box display="flex" justifyContent="center" alignItems="center" sx={{marginTop: 1}}>
+        {/* display error */}
+        {error && <p>{error.message}</p>}
+        {/* display loading */}
+        {loading && <p>Loading...</p>}
+        {/* create video player and pass in videoPost object */}
+        {Object.keys(videoPost).length > 0 && <VideoPlayer videoPost={videoPost}/>}
+        <CommentContainer comments={comments} />
+      </Box>
+    </Container>
   )
 }
+
 export default Video;

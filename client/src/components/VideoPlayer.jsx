@@ -17,7 +17,7 @@ const VideoPlayer = ({videoPost}) => {
 
 
   return (
-    <video controls autoPlay muted name="media"><source src={videoSRC} type="video/mp4"/></video>
+    <video controls autoPlay name="media"><source src={videoSRC} type="video/mp4" className="video"/></video>
   )
 }
 

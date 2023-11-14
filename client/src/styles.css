@@ -67,4 +67,16 @@ form {
 .cardThumbnail {
   width: 100%;
   height: 100%;
+  transition: transform 0.6s ease-in-out;
+  object-fit: cover;
+}
+
+.cardThumbnail:hover {
+  transform: scale(1.05);
+}
+
+video {
+  width: 100%; 
+  height: auto; 
+  max-width: 100%;
 }

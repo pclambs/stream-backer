@@ -19,10 +19,13 @@ const ThumbnailCard = ({ videoPost }) => {
 
     return (
         <Grid item xs={12} sm={6} md={4}>
-            <Paper elevation={3} sx={{ p: 0 }}>
-                <Button onClick={videoPath}
+            <Paper elevation={3} sx={{ p: 0, borderRadius: 0 }}>
+                <Button 
+                    onClick={videoPath}
                     sx={{
-                        padding: 0
+                        padding: 0,
+                        overflow: 'hidden',
+                        borderRadius: 0,
                     }}
                 >
                     {/* TODO: Add thumbnails to data */}

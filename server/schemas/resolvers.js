@@ -85,6 +85,9 @@ const resolvers = {
     },
     addComment: async (parent, { commentBody, postedBy, postedTo }) => {
       const comment = await Comment.create({ commentBody, postedBy, postedTo })
+      await VideoPost.findByIdAndUpdate(postedTo, {
+        $push: { comments: comment._id}
+      })
       return comment
     },
     updateComment: async (parent, { commentId, commentBody }) => {

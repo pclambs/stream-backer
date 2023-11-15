@@ -9,7 +9,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ErrorPage from './pages/Error';
 import Video from './pages/Video.jsx'
-import Upload from './pages/Upload.jsx'
+// import Upload from './pages/Upload.jsx'
 import Account from './pages/Account.jsx'
 
 const router = createBrowserRouter([
@@ -27,10 +27,7 @@ const router = createBrowserRouter([
       }, {
         path: '/signup',
         element: <Signup />
-      }, {
-        path: '/profile',
-        element: <Profile /> 
-      }, {
+      },  {
         path: '/profiles/:profileId',
         element: <Profile />
       }, {

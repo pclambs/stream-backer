@@ -59,9 +59,11 @@ export const ADD_VIDEO_POST = gql`
       title
       description
       videoSRC
-      postedBy
       createdAt
       thumbnail
+      postedBy {
+        _id
+      }
     }
   }
 `
@@ -73,7 +75,7 @@ export const UPDATE_VIDEO_POST = gql`
       title
       description
       videoSRC
-      postedBy
+      postedBy 
       createdAt
       thumbnail
     }

@@ -35,6 +35,27 @@ const Upload = () => {
 		setUploadedFiles(files)
 	}
 
+	const handleFileUpload = async (file) => {
+		const formData = new FormData()
+		formData.append('file', file)
+		formData.append('upload_preset', 'x2ldozq4')
+	
+		try {
+			const response = await fetch(`https://api.cloudinary.com/v1_1/streamback/video/upload`, {
+				method: 'POST',
+				body: formData,
+			})
+	
+			if (!response.ok) throw new Error('Upload failed')
+	
+			const data = await response.json()
+			return data.secure_url; // The URL of the uploaded video
+		} catch (error) {
+			console.error('Error uploading file:', error)
+			// Handle errors as appropriate
+		}
+	}
+
 	const handleChange = (event) => {
 		const { name, value } = event.target
 	
@@ -48,22 +69,45 @@ const Upload = () => {
 		event.preventDefault()
 		const { title, description, tags } = formState
 
-		const fileToUpload = uploaderFiles.length > 0 ? uploadedFiles[0] : null
-		console.log('File to upload:', fileToUpload)
-
+		const userId = Auth.getProfile()?.data?._id
+	
+		// check if theres a file to upload
+		const fileToUpload = uploadedFiles.length > 0 ? uploadedFiles[0] : null
+	
 		if (!fileToUpload) {
 			console.log('No file to upload')
 			return
 		}
+	
+		// upload file to Cloudinary and get URL
+		const uploadedVideoUrl = await handleFileUpload(fileToUpload)
 
-		// TODO: FormData for file upload
-
-		if (videoPostId) {
-			await updateVideoPost({ variables: { title, description, tags } })
-		} else {
-			await addVideoPost({ variables: { title, description, tags } })
+		if (!uploadedVideoUrl) {
+			console.log('Failed to upload video')
+			return
 		}
-		navigate('/profile')
+	
+		// TODO: generate and upload a thumbnail, then get the URL
+		const uploadedThumbnailUrl = '../assets/stream-backer-play-logo.png'
+	
+		// use Cloudinary URLs in GraphQL mutation
+		const response = await addVideoPost({ 
+			variables: { 
+				title, 
+				description,
+				thumbnail: uploadedThumbnailUrl,
+				postedBy: userId,
+				videoSrc: uploadedVideoUrl,
+				// tags 
+			}
+		})
+	
+		if (response && response.data) {
+			console.log('Video post created:', response.data.addVideoPost)
+			navigate('/profile')
+		} else {
+			console.error('Error creating video post')
+		}
 	}
 	
 	return (
@@ -72,9 +116,14 @@ const Upload = () => {
 			<Paper sx={{ borderRadius: 0, padding: '.7rem', display: 'flex' }}>
 				<FileDrop onFilesAdded={handleFileAdded}/>
 			</Paper>
+			
+			<Paper>
+				<Typography variant='h6' sx={{ borderRadius: 0, padding: '.7rem', display: 'flex' }}>Thumbnail Stuffs</Typography>
+				{/* <img style={{padding: '.7rem', objectFit: 'fill', height: 'auto', width: '100%'}} src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" /> */}
+			</Paper>
 
 			<Paper sx={{ padding: '.7rem',  borderRadius: 0 }}>
-					<form onSubmit={handleFormSubmit}>
+					<form onSubmit={handleFormSubmit} encType="multipart/form-data">
 						<CustomTextField
 							name="title"
 							type="text"
@@ -116,6 +165,7 @@ const Upload = () => {
 						</Button>
 					</form>
 				</Paper>
+
 		</Container>
 	)
 }

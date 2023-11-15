@@ -17,10 +17,20 @@ export const QUERY_SINGLE_PROFILE = gql`
       _id
       username
       email
-      uploadedVideos
+      uploadedVideos {
+        _id
+        title
+        description
+        thumbnail
+        postedBy {
+          _id
+        }
+        videoSRC
+        createdAt
+      }
     }
-}
-`
+  }
+`;
 export const QUERY_VIDEOPOSTS = gql`
   query allVideoPosts {
     videoPosts {

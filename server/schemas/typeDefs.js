@@ -6,6 +6,7 @@ const typeDefs = `
     username: String!
     email: String!
     uploadedVideos: [VideoPost]!
+    bio: String
   }
 
   type VideoPost {
@@ -58,7 +59,7 @@ const typeDefs = `
 
     removeComment(commentId: ID!): Comment
 
-    updateProfile(profileId: ID!, username: String, email: String, password: String): Profile
+    updateProfile(profileId: ID!, username: String, email: String, password: String, bio: String): Profile
 
     updateVideoPost(videoPostId: ID!, title: String, description: String, thumbnail: String, videoSRC: String): VideoPost
 

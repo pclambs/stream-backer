@@ -1,29 +1,36 @@
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import auth from '../utils/auth';
 import { QUERY_SINGLE_PROFILE } from '../utils/queries';
-import ProfileCard from '../components/ProfileCard';
+import { UPDATE_PROFILE } from '../utils/mutations';
+import UserForm from '../components/UserForm';
+import ProfileCard from '../components/ProfileCard'
+
 
 const Profile = () => {
-  const { profileId } = useParams();
+const loggedInUserId = auth.getProfile()?.data?._id
 
   const { loading, data } = useQuery(QUERY_SINGLE_PROFILE, {
-    variables: { profileId: profileId },
+    variables: { profileId: loggedInUserId },
   });
 
   const profile = data?.profile || {};
-
+  const [updateUser] = useMutation(UPDATE_PROFILE)
   console.log('profile', profile);
 
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
-    <ProfileCard />,
     <div>
       <h2>
-        {/* change this back to name if it doesn't work */}
        Welcome {profile.username}!
       </h2>
+      <ProfileCard />
+      <UserForm initialValue={
+        {...profile, profileId: loggedInUserId}} onSubmit={(userBody)=> updateUser({
+        variables: userBody
+      })}/>
     </div>
   );
 };

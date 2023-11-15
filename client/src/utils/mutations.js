@@ -27,15 +27,13 @@ export const ADD_PROFILE = gql`
 `
 
 export const UPDATE_PROFILE = gql`
-  mutation updateProfile($profileId: ID!, $username: String, $email: String, $password: String) {
-    updateProfile(profileId: $profileId, username: $username, email: $email, password: $password) {
-      token
-        profile {
+  mutation updateProfile($profileId: ID!, $username: String, $email: String, $password: String, $bio: String) {
+    updateProfile(profileId: $profileId, username: $username, email: $email, password: $password, bio: $bio) {
         _id
         username
         email
+        bio
       }
-    }
   }
 `
 

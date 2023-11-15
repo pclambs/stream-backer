@@ -1,9 +1,10 @@
 import {
   Paper, Grid, Box, Typography, Tooltip,IconButton, Button,
 } from "@mui/material";
-import UserAvatar from "./UserAvatar";
+import Auth from '../utils/auth'
+import ProfileAvatar from "./ProfileAvatar";
+const ProfileCard = (isLoggedIn, profile) => {
 
-const ProfileCard = () => {
   return (
     <Grid item xs={4}>
       <Paper square elevation={3}>
@@ -22,14 +23,13 @@ const ProfileCard = () => {
             }}
           >
             <Box paddingY={1}>
-              <Typography variant="h6" component="h2">
-                {/* TODO: import userInfo */}
+              <Typography variant="h6" component="h2">            
+               <ProfileAvatar profile={profile}/>
               </Typography>
+              
+              
             </Box>
             <Tooltip title="Username">
-              <IconButton>
-                <UserAvatar />
-              </IconButton>
             </Tooltip>
           </Box>
         </Box>

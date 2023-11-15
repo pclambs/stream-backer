@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         element: <Video />
       }, {
         path: '/upload',
-        element: <Upload />
+        // element: <Upload />
       }, {
         path: '/account',
         element: <Account />

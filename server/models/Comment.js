@@ -7,7 +7,7 @@ const commentSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    maxlength: 280,
+    maxLength: 280,
   },
   dateCreated: {
     type: Date,

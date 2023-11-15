@@ -1,16 +1,17 @@
 require('dotenv').config()
-const express = require('express');
-const { ApolloServer } = require('@apollo/server');
-const { graphqlUploadExpress } = require('graphql-upload')
-const { expressMiddleware } = require('@apollo/server/express4');
-const path = require('path');
-const { authMiddleware } = require('./utils/auth');
+const express = require('express')
+const { ApolloServer } = require('@apollo/server')
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
+const { expressMiddleware } = require('@apollo/server/express4')
+const path = require('path')
+const { authMiddleware } = require('./utils/auth')
 
-const { typeDefs, resolvers } = require('./schemas');
-const db = require('./config/connection');
+const { typeDefs, resolvers } = require('./schemas')
+const db = require('./config/connection')
 
-const PORT = process.env.PORT || 3001;
-const app = express();
+const PORT = process.env.PORT || 3001
+const app = express()
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -19,14 +20,15 @@ const server = new ApolloServer({
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
-
+  
   app.use(express.urlencoded({ extended: false }));
-  app.use(express.json());
-
-  // graphql-upload middleware
-  app.use('/graphql', graphqlUploadExpress({
-    maxFileSize: 10000000, maxFiles: 10
-  }))
+  app.use(express.json());  
+  
+  // multer file upload route
+  app.post('/upload', upload.single('file'), (req, res) => {
+    console.log('Uploaded file', req.file)
+    res.json({ message: 'File uploaded successfully.', file: req.file })
+  })
 
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware

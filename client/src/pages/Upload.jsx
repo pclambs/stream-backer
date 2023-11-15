@@ -35,6 +35,27 @@ const Upload = () => {
 		setUploadedFiles(files)
 	}
 
+	const handleFileUpload = async (file) => {
+		const formData = new FormData()
+		formData.append('file', file)
+		formData.append('upload_preset', 'x2ldozq4')
+	
+		try {
+			const response = await fetch(`https://api.cloudinary.com/v1_1/streamback/video/upload`, {
+				method: 'POST',
+				body: formData,
+			})
+	
+			if (!response.ok) throw new Error('Upload failed')
+	
+			const data = await response.json()
+			return data.secure_url; // The URL of the uploaded video
+		} catch (error) {
+			console.error('Error uploading file:', error)
+			// Handle errors as appropriate
+		}
+	}
+
 	const handleChange = (event) => {
 		const { name, value } = event.target
 	
@@ -47,37 +68,37 @@ const Upload = () => {
 	const handleFormSubmit = async (event) => {
 		event.preventDefault()
 		const { title, description, tags } = formState
-
+	
+		// check if theres a file to upload
 		const fileToUpload = uploadedFiles.length > 0 ? uploadedFiles[0] : null
-		console.log('File to upload:', fileToUpload)
-
+	
 		if (!fileToUpload) {
 			console.log('No file to upload')
 			return
 		}
-
-		let response
-		if (videoPostId) {
-			await updateVideoPost({ 
-				variables: { 
-					title, 
-					description, 
-					tags 
-				} 
-			})
-		} else {
-			response = await addVideoPost({ 
-				variables: { 
-					title, 
-					description, 
-					tags 
-				}
-			})
+	
+		// upload file to Cloudinary and get URL
+		const uploadedVideoUrl = await handleFileUpload(fileToUpload)
+	
+		if (!uploadedVideoUrl) {
+			console.log('Failed to upload video')
+			return
 		}
-
+	
+		// use Cloudinary URL in GraphQL mutation
+		const response = await addVideoPost({ 
+			variables: { 
+				title, 
+				description, 
+				tags,
+				videoSrc: uploadedVideoUrl
+			}
+		})
+	
 		if (response && response.data) {
-			console.log('uploaded video url:', response.data.uploadVideo.url)
+			console.log('Video post created:', response.data.addVideoPost)
 		}
+	
 		navigate('/profile')
 	}
 	
@@ -89,7 +110,7 @@ const Upload = () => {
 			</Paper>
 
 			<Paper sx={{ padding: '.7rem',  borderRadius: 0 }}>
-					<form onSubmit={handleFormSubmit}>
+					<form onSubmit={handleFormSubmit} encType="multipart/form-data">
 						<CustomTextField
 							name="title"
 							type="text"

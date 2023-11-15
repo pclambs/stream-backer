@@ -24,6 +24,7 @@ const typeDefs = `
     commentBody: String!
     postedBy: Profile
     postedTo: ID
+    createdAt: String!
   }
 
   type Auth {

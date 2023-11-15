@@ -93,18 +93,21 @@ const resolvers = {
     removeComment: async (parent, { commentId }) => {
       return await Comment.findOneAndDelete({ _id: commentId })
     },
-    testUpload: async () =>{
+    uploadVideo: async (parent, args, context) => {
+      // TODO: middleware 'express-fileupload' to handle file uploads?
+    
       try {
-        const imagePath = path.join(__dirname, '../../client/src/assets/stream-backer-logo.svg')
-        const result = await cloudinary.uploader.upload(imagePath)
-
+        const file = args.file
+        const result = await cloudinary.uploader.upload(file.path, {
+          resource_type: "video", 
+        })
+    
         console.log(result)
-        return 'success'
+        return result.url
       } catch (err) {
         console.log(err)
         return 'failure'
       }
-
     },
   },
 }

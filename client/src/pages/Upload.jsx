@@ -67,7 +67,7 @@ const Upload = () => {
 	}
 	
 	return (
-		<Container disableGutters sx={{marginY: 1.2, display: 'flex', gap: '.7rem'}}>
+		<Container disableGutters sx={{ marginY: 1.2, display: 'flex', gap: '.7rem', justifyContent: 'center' }}>
 
 			<Paper sx={{ borderRadius: 0, padding: '.7rem', display: 'flex' }}>
 				<FileDrop onFilesAdded={handleFileAdded}/>

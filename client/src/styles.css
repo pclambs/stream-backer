@@ -82,5 +82,5 @@ video {
 }
 
 .file-drop {
-  
+  transition: all .2s ease-in-out;
 }

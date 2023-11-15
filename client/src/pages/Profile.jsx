@@ -23,7 +23,7 @@ const Profile = () => {
   }
   return (
     <div>
-      <UserAvatar sx={{ pt: 5}} />
+      <UserAvatar />
       <h2>Welcome {profile.username}!</h2>
       <UserForm
         initialValue={{ ...profile, profileId: loggedInUserId }}

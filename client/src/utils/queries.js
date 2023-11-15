@@ -18,10 +18,7 @@ export const QUERY_SINGLE_PROFILE = gql`
       _id
       username
       email
-<<<<<<< HEAD
-      
       bio
-=======
       uploadedVideos {
         _id
         title
@@ -33,7 +30,6 @@ export const QUERY_SINGLE_PROFILE = gql`
         videoSRC
         createdAt
       }
->>>>>>> my-backup2
     }
   }
 `;

@@ -15,7 +15,7 @@ console.log(initialValue)
   }, [initialValue]);
 
   const handleInputChange = (e) => {
-   const {name, value, } = e.target
+   const {name, value } = e.target
    setUserBody({
     ...userBody,
     [name]:value
@@ -54,7 +54,6 @@ console.log(initialValue)
         component="div"
         sx={{
           display: "flex",
-
           justifyContent: "center",
           alignItems: "center",
         }}

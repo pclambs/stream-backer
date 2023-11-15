@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
       },  {
-        path: '/profiles/:profileId',
+        path: '/profile/:profileId',
         element: <Profile />
       }, {
         path: '/video/:videoPostId',

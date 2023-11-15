@@ -2,11 +2,12 @@ import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import auth from '../utils/auth';
 import { QUERY_SINGLE_PROFILE } from '../utils/queries';
-import ProfileCard from '../components/ProfileCard';
 import Auth from '../utils/auth';
+import { UPDATE_PROFILE } from '../utils/mutations';
+import UserForm from '../components/UserForm';
 
 const Profile = () => {
-  const isLoggedIn = Auth.loggedIn()
+  const loggedInUserId = Auth.loggedIn()
   const { profileId } = useParams();
   console.log(profileId)
   const { loading, error, data } = useQuery(QUERY_SINGLE_PROFILE, {
@@ -23,13 +24,10 @@ const Profile = () => {
   }
   return (
     <div>
-      <ProfileCard isLoggedIn={ isLoggedIn } profile={ profile }/>
-      ,
       <h2>
-        {/* change this back to name if it doesn't work */}
        Welcome {profile.username} !
       </h2>
-      <ProfileCard />
+      {/* <ProfileCard /> */}
       <UserForm initialValue={
         {...profile, profileId: loggedInUserId}} onSubmit={(userBody)=> updateUser({
         variables: userBody

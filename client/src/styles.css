@@ -80,3 +80,7 @@ video {
   height: auto; 
   max-width: 100%;
 }
+
+.file-drop {
+  transition: all .2s ease-in-out;
+}

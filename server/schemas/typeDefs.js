@@ -58,7 +58,7 @@ const typeDefs = `
 
     updateComment(commentId: ID!, commentBody: String): Comment
 
-    testUpload: String
+    uploadVideo: String
   }
 `
 

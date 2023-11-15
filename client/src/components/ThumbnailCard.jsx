@@ -1,6 +1,6 @@
 import UserAvatar from "./UserAvatar"
 import { useNavigate } from "react-router-dom"
-import { Paper, Grid, Box, Typography, Tooltip, IconButton, Button } from "@mui/material"
+import { Paper, Grid, Box, Typography, Tooltip, Button } from "@mui/material"
 import { formatDistanceToNow } from "date-fns"
 
 const ThumbnailCard = ({ videoPost }) => {

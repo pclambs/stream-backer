@@ -37,6 +37,7 @@ export const QUERY_VIDEOPOSTS = gql`
       comments {
         _id
         commentBody
+        createdAt
         postedBy {
           _id
           username
@@ -52,20 +53,17 @@ export const QUERY_SINGLE_VIDEOPOST = gql`
       _id
       createdAt
       description
-
       postedBy {
         _id
         username
       }
-
       thumbnail
       title
       videoSRC
-
       comments {
         _id
         commentBody
-
+        createdAt
         postedBy {
           _id
           username
@@ -81,6 +79,7 @@ export const QUERY_COMMENTS = gql`
     comments(videoPostId: $videoPostId) {
       _id
       commentBody
+      createdAt
       postedBy {
         _id
         username

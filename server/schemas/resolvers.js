@@ -5,15 +5,6 @@ const path = require('path')
 
 cloudinary.config()
 
-VideoPost.find()
-      .populate({
-        path: "comments",
-        populate: {
-          path: "postedBy",
-          model: 'Profile'
-        }
-      }).then((v) => console.log(JSON.stringify(v, null, 2)))
-
 const resolvers = {
   Query: {
     profiles: async () => {
@@ -59,8 +50,8 @@ const resolvers = {
 
       return { token, profile }
     },
-    updateProfile: async (parent, {profileId, username, email, password}) => {
-      return await Profile.findByIdAndUpdate(profileId, { username, email, password }, { new: true })
+    updateProfile: async (parent, {profileId, username, email, password, bio}) => {
+      return await Profile.findByIdAndUpdate(profileId, { username, email, password, bio }, { new: true })
     },
     removeProfile: async (parent, { profileId }) => {
       return Profile.findOneAndDelete({ _id: profileId })
@@ -93,6 +84,9 @@ const resolvers = {
     },
     addComment: async (parent, { commentBody, postedBy, postedTo }) => {
       const comment = await Comment.create({ commentBody, postedBy, postedTo })
+      await VideoPost.findByIdAndUpdate(postedTo, {
+        $push: { comments: comment._id}
+      })
       return comment
     },
     updateComment: async (parent, { commentId, commentBody }) => {
@@ -101,20 +95,38 @@ const resolvers = {
     removeComment: async (parent, { commentId }) => {
       return await Comment.findOneAndDelete({ _id: commentId })
     },
-    testUpload: async () =>{
+    uploadVideo: async (parent, { file }) => {
+      const { createReadStream} = await file
       try {
-        const imagePath = path.join(__dirname, '../../client/src/assets/stream-backer-logo.svg')
-        const result = await cloudinary.uploader.upload(imagePath)
+        const stream = createReadStream()
+        const cloudinaryResponse = await new Promise((resolve, reject) => {
+          const cloudinaryStream = cloudinary.uploader.upload_stream(
+            { 
+              resource_type: 'video',
+              transformation: [
+                { width: 1000, crop: 'scale' },
+                { quality: 'auto'},
+                { fetch_format: 'auto'}
+              ]
+            },
+            (error, result) => {
+              if (error) {
+                reject(error)
+              }
+              resolve(result)
+            }
+          )
+          stream.pipe(cloudinaryStream)
+        })
 
-        console.log(result)
-        return 'success'
-      } catch (err) {
-        console.log(err)
-        return 'failure'
+        console.log(cloudinaryResponse)
+        return cloudinaryResponse.url
+      } catch (error) {
+        console.log(error)
+        return error
       }
-
-    },
-  },
+    }
+  }
 }
 
 module.exports = resolvers

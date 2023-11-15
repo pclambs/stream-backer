@@ -27,15 +27,13 @@ export const ADD_PROFILE = gql`
 `
 
 export const UPDATE_PROFILE = gql`
-  mutation updateProfile($profileId: ID!, $username: String, $email: String, $password: String) {
-    updateProfile(profileId: $profileId, username: $username, email: $email, password: $password) {
-      token
-        profile {
+  mutation updateProfile($profileId: ID!, $username: String, $email: String, $password: String, $bio: String) {
+    updateProfile(profileId: $profileId, username: $username, email: $email, password: $password, bio: $bio) {
         _id
         username
         email
+        bio
       }
-    }
   }
 `
 
@@ -59,9 +57,11 @@ export const ADD_VIDEO_POST = gql`
       title
       description
       videoSRC
-      postedBy
       createdAt
       thumbnail
+      postedBy {
+        _id
+      }
     }
   }
 `
@@ -73,7 +73,7 @@ export const UPDATE_VIDEO_POST = gql`
       title
       description
       videoSRC
-      postedBy
+      postedBy 
       createdAt
       thumbnail
     }
@@ -99,7 +99,9 @@ export const ADD_COMMENT = gql`
     addComment(commentBody: $commentBody, postedBy: $postedBy, postedTo: $postedTo) {
       _id
       commentBody
-      postedBy
+      postedBy {
+        _id
+      }
       postedTo
     }
   }
@@ -110,8 +112,6 @@ export const UPDATE_COMMENT = gql`
     updateComment(commentId: $commentId, commentBody: $commentBody) {
       _id
       commentBody
-      postedBy
-      postedTo
     }
   }
 `
@@ -121,7 +121,10 @@ export const REMOVE_COMMENT = gql`
     removeComment(commentId: $commentId) {
       _id
       commentBody
-      postedBy
+      postedBy {
+        _id
+        username
+      }
       postedTo
     }
   }

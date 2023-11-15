@@ -1,9 +1,12 @@
 const typeDefs = `
+  scalar Upload
+
   type Profile {
     _id: ID
     username: String!
     email: String!
     uploadedVideos: [VideoPost]!
+    bio: String
   }
 
   type VideoPost {
@@ -11,9 +14,9 @@ const typeDefs = `
     title: String!
     description: String
     thumbnail: String!
-    postedBy: Profile
+    postedBy: Profile!
     videoSRC: String!
-    createdAt: String
+    createdAt: String!
     comments: [Comment]!
   }
 
@@ -27,6 +30,10 @@ const typeDefs = `
   type Auth {
     token: ID!
     profile: Profile
+  }
+
+  type FileResponse {
+    url: String
   }
 
   type Query {
@@ -52,13 +59,13 @@ const typeDefs = `
 
     removeComment(commentId: ID!): Comment
 
-    updateProfile(profileId: ID!, username: String, email: String, password: String): Profile
+    updateProfile(profileId: ID!, username: String, email: String, password: String, bio: String): Profile
 
     updateVideoPost(videoPostId: ID!, title: String, description: String, thumbnail: String, videoSRC: String): VideoPost
 
     updateComment(commentId: ID!, commentBody: String): Comment
 
-    testUpload: String
+    uploadVideo(file: Upload!): String
   }
 `
 

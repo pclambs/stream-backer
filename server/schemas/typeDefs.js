@@ -1,4 +1,6 @@
 const typeDefs = `
+  scalar Upload
+
   type Profile {
     _id: ID
     username: String!
@@ -27,6 +29,10 @@ const typeDefs = `
   type Auth {
     token: ID!
     profile: Profile
+  }
+
+  type FileResponse {
+    url: String
   }
 
   type Query {
@@ -58,7 +64,7 @@ const typeDefs = `
 
     updateComment(commentId: ID!, commentBody: String): Comment
 
-    uploadVideo: String
+    uploadVideo(file: Upload!): String
   }
 `
 

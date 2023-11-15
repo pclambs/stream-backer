@@ -68,6 +68,8 @@ const Upload = () => {
 	const handleFormSubmit = async (event) => {
 		event.preventDefault()
 		const { title, description, tags } = formState
+
+		const userId = Auth.getProfile()?.data?._id
 	
 		// check if theres a file to upload
 		const fileToUpload = uploadedFiles.length > 0 ? uploadedFiles[0] : null
@@ -79,27 +81,33 @@ const Upload = () => {
 	
 		// upload file to Cloudinary and get URL
 		const uploadedVideoUrl = await handleFileUpload(fileToUpload)
-	
+
 		if (!uploadedVideoUrl) {
 			console.log('Failed to upload video')
 			return
 		}
 	
-		// use Cloudinary URL in GraphQL mutation
+		// TODO: generate and upload a thumbnail, then get the URL
+		const uploadedThumbnailUrl = '../assets/stream-backer-play-logo.png'
+	
+		// use Cloudinary URLs in GraphQL mutation
 		const response = await addVideoPost({ 
 			variables: { 
 				title, 
-				description, 
-				tags,
-				videoSrc: uploadedVideoUrl
+				description,
+				thumbnail: uploadedThumbnailUrl,
+				postedBy: userId,
+				videoSrc: uploadedVideoUrl,
+				// tags 
 			}
 		})
 	
 		if (response && response.data) {
 			console.log('Video post created:', response.data.addVideoPost)
+			navigate('/profile')
+		} else {
+			console.error('Error creating video post')
 		}
-	
-		navigate('/profile')
 	}
 	
 	return (
@@ -107,6 +115,11 @@ const Upload = () => {
 
 			<Paper sx={{ borderRadius: 0, padding: '.7rem', display: 'flex' }}>
 				<FileDrop onFilesAdded={handleFileAdded}/>
+			</Paper>
+			
+			<Paper>
+				<Typography variant='h6' sx={{ borderRadius: 0, padding: '.7rem', display: 'flex' }}>Thumbnail Stuffs</Typography>
+				{/* <img style={{padding: '.7rem', objectFit: 'fill', height: 'auto', width: '100%'}} src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" /> */}
 			</Paper>
 
 			<Paper sx={{ padding: '.7rem',  borderRadius: 0 }}>
@@ -153,10 +166,6 @@ const Upload = () => {
 					</form>
 				</Paper>
 
-				<Paper>
-					<Typography variant='h6' sx={{ borderRadius: 0, padding: '.7rem', display: 'flex' }}>Thumbnail</Typography>
-					<img style={{padding: '.7rem', objectFit: 'fill', height: 'auto', width: '100%'}} src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" />
-				</Paper>
 		</Container>
 	)
 }

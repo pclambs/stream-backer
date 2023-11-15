@@ -5,7 +5,6 @@ const path = require('path')
 
 cloudinary.config()
 
-
 const resolvers = {
   Query: {
     profiles: async () => {
@@ -96,23 +95,38 @@ const resolvers = {
     removeComment: async (parent, { commentId }) => {
       return await Comment.findOneAndDelete({ _id: commentId })
     },
-    uploadVideo: async (parent, args, context) => {
-      // TODO: middleware 'express-fileupload' to handle file uploads?
-    
+    uploadVideo: async (parent, { file }) => {
+      const { createReadStream} = await file
       try {
-        const file = args.file
-        const result = await cloudinary.uploader.upload(file.path, {
-          resource_type: "video", 
+        const stream = createReadStream()
+        const cloudinaryResponse = await new Promise((resolve, reject) => {
+          const cloudinaryStream = cloudinary.uploader.upload_stream(
+            { 
+              resource_type: 'video',
+              transformation: [
+                { width: 1000, crop: 'scale' },
+                { quality: 'auto'},
+                { fetch_format: 'auto'}
+              ]
+            },
+            (error, result) => {
+              if (error) {
+                reject(error)
+              }
+              resolve(result)
+            }
+          )
+          stream.pipe(cloudinaryStream)
         })
-    
-        console.log(result)
-        return result.url
-      } catch (err) {
-        console.log(err)
-        return 'failure'
+
+        console.log(cloudinaryResponse)
+        return cloudinaryResponse.url
+      } catch (error) {
+        console.log(error)
+        return error
       }
-    },
-  },
+    }
+  }
 }
 
 module.exports = resolvers

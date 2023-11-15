@@ -48,7 +48,7 @@ const Upload = () => {
 		event.preventDefault()
 		const { title, description, tags } = formState
 
-		const fileToUpload = uploaderFiles.length > 0 ? uploadedFiles[0] : null
+		const fileToUpload = uploadedFiles.length > 0 ? uploadedFiles[0] : null
 		console.log('File to upload:', fileToUpload)
 
 		if (!fileToUpload) {
@@ -56,12 +56,27 @@ const Upload = () => {
 			return
 		}
 
-		// TODO: FormData for file upload
-
+		let response
 		if (videoPostId) {
-			await updateVideoPost({ variables: { title, description, tags } })
+			await updateVideoPost({ 
+				variables: { 
+					title, 
+					description, 
+					tags 
+				} 
+			})
 		} else {
-			await addVideoPost({ variables: { title, description, tags } })
+			response = await addVideoPost({ 
+				variables: { 
+					title, 
+					description, 
+					tags 
+				}
+			})
+		}
+
+		if (response && response.data) {
+			console.log('uploaded video url:', response.data.uploadVideo.url)
 		}
 		navigate('/profile')
 	}
@@ -115,6 +130,11 @@ const Upload = () => {
 							Upload
 						</Button>
 					</form>
+				</Paper>
+
+				<Paper>
+					<Typography variant='h6' sx={{ borderRadius: 0, padding: '.7rem', display: 'flex' }}>Thumbnail</Typography>
+					<img style={{padding: '.7rem', objectFit: 'fill', height: 'auto', width: '100%'}} src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" />
 				</Paper>
 		</Container>
 	)

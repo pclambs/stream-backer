@@ -1,17 +1,11 @@
 const { Schema, model } = require('mongoose');
-// const VideoPost = require('./VideoPost');
-
 
 const commentSchema = new Schema({
   commentBody: {
     type: String,
     required: true,
     trim: true,
-    maxLength: 280,
-  },
-  dateCreated: {
-    type: Date,
-    default: Date.now(),
+    maxlength: 500,
   },
   postedBy: {
     type: Schema.Types.ObjectId,
@@ -21,6 +15,8 @@ const commentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "VideoPost"
   }
+}, {
+  timestamps: true,
 })
   
 

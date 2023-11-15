@@ -99,6 +99,7 @@ export const ADD_COMMENT = gql`
     addComment(commentBody: $commentBody, postedBy: $postedBy, postedTo: $postedTo) {
       _id
       commentBody
+      createdAt
       postedBy {
         _id
       }
@@ -112,6 +113,7 @@ export const UPDATE_COMMENT = gql`
     updateComment(commentId: $commentId, commentBody: $commentBody) {
       _id
       commentBody
+      createdAt
     }
   }
 `
@@ -121,11 +123,12 @@ export const REMOVE_COMMENT = gql`
     removeComment(commentId: $commentId) {
       _id
       commentBody
+      createdAt
+      postedTo
       postedBy {
         _id
         username
       }
-      postedTo
     }
   }
 `

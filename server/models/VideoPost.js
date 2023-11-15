@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose')
-// const commentSchema = require('./Comment')
 
 const videoPostSchema = new Schema({
   title: {
@@ -29,7 +28,7 @@ const videoPostSchema = new Schema({
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 }, {
   timestamps: true,
-});
+})
 
 const VideoPost = model('VideoPost', videoPostSchema)
 

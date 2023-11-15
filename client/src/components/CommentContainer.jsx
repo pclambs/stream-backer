@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import CommentCard from './CommentCard'
 import CommentForm from './CommentForm'
-import { Button, Box } from '@mui/material'
+import { Button, Box, Container } from '@mui/material'
 import { useMutation } from '@apollo/client'
 import { ADD_COMMENT } from '../utils/mutations'
 import { useParams } from "react-router-dom"
@@ -51,11 +51,13 @@ const CommentContainer = ({ comments }) => {
     }
 
     return (
-        <Box
+        <Container
             component="div"
             className="comment-container"
-            textAlign="center">
-            {!isEditingForm && (
+            disableGutters
+        >
+            
+            {!isEditingForm && loggedInUserId && (
                 <Button
                     variant="text"
                     color="primary"
@@ -63,10 +65,8 @@ const CommentContainer = ({ comments }) => {
                     Post A Comment
                 </Button>
             )}
-            {isEditingForm && loggedInUserId && (
+            {isEditingForm && (
                 <>
-
-
                     <CommentForm
                         setIsEditingForm={setIsEditingForm}
                         onSubmit={handleCommentSubmit}
@@ -85,7 +85,7 @@ const CommentContainer = ({ comments }) => {
                     comment={comment}
                 />
             ))}
-        </Box>
+        </Container>
     )
 }
 

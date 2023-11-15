@@ -13,7 +13,9 @@ const ThumbnailCard = ({ videoPost }) => {
     const navigate = useNavigate()
     const videoPath = () => {
         let path = `/video/${videoPost._id}`
-        navigate(path)
+        setTimeout(() => {
+            navigate(path)
+        }, 300)
     }
 
 

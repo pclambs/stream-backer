@@ -20,12 +20,10 @@ const Profile = () => {
   }
   return (
     <div>
-      <ProfileCard isLoggedIn={ isLoggedIn } profile={ profile }/>
-      ,
       <h2>
-        {/* change this back to name if it doesn't work */}
        Welcome {profile.username} !
       </h2>
+      <ProfileCard isLoggedIn={ isLoggedIn } profile={ profile }/>
     </div>
   );
 };

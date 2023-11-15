@@ -4,7 +4,8 @@ import auth from "../utils/auth";
 import { QUERY_SINGLE_PROFILE } from "../utils/queries";
 import { UPDATE_PROFILE } from "../utils/mutations";
 import UserForm from "../components/UserForm";
-// import ProfileCard from "../components/ProfileCard";
+import UserAvatar from "../components/UserAvatar";
+
 
 const Profile = () => {
   const loggedInUserId = auth.getProfile()?.data?._id;
@@ -22,8 +23,8 @@ const Profile = () => {
   }
   return (
     <div>
+      <UserAvatar sx={{ pt: 5}} />
       <h2>Welcome {profile.username}!</h2>
-      {/* <ProfileCard /> */}
       <UserForm
         initialValue={{ ...profile, profileId: loggedInUserId }}
         onSubmit={(userBody) =>

@@ -32,7 +32,7 @@ console.log(initialValue)
 
   return (
     <Box component="form" noValidate autoComplete="off">
-      <pre>{JSON.stringify(userBody, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(userBody, null, 2)}</pre> */}
       <TextField
         label="Username"
         variant="outlined"

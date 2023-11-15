@@ -24,54 +24,48 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
   return (
     <Card sx={{ width: "100%" }}>
       <CardHeader
-        sx={{
-          borderBottom: 1,
-          borderColor: "primary.main",
-        }}
         avatar={
           <UserAvatar />
         }
         action={
           <Stack direction="row" spacing={1}>
-            <Button 
-              variant="outlined" 
-              color="success" 
+            <Button
+              variant="outlined"
+              color="success"
               onClick={submitComment}
             >
-          Submit
+              Submit
             </Button>
           </Stack>
         }
         title="Add a comment"
-        // subheader="Add a comment"
+      // subheader="Add a comment"
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          <Box 
-            component="form"
-                noValidate
-                autoComplete="off"
+        <Box
+          component="form"
+          noValidate
+          autoComplete="off"
+          sx={{
+            width: "100%"
+          }}
+        >
+          <CustomTextField
+            name="description"
+            id="comment-input"
+            type="text"
+            value={commentBody}
+            onChange={(e) => setCommentBody(e.target.value)}
+            variant='standard'
+            rows={4}
+            multiline
+            label='Add a comment'
+            helperText=""
             sx={{
               width: "100%"
             }}
-          >
-            <CustomTextField
-							name="description"
-              id="comment-input"
-							type="text"
-							value={commentBody}
-							onChange={(e) => setCommentBody(e.target.value)}
-							variant='standard'
-							rows={4}
-							multiline
-							label='Add a comment'
-              helperText=""
-              sx={{
-                width: "100%"
-              }}
-						/>
-          </Box>
-        </Typography>
+          />
+        </Box>
       </CardContent>
     </Card>
 

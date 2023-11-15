@@ -5,12 +5,15 @@ import { UPDATE_COMMENT, REMOVE_COMMENT } from '../utils/mutations';
 import { Box, Button, Stack, Typography, Card, CardHeader, CardContent, Avatar } from "@mui/material"
 import CommentForm from './CommentForm'
 import { formatDistanceToNow } from "date-fns"
+import Auth from "../utils/auth"
 
 const CommentCard = ({ comment }) => {
   console.log(comment)
   const [updateComment] = useMutation(UPDATE_COMMENT)
   const [removeComment] = useMutation(REMOVE_COMMENT)
   const [isEditing, setIsEditing] = useState(false)
+
+  const isLoggedIn = Auth.loggedIn()
 
   const timestamp = Number(comment.createdAt)
   const date = new Date(timestamp)
@@ -62,7 +65,7 @@ const CommentCard = ({ comment }) => {
         marginBottom: "20px",
         width: "100%"
       }}>
-      {isEditing ? (
+      {isEditing && isLoggedIn ? (
         <CommentForm
           initialValue={comment.commentBody}
           comment={comment}
@@ -77,6 +80,8 @@ const CommentCard = ({ comment }) => {
             sx={{
               borderBottom: 1,
               borderColor: "primary.main",
+              mx:"16px",
+              px: "0px"
             }}
             avatar={
               <Avatar aria-label="recipe">
@@ -108,7 +113,7 @@ const CommentCard = ({ comment }) => {
             subheader={relativeTime}
           />
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
+            <Typography component="p" variant="body2" color="text.secondary">
               {comment.commentBody}
             </Typography>
           </CardContent>

@@ -59,9 +59,11 @@ export const ADD_VIDEO_POST = gql`
       title
       description
       videoSRC
-      postedBy
       createdAt
       thumbnail
+      postedBy {
+        _id
+      }
     }
   }
 `
@@ -73,7 +75,7 @@ export const UPDATE_VIDEO_POST = gql`
       title
       description
       videoSRC
-      postedBy
+      postedBy 
       createdAt
       thumbnail
     }
@@ -99,7 +101,9 @@ export const ADD_COMMENT = gql`
     addComment(commentBody: $commentBody, postedBy: $postedBy, postedTo: $postedTo) {
       _id
       commentBody
-      postedBy
+      postedBy {
+        _id
+      }
       postedTo
     }
   }
@@ -110,8 +114,6 @@ export const UPDATE_COMMENT = gql`
     updateComment(commentId: $commentId, commentBody: $commentBody) {
       _id
       commentBody
-      postedBy
-      postedTo
     }
   }
 `
@@ -121,7 +123,10 @@ export const REMOVE_COMMENT = gql`
     removeComment(commentId: $commentId) {
       _id
       commentBody
-      postedBy
+      postedBy {
+        _id
+        username
+      }
       postedTo
     }
   }

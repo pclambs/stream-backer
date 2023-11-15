@@ -15,6 +15,8 @@ const Profile = () => {
   console.log('Data', data)
   const profile = data?.profile || {};
 
+  console.log('profile', profile);
+
   if (loading) {
     return <div>Loading...</div>;
   }

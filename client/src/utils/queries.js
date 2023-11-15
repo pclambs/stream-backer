@@ -18,8 +18,22 @@ export const QUERY_SINGLE_PROFILE = gql`
       _id
       username
       email
+<<<<<<< HEAD
       
       bio
+=======
+      uploadedVideos {
+        _id
+        title
+        description
+        thumbnail
+        postedBy {
+          _id
+        }
+        videoSRC
+        createdAt
+      }
+>>>>>>> my-backup2
     }
   }
 `;

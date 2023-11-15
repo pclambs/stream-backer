@@ -50,8 +50,8 @@ const resolvers = {
 
       return { token, profile }
     },
-    updateProfile: async (parent, {profileId, username, email, password}) => {
-      return await Profile.findByIdAndUpdate(profileId, { username, email, password }, { new: true })
+    updateProfile: async (parent, {profileId, username, email, password, bio}) => {
+      return await Profile.findByIdAndUpdate(profileId, { username, email, password, bio }, { new: true })
     },
     removeProfile: async (parent, { profileId }) => {
       return Profile.findOneAndDelete({ _id: profileId })

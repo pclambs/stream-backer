@@ -19,7 +19,12 @@ const profileSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minlength: 5,
+    minLength: 5,
+  },
+  bio: {
+    type: String,
+    required: false,
+    maxLength: 250,
   },
   uploadedVideos: {
     type: [

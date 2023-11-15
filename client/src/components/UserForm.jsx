@@ -42,6 +42,22 @@ console.log(initialValue)
       />
 
       <TextField
+        label="Email"
+        variant="outlined"
+        name="email"
+        value={userBody.email}
+        onChange={handleInputChange}
+      />
+
+      <TextField
+        label="Password"
+        type="password"
+        name="password"
+        value={userBody.password}
+        autoComplete="current-password"
+      />
+
+      <TextField
         name="bio"
         label="Write your bio"
         value={userBody.bio}

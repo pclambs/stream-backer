@@ -30,13 +30,13 @@ function Header() {
   const [search, setSearch] = useState("")
   const settings = Auth.loggedIn()
     ? [
-      { title: "Profile", link: `/profile/${userId}`, icon: <PersonIcon />},
-      { title: "Account", link: "/account", icon: <SettingsIcon />},
-      { title: "Upload", link: "/upload", icon: <UploadIcon />}, 
-      { title: "Log out", action: logout, icon: <LogoutIcon />}
+      { title: "Profile", link: `/profile/${userId}`, icon: <PersonIcon sx={{ fontSize: '1.25rem' }}/>},
+      { title: "Account", link: "/account", icon: <SettingsIcon sx={{ fontSize: '1.25rem' }}/>},
+      { title: "Upload", link: "/upload", icon: <UploadIcon sx={{ fontSize: '1.25rem' }}/>}, 
+      { title: "Log out", action: logout, icon: <LogoutIcon sx={{ fontSize: '1.25rem', transform: 'translateX(2px)' }}/>}
     ] : [
-      { title: "Log in", link: "/login", icon: <LoginIcon /> }, 
-      { title: "Sign up", link: "/signup", icon: <SignupIcon /> }
+      { title: "Log in", link: "/login", icon: <LoginIcon sx={{ fontSize: '1.25rem' }}/> }, 
+      { title: "Sign up", link: "/signup", icon: <SignupIcon sx={{ fontSize: '1.25rem' }}/> }
     ]
   
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -120,15 +120,15 @@ function Header() {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting.title || setting} onClick={handleCloseUserMenu}>
-                    <ListItemIcon>
+                    <ListItemIcon sx={{ fontSize: '5rem' }}>
                       {setting.icon}
                     </ListItemIcon>
                     {setting.link ? (
                       <Link to={setting.link} style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <Typography textAlign="center">{setting.title}</Typography>
+                        <Typography textAlign="center" sx={{ fontSize: '0.875rem' }}>{setting.title}</Typography>
                       </Link>
                     ) : (
-                      <Typography textAlign="center" onClick={setting.action}>{setting.title || setting}</Typography>
+                      <Typography textAlign="center" onClick={setting.action} sx={{ fontSize: '0.875rem' }}>{setting.title || setting}</Typography>
                     )}
                   </MenuItem>
                 ))}

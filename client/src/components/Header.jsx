@@ -24,13 +24,15 @@ const logout = (event) => {
   Auth.logout()
 }
 
+const userId = Auth.getProfile().data._id
+
 function Header() {
 
   const [search, setSearch] = useState("")
   const pages = ["Liked Videos", "Video Feed", "Supporters"];
   const settings = Auth.loggedIn()
     ? [
-      { title: "Profile", link: "/profile"},
+      { title: "Profile", link: `/profile/${userId}`},
       { title: "Account", link: "/account"},
       { title: "Upload", link: "/upload"},
       { title: "Log out", action: logout }

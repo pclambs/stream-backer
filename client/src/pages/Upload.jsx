@@ -8,6 +8,7 @@ import Auth from "../utils/auth"
 import { Button, Typography, Container, Paper } from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
+
 const Upload = () => {
 	const [formState, setFormState] = useState({ title: '', description: '', tags: '', })
 	const [uploadedFiles, setUploadedFiles] = useState([])
@@ -104,7 +105,7 @@ const Upload = () => {
 	
 		if (response && response.data) {
 			console.log('Video post created:', response.data.addVideoPost)
-			navigate('/profile')
+			navigate(`/profile/${userId}`)
 		} else {
 			console.error('Error creating video post')
 		}

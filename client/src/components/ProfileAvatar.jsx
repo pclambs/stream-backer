@@ -1,9 +1,18 @@
 import React from "react"
 import { Avatar, IconButton } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 const ProfileAvatar = React.forwardRef((props, ref) => {
   const { profile } = props
   const initial = profile.username.charAt(0).toUpperCase()
+  const navigate = useNavigate()
+
+  const handleAvatarClick = () => {
+    let path = `/profile/${profile._id}`
+    setTimeout(() => {
+      navigate(path)
+    }, 200)
+  }
 
   return (
     <Avatar
@@ -11,9 +20,10 @@ const ProfileAvatar = React.forwardRef((props, ref) => {
       {...props}
       profile={ profile }
       sx={{ width: 38, height: 38, backgroundColor: "#bd279f" }}
+      onClick={handleAvatarClick}
     >
       <IconButton sx={{ width: 38, height: 38, fontSize: "1.1rem" }}>
-        {initial}
+        {initial} 
       </IconButton>
     </Avatar>
   )

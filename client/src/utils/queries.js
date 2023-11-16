@@ -4,10 +4,23 @@ export const QUERY_PROFILES = gql`
   query allProfiles {
     profiles {
       _id
+      createdAt
       username
       email
-      uploadedVideos 
       bio
+      uploadedVideos {
+        _id
+        createdAt
+        title
+        description
+        thumbnail
+        postedBy {
+          _id
+          username
+        }
+        videoSRC
+        createdAt
+      }
     }
   }
 `
@@ -16,6 +29,7 @@ export const QUERY_SINGLE_PROFILE = gql`
   query singleProfile($profileId: ID!) {
     profile(profileId: $profileId) {
       _id
+      createdAt
       username
       email
       bio
@@ -26,6 +40,7 @@ export const QUERY_SINGLE_PROFILE = gql`
         thumbnail
         postedBy {
           _id
+          username
         }
         videoSRC
         createdAt
@@ -42,6 +57,7 @@ export const QUERY_VIDEOPOSTS = gql`
       description
       postedBy {
         _id
+        createdAt
         username
       }
       thumbnail
@@ -68,6 +84,7 @@ export const QUERY_SINGLE_VIDEOPOST = gql`
       description
       postedBy {
         _id
+        createdAt
         username
       }
       thumbnail
@@ -95,6 +112,7 @@ export const QUERY_COMMENTS = gql`
       postedTo
       postedBy {
         _id
+        createdAt
         username
       }
     }

@@ -7,6 +7,7 @@ const typeDefs = `
     email: String!
     uploadedVideos: [VideoPost]!
     bio: String
+    createdAt: String!
   }
 
   type VideoPost {

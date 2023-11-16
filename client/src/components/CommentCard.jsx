@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { UPDATE_COMMENT, REMOVE_COMMENT } from '../utils/mutations';
-import { Box, Stack, Typography, Card, CardHeader, CardContent, Tooltip, IconButton } from "@mui/material"
+import { Box, Stack, Typography, Card, Paper, CardHeader, CardContent, Tooltip, IconButton } from "@mui/material"
 import CommentForm from './CommentForm'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -80,7 +80,10 @@ const CommentCard = ({ comment }) => {
 
         />
       ) : (
-        <Card sx={{ width: "100%" }}>
+        <Paper 
+          elevation={2}
+          sx={{ width: "100%" }}
+        >
           <CardHeader
             sx={{
               borderBottom: 1,
@@ -131,7 +134,7 @@ const CommentCard = ({ comment }) => {
                 </IconButton>
               </Stack>
             }
-            title={comment.postedBy.username}
+            title={postedBy.username}
             subheader={relativeTime}
           />
           <CardContent>
@@ -139,7 +142,7 @@ const CommentCard = ({ comment }) => {
               {comment.commentBody}
             </Typography>
           </CardContent>
-        </Card>
+        </Paper>
       )}
     </Box>
   )

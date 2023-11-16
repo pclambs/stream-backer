@@ -1,6 +1,6 @@
 // CommentForm.jsx
 import React, { useState, useEffect } from 'react'
-import { Button, Box, Card, CardHeader, CardContent, Stack, Typography } from '@mui/material'
+import { Button, Box, Card, CardHeader, CardContent, Stack, Paper } from '@mui/material'
 import CustomTextField from './CustomTextField'
 import UserAvatar from "./UserAvatar"
 import { format } from "date-fns"
@@ -24,10 +24,11 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
   const username = Auth.getProfile()?.data?.username
 
   return (
-    <Card 
+    <Paper 
+      elevation={2}
       sx={{ 
         width: "100%",
-        marginBottom: "15px"
+        marginBottom: "20px"
       }}
     >
       <CardHeader
@@ -88,7 +89,7 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
           />
         </Box>
       </CardContent>
-    </Card>
+    </Paper>
   )
 }
 

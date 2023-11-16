@@ -44,7 +44,7 @@ const Home = () => {
   const videoPosts = data?.videoPosts || []
 
   return (
-    <Container disableGutters>
+    <Container maxWidth="xl" disableGutters>
       <div>
         <FilterTags
           tags={tags}

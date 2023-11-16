@@ -6,6 +6,7 @@ export const LOGIN_USER = gql`
       token
       profile {
         _id
+        createdAt
         username
         email
       }
@@ -19,6 +20,7 @@ export const ADD_PROFILE = gql`
       token
         profile {
         _id
+        createdAt
         username
         email
       }
@@ -30,6 +32,7 @@ export const UPDATE_PROFILE = gql`
   mutation updateProfile($profileId: ID!, $username: String, $email: String, $password: String, $bio: String) {
     updateProfile(profileId: $profileId, username: $username, email: $email, password: $password, bio: $bio) {
         _id
+        createdAt
         username
         email
         bio
@@ -43,6 +46,7 @@ export const REMOVE_PROFILE = gql`
       token
         profile {
         _id
+        createdAt
         username
         email
       }

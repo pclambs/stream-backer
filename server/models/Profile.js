@@ -24,7 +24,7 @@ const profileSchema = new Schema({
   bio: {
     type: String,
     required: false,
-    maxLength: 250,
+    maxLength: 500,
   },
   uploadedVideos: {
     type: [
@@ -35,7 +35,9 @@ const profileSchema = new Schema({
     ],
     default: [],
   },
-});
+}, {
+  timestamps: true,
+})
 
 // set up pre-save middleware to create password
 profileSchema.pre('save', async function (next) {

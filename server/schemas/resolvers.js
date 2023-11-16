@@ -11,31 +11,41 @@ const resolvers = {
       return await Profile.find().populate("uploadedVideos")
     },
     profile: async (parent, { profileId }) => {
-      return await Profile.findOne({ _id: profileId }).populate("uploadedVideos")
-    },
-    videoPosts: async () => {
-      return await VideoPost.find()
-      .populate("postedBy")
+      console.log("resolver profileId", profileId)
+      const profile = await Profile.findOne({ _id: profileId })
       .populate({
-        path: "comments",
+        path: "uploadedVideos",
         populate: {
           path: "postedBy",
           model: 'Profile'
         }
     })
-      .populate('postedBy')
+      // console.log("resolver profile", profile)
+      return profile
+    },
+    videoPosts: async () => {
+      return await VideoPost.find()
+        .populate("postedBy")
+        .populate({
+          path: "comments",
+          populate: {
+            path: "postedBy",
+            model: 'Profile'
+          }
+        })
+        .populate('postedBy')
     },
     videoPost: async (parent, { videoPostId }) => {
       return await VideoPost.findOne({ _id: videoPostId })
-      .populate("postedBy")
-      .populate({
-        path: "comments",
-        populate: {
-          path: "postedBy",
-          model: 'Profile'
-        }
-      })
-    
+        .populate("postedBy")
+        .populate({
+          path: "comments",
+          populate: {
+            path: "postedBy",
+            model: 'Profile'
+          }
+        })
+
     },
     comments: async (parent, { videoPostId }) => {
       return await Comment.find({ postedTo: videoPostId })
@@ -50,7 +60,7 @@ const resolvers = {
 
       return { token, profile }
     },
-    updateProfile: async (parent, {profileId, username, email, password, bio}) => {
+    updateProfile: async (parent, { profileId, username, email, password, bio }) => {
       return await Profile.findByIdAndUpdate(profileId, { username, email, password, bio }, { new: true })
     },
     removeProfile: async (parent, { profileId }) => {
@@ -85,28 +95,28 @@ const resolvers = {
     addComment: async (parent, { commentBody, postedBy, postedTo }) => {
       const comment = await Comment.create({ commentBody, postedBy, postedTo })
       await VideoPost.findByIdAndUpdate(postedTo, {
-        $push: { comments: comment._id}
+        $push: { comments: comment._id }
       })
       return comment
     },
     updateComment: async (parent, { commentId, commentBody }) => {
-      return await Comment.findByIdAndUpdate(commentId, { commentBody }, { new:true })
+      return await Comment.findByIdAndUpdate(commentId, { commentBody }, { new: true })
     },
     removeComment: async (parent, { commentId }) => {
       return await Comment.findOneAndDelete({ _id: commentId })
     },
     uploadVideo: async (parent, { file }) => {
-      const { createReadStream} = await file
+      const { createReadStream } = await file
       try {
         const stream = createReadStream()
         const cloudinaryResponse = await new Promise((resolve, reject) => {
           const cloudinaryStream = cloudinary.uploader.upload_stream(
-            { 
+            {
               resource_type: 'video',
               transformation: [
                 { width: 1000, crop: 'scale' },
-                { quality: 'auto'},
-                { fetch_format: 'auto'}
+                { quality: 'auto' },
+                { fetch_format: 'auto' }
               ]
             },
             (error, result) => {

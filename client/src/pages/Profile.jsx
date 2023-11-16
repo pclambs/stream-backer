@@ -13,20 +13,25 @@ import { getRelativeTime } from "../utils/helpers"
 
 const Profile = () => {
   const isLoggedIn = Auth.loggedIn()
-  const loggedInUserId = Auth.getProfile()?.data?._id;
+  const loggedInUserId = Auth.getProfile()?.data?._id
+
+  const { profileId } = useParams()
+  // console.log("URL PARAM", profileId)
 
   const { loading, data } = useQuery(QUERY_SINGLE_PROFILE, {
-    variables: { profileId: loggedInUserId },
-  });
+    variables: { profileId },
+    fetchPolicy: "cache-and-network"
+  })
+  // console.log("data", data)
 
-  const profile = data?.profile || {};
-  const [updateUser] = useMutation(UPDATE_PROFILE);
-  console.log("profile", profile)
+  const profile = data?.profile || {}
+  const [updateUser] = useMutation(UPDATE_PROFILE)
+  // console.log("profile", profile, Object.keys(profile).length)
 
   const relativeTime = getRelativeTime(profile.createdAt)
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
   return (
     <Container
@@ -35,84 +40,88 @@ const Profile = () => {
         marginTop: 5
       }}
     >
-      <Grid container spacing={2}>
-        {/* Profile Info Card */}
-        <Grid item xs={4}>
-          <Paper
-            elevation={2}
-            sx={{ width: "100%" }}
-          >
-            <CardHeader
-              sx={{
-                borderBottom: 1,
-                borderColor: "primary.main",
-                mx: "16px",
-                px: "0px"
-              }}
-              avatar={
-                <Tooltip
-                  title="Change Avatar"
-                  PopperProps={{
-                    modifiers: [
-                      {
-                        name: 'offset',
-                        options: {
-                          offset: [0, -7], // X, Y
+      {profile && Object.keys(profile).length > 0 ? (
+
+        <Grid container spacing={2}>
+          {/* Profile Info Card */}
+          <Grid item xs={4}>
+            <Paper
+              elevation={2}
+              sx={{ width: "100%" }}
+            >
+              <CardHeader
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "primary.main",
+                  mx: "16px",
+                  px: "0px"
+                }}
+                avatar={
+                  <Tooltip
+                    title="Change Avatar"
+                    PopperProps={{
+                      modifiers: [
+                        {
+                          name: 'offset',
+                          options: {
+                            offset: [0, -7], // X, Y
+                          },
                         },
-                      },
-                    ],
-                  }}
-                >
-                  <ProfileAvatar 
-                    profile={profile}
-                    sx={{ width: 150, height: 150 }}
-                  />
-                </Tooltip>
-              }
-              action={
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  sx={{
-                    marginRight: "10px",
-                    transform: "translateY(5px)"
-                  }}
-                >
+                      ],
+                    }}
+                  >
+                    <ProfileAvatar 
+                      profile={profile}
+                      sx={{ width: 150, height: 150 }}
+                    />
+                  </Tooltip>
+                }
+                action={
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    sx={{
+                      marginRight: "10px",
+                      transform: "translateY(5px)"
+                    }}
+                  >
 
-                </Stack>
-              }
-              title={
-                <Typography component="h1" variant="h3">{profile.username}</Typography>
-              }
-              subheader={`Joined ${relativeTime}`}
-            />
-            <CardContent>
-            <CustomTextField
-            name="description"
-            id="comment-input"
-            type="text"
-            // value={}
-            // onChange={}
-            variant='standard'
-            rows={4}
-            multiline
-            label='About You:'
-            helperText=""
-            sx={{
-              width: "100%"
-            }}
-            />
-              <Typography component="p" variant="body2" color="text.secondary">
+                  </Stack>
+                }
+                title={
+                  <Typography component="h1" variant="h3">{profile.username}</Typography>
+                }
+                subheader={`Joined ${relativeTime}`}
+              />
+              <CardContent>
+              <CustomTextField
+              name="description"
+              id="comment-input"
+              type="text"
+              // value={}
+              // onChange={}
+              variant='standard'
+              rows={4}
+              multiline
+              label='About You:'
+              helperText=""
+              sx={{
+                width: "100%"
+              }}
+              />
+                <Typography component="p" variant="body2" color="text.secondary">
+                {/* {profile.bio} */}
+                </Typography>
+              </CardContent>
+            </Paper>
+          </Grid>
+          {/* Profile's Posted Videos Section */}
+          <Grid item xs={8} sx={{ }}>
+            
 
-              </Typography>
-            </CardContent>
-          </Paper>
+          </Grid>
         </Grid>
-        {/* Profile's Posted Videos Section */}
-        <Grid item xs={8} sx={{ }}>
-
-        </Grid>
-      </Grid>
+      ) : ( <p>No Profile Found</p>)}
 
     </Container>
 
@@ -149,4 +158,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Profile

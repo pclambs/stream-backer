@@ -38,12 +38,12 @@ export const QUERY_SINGLE_PROFILE = gql`
         title
         description
         thumbnail
+        videoSRC
+        createdAt
         postedBy {
           _id
           username
         }
-        videoSRC
-        createdAt
       }
     }
   }

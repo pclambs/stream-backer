@@ -21,7 +21,6 @@ import logo from '../assets/stream-backer.png'
 import playLogo from '../assets/stream-backer-play-logo.png'
 
 const logout = (event) => {
-  // event.preventDefault()
   Auth.logout()
 }
 

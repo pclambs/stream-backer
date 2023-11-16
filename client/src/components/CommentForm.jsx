@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, Box, Card, CardHeader, CardContent, Stack, Typography } from '@mui/material'
 import CustomTextField from './CustomTextField'
 import UserAvatar from "./UserAvatar"
+import { format } from "date-fns"
 
 const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditing }) => {
   const [commentBody, setCommentBody] = useState(initialValue)
@@ -22,14 +23,33 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
 
 
   return (
-    <Card sx={{ width: "100%" }}>
+    <Card 
+      sx={{ 
+        width: "100%",
+        marginBottom: "15px"
+      }}
+    >
       <CardHeader
+        sx={{
+          borderBottom: 1,
+          borderColor: "primary.main",
+          mx:"16px",
+          px: "0px"
+        }}
         avatar={
           <UserAvatar />
         }
         action={
-          <Stack direction="row" spacing={1}>
+          <Stack 
+            direction="row" 
+            spacing={1}
+            sx={{
+              marginRight: "10px",
+              transform: "translateY(5px)"
+            }}
+          >
             <Button
+              size="small"
               variant="outlined"
               color="success"
               onClick={submitComment}
@@ -38,8 +58,8 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
             </Button>
           </Stack>
         }
-        title="Add a comment"
-      // subheader="Add a comment"
+        title="{ Username Placeholder }"
+      subheader={format(Date.now(), "h:m aaa")}
       />
       <CardContent>
         <Box
@@ -68,56 +88,6 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
         </Box>
       </CardContent>
     </Card>
-
-    // <Box
-    //   component="form"
-    //   sx={{
-    //     '& .MuiTextField-root': { m: 1, width: '25ch' },
-    //   }}
-    //   noValidate
-    //   autoComplete="off"
-
-    // >
-    //     <Box
-    //     sx={{
-    //         textAlign: "center"
-    //     }}>
-    //   <TextField
-    //     id="comment-input"
-    //     label="Type your comment"
-    //     value={commentBody}
-    //     onChange={(e) => setCommentBody(e.target.value)}
-    //     multiline
-    //     helperText=""
-    //   />
-    //   </Box>
-
-    //   <Box
-    //     component= "div"
-    //     sx={{
-    //       display:'flex',
-
-    //       justifyContent: "center",
-    //       alignItems: "center"
-    //     }}
-    //   >
-    //   <Button 
-    //     variant="outlined" 
-    //     color="success" 
-    //     onClick={submitComment}
-    //   >
-    //     Submit
-    //   </Button>
-    //   {isEditing && (
-    //   <Button 
-    //     variant="text" 
-    //     color="error" 
-    //     onClick={onCancel}
-    //   >
-    //     Cancel
-    //   </Button>)}
-    //   </Box>
-    // </Box>
   )
 }
 

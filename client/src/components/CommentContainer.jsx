@@ -61,22 +61,29 @@ const CommentContainer = ({ comments }) => {
                 <Button
                     variant="text"
                     color="primary"
-                    onClick={handlePostCommentClick}>
-                    Post A Comment
+                    onClick={handlePostCommentClick}
+                    sx={{
+                        margin: "9px"
+                    }}
+                >
+                    Add a Comment
                 </Button>
             )}
             {isEditingForm && (
                 <>
+                    <Button
+                        variant="text"
+                        color="primary"
+                        onClick={handleCancelClick}
+                        sx={{
+                            margin: "9px"
+                        }}
+                    >Cancel
+                    </Button>
                     <CommentForm
                         setIsEditingForm={setIsEditingForm}
                         onSubmit={handleCommentSubmit}
                     />
-                    <Button
-                        variant="outlined"
-                        color="error"
-                        onClick={handleCancelClick}
-                    >Cancel
-                    </Button>
                 </>
             )}
             {comments.map((comment, index) => (

@@ -89,7 +89,14 @@ const CommentCard = ({ comment }) => {
               </Avatar>
             }
             action={
-              <Stack direction="row" spacing={1}>
+              <Stack 
+                direction="row" 
+                spacing={1}
+                sx={{
+                  marginRight: "10px",
+                  transform: "translateY(5px)"
+                }}
+              >
                 <Button
                   size="small"
                   variant="outlined"

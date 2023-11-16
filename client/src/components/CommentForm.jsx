@@ -4,6 +4,8 @@ import { Button, Box, Card, CardHeader, CardContent, Stack, Typography } from '@
 import CustomTextField from './CustomTextField'
 import UserAvatar from "./UserAvatar"
 import { format } from "date-fns"
+import Auth from "../utils/auth"
+
 
 const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditing }) => {
   const [commentBody, setCommentBody] = useState(initialValue)
@@ -20,6 +22,8 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
     onSubmit(commentBody)
 
   }
+
+  const username = Auth.getProfile()?.data?.username
 
 
   return (
@@ -51,15 +55,15 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
             <Button
               size="small"
               variant="outlined"
-              color="success"
+              color="info"
               onClick={submitComment}
             >
               Submit
             </Button>
           </Stack>
         }
-        title="{ Username Placeholder }"
-      subheader={format(Date.now(), "h:m aaa")}
+        title={username}
+      subheader={format(Date.now(), "h:mm aaa")}
       />
       <CardContent>
         <Box

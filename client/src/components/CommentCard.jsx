@@ -2,8 +2,10 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { UPDATE_COMMENT, REMOVE_COMMENT } from '../utils/mutations';
-import { Box, Button, Stack, Typography, Card, CardHeader, CardContent, Avatar } from "@mui/material"
+import { Box, Button, Stack, Typography, Card, CardHeader, CardContent, Avatar, IconButton } from "@mui/material"
 import CommentForm from './CommentForm'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 import { formatDistanceToNow } from "date-fns"
 import Auth from "../utils/auth"
 
@@ -97,23 +99,21 @@ const CommentCard = ({ comment }) => {
                   transform: "translateY(5px)"
                 }}
               >
-                <Button
+                <IconButton
                   size="small"
-                  variant="outlined"
-                  color="success"
+                  color="info"
                   onClick={() => setIsEditing(true)}
                 >
-                  Update
-                </Button>
-                <Button
+                  <EditIcon />
+                </IconButton>
+                <IconButton
                   size="small"
                   id="deleteButton"
-                  variant="outlined"
-                  color="error"
+                  color="info"
                   onClick={handleDelete}
                 >
-                  Delete
-                </Button>
+                  <DeleteIcon />
+                </IconButton>
               </Stack>
             }
             title={comment.postedBy.username}

@@ -89,7 +89,19 @@ const CommentCard = ({ comment }) => {
               px: "0px"
             }}
             avatar={
-              <Tooltip title={postedBy.username}>
+              <Tooltip 
+                title={postedBy.username}
+                PopperProps={{
+                  modifiers: [
+                    {
+                      name: 'offset',
+                      options: {
+                        offset: [0, -7], // X, Y
+                      },
+                    },
+                  ],
+                }}
+              >
                 <ProfileAvatar profile={postedBy}/>
               </Tooltip>
             }

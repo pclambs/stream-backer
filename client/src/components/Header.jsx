@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Auth from '../utils/auth';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import Auth from '../utils/auth'
 import SearchBar from './SearchBar'
 import { useSearch } from '../contexts/SearchContext'
 import UserAvatar from './UserAvatar'
+import PersonIcon from '@mui/icons-material/Person'
+import SettingsIcon from '@mui/icons-material/Settings'
+import UploadIcon from '@mui/icons-material/Upload'
+import LogoutIcon from '@mui/icons-material/Logout'
+import LoginIcon from '@mui/icons-material/Login'
+import SignupIcon from '@mui/icons-material/PersonAdd'
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
+import { 
+  AppBar, Box, Toolbar, IconButton, Typography, Menu, 
+  MenuItem, ListItemIcon, Container, Tooltip,  
+} from '@mui/material'
 
 import logo from '../assets/stream-backer.png'
 import playLogo from '../assets/stream-backer-play-logo.png'
@@ -23,22 +23,20 @@ const logout = (event) => {
   event.preventDefault()
   Auth.logout()
 }
-const color = "#fffff"
 
 function Header() {
   const userId = Auth.loggedIn() ? Auth.getProfile().data._id : null;
 
   const [search, setSearch] = useState("")
-  const pages = ["Liked Videos", "Video Feed", "Supporters"];
   const settings = Auth.loggedIn()
     ? [
-      { title: "Profile", link: `/profile/${userId}`},
-      { title: "Account", link: "/account"},
-      { title: "Upload", link: "/upload"},
-      { title: "Log out", action: logout }
+      { title: "Profile", link: `/profile/${userId}`, icon: <PersonIcon />},
+      { title: "Account", link: "/account", icon: <SettingsIcon />},
+      { title: "Upload", link: "/upload", icon: <UploadIcon />}, 
+      { title: "Log out", action: logout, icon: <LogoutIcon />}
     ] : [
-      { title: "Log in", link: "/login" }, 
-      { title: "Sign up", link: "/signup" }
+      { title: "Log in", link: "/login", icon: <LoginIcon /> }, 
+      { title: "Sign up", link: "/signup", icon: <SignupIcon /> }
     ]
   
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -121,10 +119,10 @@ function Header() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem 
-                    key={setting.title || setting} 
-                    onClick={handleCloseUserMenu}
-                  >
+                  <MenuItem key={setting.title || setting} onClick={handleCloseUserMenu}>
+                    <ListItemIcon>
+                      {setting.icon}
+                    </ListItemIcon>
                     {setting.link ? (
                       <Link to={setting.link} style={{ textDecoration: 'none', color: 'inherit' }}>
                         <Typography textAlign="center">{setting.title}</Typography>

@@ -6,6 +6,7 @@ import Header from './components/Header/'
 import Footer from './components/Footer'
 import theme from './utils/theme'
 import { ThemeProvider } from '@emotion/react'
+import Scrollbar from './components/ScrollBar/'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -34,6 +35,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <Scrollbar>
       <ThemeProvider theme={theme}>
         <SearchProvider>
           <Header />
@@ -41,6 +43,7 @@ function App() {
           <Footer />
         </SearchProvider>
       </ThemeProvider>
+      </Scrollbar>
     </ApolloProvider>
   )
 }

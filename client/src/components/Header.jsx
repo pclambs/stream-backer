@@ -23,7 +23,7 @@ const logout = (event) => {
   event.preventDefault()
   Auth.logout()
 }
-
+const color = "#fffff"
 const userId = Auth.getProfile().data._id
 
 function Header() {

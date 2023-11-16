@@ -1,13 +1,11 @@
 /* STYLING FOR VERTICAL SCROLLBAR */
 ::-webkit-scrollbar {
   width: 5px;
-  transition: width 0.2s;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #272727;
   border-radius: 2px;
-  width: 1px;
 }
 
 ::-webkit-scrollbar-track {

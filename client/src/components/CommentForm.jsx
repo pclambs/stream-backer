@@ -18,13 +18,10 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
     if (!commentBody) {
       return alert('Must include a comment')
     }
-
     onSubmit(commentBody)
-
   }
 
   const username = Auth.getProfile()?.data?.username
-
 
   return (
     <Card 

@@ -24,9 +24,9 @@ const logout = (event) => {
   Auth.logout()
 }
 const color = "#fffff"
-const userId = Auth.getProfile().data._id
 
 function Header() {
+  const userId = Auth.loggedIn() ? Auth.getProfile().data._id : null;
 
   const [search, setSearch] = useState("")
   const pages = ["Liked Videos", "Video Feed", "Supporters"];

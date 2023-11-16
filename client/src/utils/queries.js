@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client'
 
 export const QUERY_PROFILES = gql`
   query allProfiles {
@@ -9,7 +9,7 @@ export const QUERY_PROFILES = gql`
       uploadedVideos 
       bio
     }
-}
+  }
 `
 
 export const QUERY_SINGLE_PROFILE = gql`
@@ -32,7 +32,8 @@ export const QUERY_SINGLE_PROFILE = gql`
       }
     }
   }
-`;
+`
+
 export const QUERY_VIDEOPOSTS = gql`
   query allVideoPosts {
     videoPosts {
@@ -56,7 +57,7 @@ export const QUERY_VIDEOPOSTS = gql`
         }
       }
     }
-}
+  }
 `
 
 export const QUERY_SINGLE_VIDEOPOST = gql`
@@ -80,7 +81,6 @@ export const QUERY_SINGLE_VIDEOPOST = gql`
           _id
           username
         }
-        
       }
     }
   }
@@ -92,11 +92,11 @@ export const QUERY_COMMENTS = gql`
       _id
       commentBody
       createdAt
+      postedTo
       postedBy {
         _id
         username
       }
-      postedTo
     }
-}
+  }
 `

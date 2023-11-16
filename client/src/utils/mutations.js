@@ -102,6 +102,7 @@ export const ADD_COMMENT = gql`
       createdAt
       postedBy {
         _id
+        username
       }
       postedTo
     }

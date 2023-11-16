@@ -2,12 +2,13 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { UPDATE_COMMENT, REMOVE_COMMENT } from '../utils/mutations';
-import { Box, Button, Stack, Typography, Card, CardHeader, CardContent, Avatar, IconButton } from "@mui/material"
+import { Box, Stack, Typography, Card, CardHeader, CardContent, Tooltip, IconButton } from "@mui/material"
 import CommentForm from './CommentForm'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { formatDistanceToNow } from "date-fns"
 import Auth from "../utils/auth"
+import ProfileAvatar from './ProfileAvatar'
 
 const CommentCard = ({ comment }) => {
   console.log(comment)
@@ -16,6 +17,8 @@ const CommentCard = ({ comment }) => {
   const [isEditing, setIsEditing] = useState(false)
 
   const isLoggedIn = Auth.loggedIn()
+  // const username = Auth.getProfile()?.data?.username;
+  const { postedBy } = comment
 
   const timestamp = Number(comment.createdAt)
   const date = new Date(timestamp)
@@ -86,9 +89,9 @@ const CommentCard = ({ comment }) => {
               px: "0px"
             }}
             avatar={
-              <Avatar aria-label="recipe">
-                R
-              </Avatar>
+              <Tooltip title={postedBy.username}>
+                <ProfileAvatar profile={postedBy}/>
+              </Tooltip>
             }
             action={
               <Stack 

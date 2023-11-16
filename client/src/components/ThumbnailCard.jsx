@@ -1,4 +1,4 @@
-import UserAvatar from "./UserAvatar"
+import ProfileAvatar from "./ProfileAvatar"
 import { useNavigate } from "react-router-dom"
 import { Paper, Grid, Box, Typography, Tooltip, Button } from "@mui/material"
 import { formatDistanceToNow } from "date-fns"
@@ -74,7 +74,7 @@ const ThumbnailCard = ({ videoPost }) => {
                             </Typography>
                         </Box>
                         <Tooltip title={postedBy.username}>
-                            <UserAvatar />
+                            <ProfileAvatar profile={postedBy}/>
                         </Tooltip>
                     </Box>
                 </Box>

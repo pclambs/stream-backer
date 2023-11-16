@@ -22,7 +22,7 @@ const ProfileAvatar = React.forwardRef((props, ref) => {
       sx={{ backgroundColor: "#bd279f" }}
       onClick={handleAvatarClick}
     >
-      <IconButton sx={{ width: 38, height: 38, fontSize: "1.1rem" }}>
+      <IconButton sx={{ fontSize: "1.1rem" }}>
         {initial} 
       </IconButton>
     </Avatar>

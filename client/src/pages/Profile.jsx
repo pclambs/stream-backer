@@ -8,7 +8,7 @@ import UserForm from "../components/UserForm";
 import ProfileAvatar from "../components/ProfileAvatar";
 import CustomTextField from '../components/CustomTextField'
 import { Container, Box, Stack, Paper, CardHeader, Tooltip, IconButton, CardContent, Typography, Grid } from "@mui/material"
-import { formatDistanceToNow } from "date-fns"
+import { getRelativeTime } from "../utils/helpers"
 
 
 const Profile = () => {
@@ -23,10 +23,7 @@ const Profile = () => {
   const [updateUser] = useMutation(UPDATE_PROFILE);
   console.log("profile", profile)
 
-  const timestamp = Number(profile.createdAt)
-	const date = new Date(timestamp)
-  console.log("date", date)
-	const relativeTime = formatDistanceToNow(date, { addSuffix: true })
+  const relativeTime = getRelativeTime(profile.createdAt)
 
   if (loading) {
     return <div>Loading...</div>;
@@ -68,7 +65,7 @@ const Profile = () => {
                 >
                   <ProfileAvatar 
                     profile={profile}
-                    // sx={{ width: 100, height: 100 }}
+                    sx={{ width: 150, height: 150 }}
                   />
                 </Tooltip>
               }
@@ -87,7 +84,7 @@ const Profile = () => {
               title={
                 <Typography component="h1" variant="h3">{profile.username}</Typography>
               }
-              // subheader={`Joined ${relativeTime}`}
+              subheader={`Joined ${relativeTime}`}
             />
             <CardContent>
             <CustomTextField
@@ -104,7 +101,7 @@ const Profile = () => {
             sx={{
               width: "100%"
             }}
-          />
+            />
               <Typography component="p" variant="body2" color="text.secondary">
 
               </Typography>

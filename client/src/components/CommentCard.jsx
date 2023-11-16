@@ -6,12 +6,11 @@ import { Box, Stack, Typography, Card, Paper, CardHeader, CardContent, Tooltip, 
 import CommentForm from './CommentForm'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { formatDistanceToNow } from "date-fns"
+import { getRelativeTime } from "../utils/helpers"
 import Auth from "../utils/auth"
 import ProfileAvatar from './ProfileAvatar'
 
 const CommentCard = ({ comment }) => {
-  console.log(comment)
   const [updateComment] = useMutation(UPDATE_COMMENT)
   const [removeComment] = useMutation(REMOVE_COMMENT)
   const [isEditing, setIsEditing] = useState(false)
@@ -20,9 +19,7 @@ const CommentCard = ({ comment }) => {
   // const username = Auth.getProfile()?.data?.username;
   const { postedBy } = comment
 
-  const timestamp = Number(comment.createdAt)
-  const date = new Date(timestamp)
-  const relativeTime = formatDistanceToNow(date, { addSuffix: true })
+  const relativeTime = getRelativeTime(comment.createdAt)
 
   const handleUpdate = async (updatedCommentBody) => {
     try {

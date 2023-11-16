@@ -1,23 +1,20 @@
 import ProfileAvatar from "./ProfileAvatar"
 import { useNavigate } from "react-router-dom"
 import { Paper, Grid, Box, Typography, Tooltip, Button } from "@mui/material"
-import { formatDistanceToNow } from "date-fns"
+import { getRelativeTime } from "../utils/helpers"
 
 const ThumbnailCard = ({ videoPost }) => {
-	const { thumbnail, title, createdAt, postedBy } = videoPost
+	const { _id, thumbnail, title, createdAt, postedBy } = videoPost
 
-	const timestamp = Number(createdAt)
-	const date = new Date(timestamp)
-	const relativeTime = formatDistanceToNow(date, { addSuffix: true })
+	const relativeTime = getRelativeTime(createdAt)
 
 	const navigate = useNavigate()
 	const videoPath = () => {
-		let path = `/video/${videoPost._id}`
+		let path = `/video/${_id}`
 		setTimeout(() => {
 			navigate(path)
 		}, 300)
 	}
-
 
 	return (
 		<Grid item xs={12} sm={6} md={4}>

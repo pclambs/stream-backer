@@ -1,23 +1,72 @@
-# Decode and Read JSON Web Token (Client-side)
+# Stream Backer
 
-In this demo, you demonstrate how a token is stored client-side after successfully logging into the application.
+A media player for content creators developed using MERN stack.
 
-## Instructions
+## Repository Link
+https://github.com/pclambs/stream-backer
 
-* Run `npm install` and `npm run seed` to set up the database.
+## Deployed Heroku Link
+https://stream-backer-668b75ae5120.herokuapp.com/
 
-* Open the client-side [package.json](client/package.json) and explain that while we can't sign or verify a token in the client, we can check what information it holds and when it expires with the `jwt-decode` library.
+## Installation
+Clone down repository
+In the root of the directory run npm i to install dependencies
+Create Cloudinary account & follow installation
+Create .env file and add CLOUDINARY_URL with appropriate information
+Run npm run seed to seed the database
+Run npm run develop to launch server & GraphQL
 
-* Open [auth.js](client/src/utils/auth.js) and explain the `AuthService` class:
+## User Story
 
-  * When we log into the site, we need to store our access token somewhere so we can retrieve and include it with any request to our server. This suite of functionality helps us achieve that goal.
+```
+Our Group Concept
 
-* Open [App.js](client/src/App.js) and explain the contents:
+An app designed to have a media player site for digital creators to host their content.
 
-  * We now import the `setContext()` function from Apollo Client and implement it to retrieve the token and include it in the `headers` of any request to our server.
 
-  * We don't have anything server-side yet that will verify this token, but we'll focus on that later.
+``````
 
-* Open [Login.js](client/src/pages/Login.js) and explain the page's functionality:
+## Acceptance Criteria
 
-  * When we fill out and submit this form to login, we execute the `login` mutation and receive a token in return, which we immediately store using our `AuthService` class functionality.
+Use React for the front end.
+
+Use GraphQL with a Node.js and Express.js server.
+
+Use MongoDB and the Mongoose ODM for the database.
+
+Use queries and mutations for retrieving, adding, updating, and deleting data.
+
+Be deployed using Heroku (with data).
+
+Have a polished UI.
+
+Be responsive.
+
+Be interactive (i.e., accept and respond to user input).
+
+Include authentication (JWT).
+
+
+## Technology Utilized
+```
+React
+Express.js
+Node.js
+MongoDB
+Mongoose
+GraphQL
+MUI components
+Heroku
+```
+
+## Resources Used 
+```
+
+
+```
+## Screenshots
+![Homepage](client/src/assets/homepage.png)
+![Login page](client/src/assets/loginpage.png)
+![Upload page](client/src/assets/uploadpage.png)
+
+

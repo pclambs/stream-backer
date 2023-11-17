@@ -8,6 +8,13 @@ https://github.com/pclambs/stream-backer
 ## Deployed Heroku Link
 https://stream-backer-668b75ae5120.herokuapp.com/
 
+## Installation
+Clone down repository
+In the root of the directory run npm i to install dependencies
+Create Cloudinary account & follow installation
+Create .env file and add CLOUDINARY_URL with appropriate information
+Run npm run seed to seed the database
+Run npm run develop to launch server & GraphQL
 
 ## User Story
 
@@ -58,8 +65,8 @@ Heroku
 
 ```
 ## Screenshots
-
-
-
+![Homepage](client/src/assets/homepage.png)
+![Login page](client/src/assets/loginpage.png)
+![Upload page](client/src/assets/uploadpage.png)
 
 

@@ -7,7 +7,7 @@ import { UPDATE_PROFILE } from "../utils/mutations";
 import UserForm from "../components/UserForm";
 import ProfileAvatar from "../components/ProfileAvatar";
 import CustomTextField from '../components/CustomTextField'
-import { Container, Stack, Paper, CardHeader, Tooltip, IconButton, CardContent, Typography, Grid, Fab } from "@mui/material"
+import { Container, Box, Stack, Paper, CardHeader, Tooltip, IconButton, CardContent, Typography, Grid, Fab } from "@mui/material"
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { getRelativeTime } from "../utils/helpers"
@@ -86,7 +86,7 @@ const Profile = () => {
                       ],
                     }}
                   >
-                    <ProfileAvatar 
+                    <ProfileAvatar
                       profile={profile}
                       sx={{ width: 150, height: 150 }}
                     />
@@ -110,47 +110,57 @@ const Profile = () => {
                 subheader={`Joined ${relativeTime}`}
               />
               <CardContent>
-                <Stack 
+                <Stack
                   direction="row"
                   justifyContent="end"
                 >
-                  <Fab color="info" size="small" aria-label="Edit">
-                    {isMyProfile && <IconButton onClick={() => setIsEditMode(!isEditMode)}>{isEditMode ? <KeyboardReturnIcon /> : <ModeEditIcon />}</IconButton>}
-                  </Fab>
+                  {isMyProfile && <Fab color="info" size="small" aria-label="Edit">
+                    <IconButton onClick={() => setIsEditMode(!isEditMode)}>{isEditMode ? <KeyboardReturnIcon /> : <ModeEditIcon />}</IconButton>
+                  </Fab>}
                 </Stack>
                 {isMyProfile && isEditMode ? (
-                  <CustomTextField
-                  name="description"
-                  id="comment-input"
-                  type="text"
-                  value={tempBio}
-                  onChange={event => setTempBio(event.target.value)}
-                  variant='standard'
-                  rows={4}
-                  multiline
-                  label='About You:'
-                  helperText=""
-                  sx={{
-                    width: "100%"
-                  }}
-                  />
+                  <Container>
+                    <UserForm
+                      initialValue={{ ...profile, profileId: loggedInUserId }}
+                      onSubmit={(userBody) =>
+                        updateUser({
+                          variables: userBody,
+                        })
+                      }
+                    />
+                  </Container>
 
+                  // <CustomTextField
+                  // name="description"
+                  // id="comment-input"
+                  // type="text"
+                  // value={tempBio}
+                  // onChange={event => setTempBio(event.target.value)}
+                  // variant='standard'
+                  // rows={4}
+                  // multiline
+                  // label='About You:'
+                  // helperText=""
+                  // sx={{
+                  //   width: "100%"
+                  // }}
+                  // />
                 ) : (
                   <Typography component="p" variant="body2" color="text.secondary">
-                  {tempBio}
+                    {tempBio}
                   </Typography>
                 )}
               </CardContent>
             </Paper>
           </Grid>
           {/* Profile's Posted Videos Section */}
-          <Grid item xs={8} sx={{ }}>
+          <Grid item xs={8} sx={{}}>
             <Grid container spacing={2}>
-            {videos.map(videoPost => <ThumbnailCard videoPost={videoPost}/>)}
+              {videos.map(videoPost => <ThumbnailCard videoPost={videoPost} />)}
             </Grid>
           </Grid>
         </Grid>
-      ) : ( <p>No Profile Found</p>)}
+      ) : (<p>No Profile Found</p>)}
 
     </Container>
 

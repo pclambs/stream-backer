@@ -71,9 +71,9 @@ form {
   object-fit: cover;
 }
 
-.cardThumbnail:hover {
+/* .cardThumbnail:hover {
   transform: scale(1.05);
-}
+} */
 
 video {
   width: 100%; 

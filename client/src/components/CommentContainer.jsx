@@ -17,7 +17,7 @@ const CommentContainer = ({ comments }) => {
     const loggedInUserId = Auth.getProfile()?.data?._id
 
     const handlePostCommentClick = () => {
-        setIsEditingForm(true)
+        setIsEditingForm(true)       
     }
 
     const handleCancelClick = () => {

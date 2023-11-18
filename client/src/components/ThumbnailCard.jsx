@@ -2,6 +2,7 @@ import ProfileAvatar from "./ProfileAvatar"
 import { useNavigate } from "react-router-dom"
 import { Paper, Grid, Box, Typography, Tooltip, Button } from "@mui/material"
 import { getRelativeTime } from "../utils/helpers"
+import playBtn from "../assets/stream-backer-play.png"
 
 const ThumbnailCard = ({ videoPost }) => {
 	const { _id, thumbnail, title, createdAt, postedBy } = videoPost
@@ -25,6 +26,21 @@ const ThumbnailCard = ({ videoPost }) => {
 						padding: 0,
 						overflow: 'hidden',
 						borderRadius: 0,
+						position: 'relative',
+						'&:hover::before': {
+							content: '""',
+							position: 'absolute',
+							top: '50%',
+							left: '50%',
+							transform: 'translate(-50%, -50%)',
+							backgroundImage: `url(${playBtn})`,
+							backgroundSize: 'contain',
+							width: '53px',
+							height: '60px',
+							// opacity: '.9',
+							zIndex: 1,
+							filter: 'drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4))',
+						} 
 					}}
 				>
 					{/* TODO: Add thumbnails to data */}

@@ -8,7 +8,14 @@ cloudinary.config()
 const resolvers = {
   Query: {
     profiles: async () => {
-      return await Profile.find().populate("uploadedVideos")
+      return await Profile.find()
+      .populate({
+        path: "uploadedVideos",
+        populate: {
+          path: "postedBy",
+          model: 'Profile'
+        }
+    })
     },
     profile: async (parent, { profileId }) => {
       // console.log("resolver profileId", profileId)
@@ -85,6 +92,11 @@ const resolvers = {
     },
     addVideoPost: async (parent, { title, description, thumbnail, postedBy, videoSRC }) => {
       const videoPost = await VideoPost.create({ title, description, thumbnail, postedBy, videoSRC })
+      await Profile.findByIdAndUpdate(
+        postedBy._id,
+        { $push: { uploadedVideos: videoPost._id } },
+        { new: true }
+      )
       return videoPost
     },
     updateVideoPost: async (parent, { videoPostId, title, description, thumbnail, videoSRC }) => {

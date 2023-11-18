@@ -101,7 +101,35 @@ const Profile = () => {
                       transform: "translateY(5px)"
                     }}
                   >
-
+                    <Stack
+                      direction="row"
+                      justifyContent="end"
+                    >
+                      {isMyProfile &&
+                        <Tooltip
+                          title="Edit Profile"
+                          PopperProps={{
+                            modifiers: [
+                              {
+                                name: 'offset',
+                                options: {
+                                  offset: [0, -7], // X, Y
+                                },
+                              },
+                            ],
+                          }}
+                        >
+                          <Fab 
+                            color="info" 
+                            size="small" 
+                            aria-label="Edit" 
+                            onClick={() => setIsEditMode(!isEditMode)}
+                          >
+                            {isEditMode ? <KeyboardReturnIcon /> : <ModeEditIcon />}
+                          </Fab>
+                        </Tooltip>
+                      }
+                    </Stack>
                   </Stack>
                 }
                 title={
@@ -110,23 +138,16 @@ const Profile = () => {
                 subheader={`Joined ${relativeTime}`}
               />
               <CardContent>
-                <Stack
-                  direction="row"
-                  justifyContent="end"
-                >
-                  {isMyProfile && 
-                    <Fab color="info" size="small" aria-label="Edit" onClick={() => setIsEditMode(!isEditMode)}>{isEditMode ? <KeyboardReturnIcon /> : <ModeEditIcon />}</Fab>}
-                </Stack>
                 {isMyProfile && isEditMode ? (
 
-                    <UserForm
-                      initialValue={{ ...profile, profileId: loggedInUserId }}
-                      onSubmit={(userBody) =>
-                        updateUser({
-                          variables: userBody,
-                        })
-                      }
-                    />
+                  <UserForm
+                    initialValue={{ ...profile, profileId: loggedInUserId }}
+                    onSubmit={(userBody) =>
+                      updateUser({
+                        variables: userBody,
+                      })
+                    }
+                  />
 
                   // <CustomTextField
                   // name="description"
@@ -144,9 +165,9 @@ const Profile = () => {
                   // }}
                   // />
                 ) : (
-                  <Typography 
-                    component="p" 
-                    variant="body2" 
+                  <Typography
+                    component="p"
+                    variant="body2"
                     color="text.secondary"
                     sx={{
                       overflowWrap: "break-word"
@@ -161,7 +182,7 @@ const Profile = () => {
           {/* Profile's Posted Videos Section */}
           <Grid item xs={8} sx={{}}>
             <Grid container spacing={2}>
-              {videos.map(videoPost => <ThumbnailCard videoPost={videoPost} key={videoPost._id}/>)}
+              {videos.map(videoPost => <ThumbnailCard videoPost={videoPost} key={videoPost._id} />)}
             </Grid>
           </Grid>
         </Grid>

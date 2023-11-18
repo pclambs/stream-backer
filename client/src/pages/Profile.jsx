@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { QUERY_SINGLE_PROFILE } from "../utils/queries";
@@ -114,12 +114,11 @@ const Profile = () => {
                   direction="row"
                   justifyContent="end"
                 >
-                  {isMyProfile && <Fab color="info" size="small" aria-label="Edit">
-                    <IconButton onClick={() => setIsEditMode(!isEditMode)}>{isEditMode ? <KeyboardReturnIcon /> : <ModeEditIcon />}</IconButton>
-                  </Fab>}
+                  {isMyProfile && 
+                    <Fab color="info" size="small" aria-label="Edit" onClick={() => setIsEditMode(!isEditMode)}>{isEditMode ? <KeyboardReturnIcon /> : <ModeEditIcon />}</Fab>}
                 </Stack>
                 {isMyProfile && isEditMode ? (
-                  <Container>
+
                     <UserForm
                       initialValue={{ ...profile, profileId: loggedInUserId }}
                       onSubmit={(userBody) =>
@@ -128,7 +127,6 @@ const Profile = () => {
                         })
                       }
                     />
-                  </Container>
 
                   // <CustomTextField
                   // name="description"
@@ -146,7 +144,14 @@ const Profile = () => {
                   // }}
                   // />
                 ) : (
-                  <Typography component="p" variant="body2" color="text.secondary">
+                  <Typography 
+                    component="p" 
+                    variant="body2" 
+                    color="text.secondary"
+                    sx={{
+                      overflowWrap: "break-word"
+                    }}
+                  >
                     {tempBio}
                   </Typography>
                 )}
@@ -156,44 +161,13 @@ const Profile = () => {
           {/* Profile's Posted Videos Section */}
           <Grid item xs={8} sx={{}}>
             <Grid container spacing={2}>
-              {videos.map(videoPost => <ThumbnailCard videoPost={videoPost} />)}
+              {videos.map(videoPost => <ThumbnailCard videoPost={videoPost} key={videoPost._id}/>)}
             </Grid>
           </Grid>
         </Grid>
       ) : (<p>No Profile Found</p>)}
 
     </Container>
-
-
-
-
-    // <Container 
-    //   sx={{ 
-    //     border: 1,
-    //     borderColor: "primary.main",
-    //     marginTop: 10
-    //   }}
-    // >
-    //   <Stack 
-    //     direction="row" 
-    //     spacing={1}
-    //     sx={{
-    //       marginRight: "10px",
-    //       transform: "translateY(5px)"
-    //     }}
-    //   >
-    //     <UserAvatar />
-    //     <h2>{profile.username}</h2>
-    //   </Stack>
-    //   <UserForm
-    //     initialValue={{ ...profile, profileId: loggedInUserId }}
-    //     onSubmit={(userBody) =>
-    //       updateUser({
-    //         variables: userBody,
-    //       })
-    //     }
-    //   />
-    // </Container>
   );
 };
 

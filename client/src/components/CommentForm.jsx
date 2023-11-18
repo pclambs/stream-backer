@@ -7,7 +7,7 @@ import { format } from "date-fns"
 import Auth from "../utils/auth"
 
 
-const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditing }) => {
+const CommentForm = ({ initialValue, initialComment, onSubmit, closeForm, isEditing }) => {
   const [commentBody, setCommentBody] = useState(initialValue)
 
   useEffect(() => {
@@ -19,6 +19,7 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, onCancel, isEditi
       return alert('Must include a comment')
     }
     onSubmit(commentBody)
+    closeForm()
   }
 
   const username = Auth.getProfile()?.data?.username

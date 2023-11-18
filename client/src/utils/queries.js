@@ -14,12 +14,11 @@ export const QUERY_PROFILES = gql`
         title
         description
         thumbnail
+        videoSRC
         postedBy {
           _id
           username
         }
-        videoSRC
-        createdAt
       }
     }
   }
@@ -55,14 +54,13 @@ export const QUERY_VIDEOPOSTS = gql`
       _id
       createdAt
       description
-      postedBy {
-        _id
-        createdAt
-        username
-      }
       thumbnail
       title
       videoSRC
+      postedBy {
+        _id
+        username
+      }
       comments {
         _id
         commentBody
@@ -82,18 +80,18 @@ export const QUERY_SINGLE_VIDEOPOST = gql`
       _id
       createdAt
       description
-      postedBy {
-        _id
-        createdAt
-        username
-      }
       thumbnail
       title
       videoSRC
+      postedBy {
+        _id
+        username
+      }
       comments {
         _id
         commentBody
         createdAt
+        postedTo
         postedBy {
           _id
           username
@@ -112,7 +110,6 @@ export const QUERY_COMMENTS = gql`
       postedTo
       postedBy {
         _id
-        createdAt
         username
       }
     }

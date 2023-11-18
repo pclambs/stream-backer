@@ -9,26 +9,25 @@ import { useParams } from "react-router-dom"
 
 import Auth from "../utils/auth"
 
-
 const CommentContainer = ({ comments }) => {
     const [isEditingForm, setIsEditingForm] = useState(false)
     const [addComment] = useMutation(ADD_COMMENT)
     const { videoPostId } = useParams()
     const loggedInUserId = Auth.getProfile()?.data?._id
+    // console.log("Profile Data", Auth.getProfile()?.data)
 
     const handlePostCommentClick = () => {
         setIsEditingForm(true)       
     }
 
-    const handleCancelClick = () => {
+    const closeForm = () => {
         setIsEditingForm(false)
     }
 
     const handleCommentSubmit = async (newCommentBody) => {
-        // TODO push comment to VidoPost comments array
+        // TODO push comment to VideoPost comments array
 
-
-        //creats new comment object
+        //creates new comment object
         const newComment = {
             commentBody: newCommentBody,
             postedTo: videoPostId,
@@ -45,8 +44,8 @@ const CommentContainer = ({ comments }) => {
             setTimeout(() => {
                 window.location.reload();
             }, 500)
-        } catch (error) {
-            console.log(error)
+        } catch(error) {
+            console.error(error)
         }
     }
 
@@ -74,7 +73,7 @@ const CommentContainer = ({ comments }) => {
                     <Button
                         variant="text"
                         color="primary"
-                        onClick={handleCancelClick}
+                        onClick={closeForm}
                         sx={{
                             margin: "9px"
                         }}
@@ -83,6 +82,7 @@ const CommentContainer = ({ comments }) => {
                     <CommentForm
                         setIsEditingForm={setIsEditingForm}
                         onSubmit={handleCommentSubmit}
+                        closeForm={closeForm}
                     />
                 </>
             )}

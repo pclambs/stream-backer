@@ -104,11 +104,11 @@ export const ADD_COMMENT = gql`
       _id
       commentBody
       createdAt
+      postedTo
       postedBy {
         _id
         username
       }
-      postedTo
     }
   }
 `

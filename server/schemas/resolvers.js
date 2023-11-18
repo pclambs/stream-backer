@@ -11,7 +11,7 @@ const resolvers = {
       return await Profile.find().populate("uploadedVideos")
     },
     profile: async (parent, { profileId }) => {
-      console.log("resolver profileId", profileId)
+      // console.log("resolver profileId", profileId)
       const profile = await Profile.findOne({ _id: profileId })
       .populate({
         path: "uploadedVideos",
@@ -49,6 +49,7 @@ const resolvers = {
     },
     comments: async (parent, { videoPostId }) => {
       return await Comment.find({ postedTo: videoPostId })
+      .populate("postedBy")
     },
   },
 
@@ -64,7 +65,7 @@ const resolvers = {
       return await Profile.findByIdAndUpdate(profileId, { username, email, password, bio }, { new: true })
     },
     removeProfile: async (parent, { profileId }) => {
-      return Profile.findOneAndDelete({ _id: profileId })
+      return Profile.findOneAndDelete({ _id: profileId }, { new: true })
     },
     login: async (parent, { email, password }) => {
       const profile = await Profile.findOne({ email })
@@ -90,20 +91,26 @@ const resolvers = {
       return await VideoPost.findByIdAndUpdate(videoPostId, { title, description, thumbnail, videoSRC }, { new: true })
     },
     removeVideoPost: async (parent, { videoPostId }) => {
-      return await VideoPost.findOneAndDelete({ _id: videoPostId })
+      return await VideoPost.findOneAndDelete({ _id: videoPostId }, { new: true })
     },
     addComment: async (parent, { commentBody, postedBy, postedTo }) => {
       const comment = await Comment.create({ commentBody, postedBy, postedTo })
-      await VideoPost.findByIdAndUpdate(postedTo, {
-        $push: { comments: comment._id }
-      })
-      return comment
+      const populatedComment = await Comment.findById(comment._id).populate("postedBy")
+      await VideoPost.findByIdAndUpdate(
+        postedTo, 
+        { $push: { comments: comment._id } },
+        { new: true }
+      )
+      return populatedComment
     },
     updateComment: async (parent, { commentId, commentBody }) => {
-      return await Comment.findByIdAndUpdate(commentId, { commentBody }, { new: true })
+      return await Comment.findByIdAndUpdate(
+        commentId, 
+        { commentBody }, 
+        { new: true })
     },
     removeComment: async (parent, { commentId }) => {
-      return await Comment.findOneAndDelete({ _id: commentId })
+      return await Comment.findOneAndDelete({ _id: commentId }, { new: true })
     },
     uploadVideo: async (parent, { file }) => {
       const { createReadStream } = await file

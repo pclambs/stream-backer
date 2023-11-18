@@ -33,11 +33,21 @@ console.log(initialValue)
   return (
     <React.Fragment>
       {/* <CssBaseline /> */}
-      <Container>
-        <Box component="form" noValidate autoComplete="off">
+      <Container 
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        disableGutters
+      >
+        <Box 
+          component="form" 
+          noValidate 
+          autoComplete="off"
+        >
           {/* <pre>{JSON.stringify(userBody, null, 2)}</pre> */}
           <TextField
-            id="margin-normal"
             margin="normal"
             label="Username"
             variant="outlined"
@@ -47,7 +57,6 @@ console.log(initialValue)
           />
 
           <TextField
-            id="margin-normal"
             margin="normal"
             label="Email"
             variant="outlined"
@@ -57,7 +66,6 @@ console.log(initialValue)
           />
 
           <TextField
-            id="margin-normal"
             margin="normal"
             label="Password"
             type="password"
@@ -67,13 +75,13 @@ console.log(initialValue)
           />
 
           <TextField
-            id="margin-normal"
             margin="normal"
             name="bio"
             label="Write your bio"
             value={userBody.bio}
             onChange={handleInputChange}
             multiline
+            rows={3}
             helperText=""
           />
 
@@ -81,7 +89,7 @@ console.log(initialValue)
             component="div"
             sx={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "space-around",
               alignItems: "center",
             }}
           >
@@ -89,7 +97,7 @@ console.log(initialValue)
               Submit
             </Button>
             {
-              <Button variant="text" color="error" onClick={onCancel}>
+              <Button variant="outlined" color="error" onClick={onCancel}>
                 Cancel
               </Button>
             }

@@ -23,10 +23,10 @@ const typeDefs = `
 
   type Comment {
     _id: ID
-    commentBody: String!
-    postedBy: Profile
-    postedTo: ID
     createdAt: String!
+    commentBody: String!
+    postedTo: ID
+    postedBy: Profile
   }
 
   type Auth {

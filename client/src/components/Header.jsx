@@ -85,14 +85,9 @@ function Header() {
             </Box>
 
             {/* Right-aligned items */}
-            <Box sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              margin: {
-                xs: '0 .44rem 0 1rem',
-                sm: '0 .8rem 0 1rem'
-              }
-            }}>
+            <Box 
+              className="header-avatar"
+            >
               <Tooltip 
                 title="Open settings" 
                 PopperProps={{

@@ -26,6 +26,13 @@ body {
   padding: .4rem .4rem 0 .4rem;
 }
 
+.header-avatar {
+  margin: 0 1rem 0 0;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 .8rem 0 0;
+}
+
 .footer-text {
   bottom: 0;
   width: 100%;
@@ -83,4 +90,15 @@ video {
 
 .file-drop {
   transition: all .2s ease-in-out;
+}
+
+
+/* Media query for smaller screens */
+@media screen and (min-width: 1245px) {
+  .logo {
+    padding-left: 0;
+  }
+  .header-avatar {
+    margin-right: 0;
+  }
 }

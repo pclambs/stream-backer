@@ -54,7 +54,7 @@ function Header() {
   return (
     <header>
       <AppBar position="static">
-        <Container disableGutters maxWidth="xl" sx={{ minHeight: '50px' }}>
+        <Container disableGutters maxWidth="lg" sx={{ minHeight: '50px' }}>
           <Toolbar disableGutters sx={{
             alignItems: 'center',
             minHeight: '50px',

@@ -7,6 +7,7 @@ import { ADD_VIDEO_POST, UPDATE_VIDEO_POST } from '../utils/mutations'
 import Auth from "../utils/auth"
 import { Button, Typography, Container, Paper } from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import { QUERY_SINGLE_PROFILE } from '../utils/queries'
 
 
 const Upload = () => {
@@ -100,7 +101,11 @@ const Upload = () => {
 				postedBy: userId,
 				videoSrc: uploadedVideoUrl,
 				// tags 
-			}
+			},
+			refetchQueries: [
+				QUERY_SINGLE_PROFILE, // DocumentNode object parsed with gql
+				'singleProfile' // Query name
+			],
 		})
 	
 		if (response && response.data) {

@@ -65,6 +65,10 @@ export const ADD_VIDEO_POST = gql`
       thumbnail
       postedBy {
         _id
+        username
+        uploadedVideos {
+          _id
+        }
       }
     }
   }

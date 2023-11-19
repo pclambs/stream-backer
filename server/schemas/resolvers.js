@@ -44,7 +44,13 @@ const resolvers = {
     },
     videoPost: async (parent, { videoPostId }) => {
       return await VideoPost.findOne({ _id: videoPostId })
-        .populate("postedBy")
+        .populate({
+          path: "postedBy",
+          populate: {
+            path: "uploadedVideos",
+            model: 'VideoPost'
+          }
+        })
         .populate({
           path: "comments",
           populate: {

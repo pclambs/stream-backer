@@ -7,6 +7,7 @@ import CommentForm from './CommentForm'
 import { ADD_COMMENT } from '../utils/mutations'
 import { QUERY_COMMENTS } from '../utils/queries'
 import { Button, Box, Container } from '@mui/material'
+import submitSound from '../assets/sounds/chat.mp3'
 
 import Auth from "../utils/auth"
 
@@ -59,6 +60,11 @@ const CommentContainer = ({ comments }) => {
 					})
 				},
 			})
+
+			// play submit sound
+			const audio = new Audio(submitSound)
+			audio.volume = 0.15
+			audio.play()
 
 			// alert('Comment Added!')
 			closeForm()

@@ -88,7 +88,7 @@ const Profile = () => {
                   >
                     <ProfileAvatar
                       profile={profile}
-                      sx={{ width: 150, height: 150 }}
+                      // sx={{ width: 150, height: 150 }}
                     />
                   </Tooltip>
                 }

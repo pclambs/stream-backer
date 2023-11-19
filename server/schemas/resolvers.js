@@ -40,7 +40,6 @@ const resolvers = {
             model: 'Profile'
           }
         })
-        .populate('postedBy')
     },
     videoPost: async (parent, { videoPostId }) => {
       return await VideoPost.findOne({ _id: videoPostId })
@@ -96,13 +95,16 @@ const resolvers = {
       const token = signToken(profile);
       return { token, profile };
     },
-    addVideoPost: async (parent, { title, description, thumbnail, postedBy, videoSRC }) => {
-      const videoPost = await VideoPost.create({ title, description, thumbnail, postedBy, videoSRC })
+addVideoPost: async (parent, { title, description, thumbnail, postedBy, videoSRC }) => {
+      let videoPost = await VideoPost.create({ title, description, thumbnail, postedBy, videoSRC })
+          videoPost = await VideoPost.findById(videoPost._id).populate('postedBy')
+      
       await Profile.findByIdAndUpdate(
-        postedBy._id,
+        postedBy,
         { $push: { uploadedVideos: videoPost._id } },
         { new: true }
       )
+
       return videoPost
     },
     updateVideoPost: async (parent, { videoPostId, title, description, thumbnail, videoSRC }) => {

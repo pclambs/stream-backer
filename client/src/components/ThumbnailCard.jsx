@@ -1,16 +1,18 @@
 import ProfileAvatar from "./ProfileAvatar"
-import { useNavigate, useParams } from "react-router-dom"
-import { Paper, Grid, Box, Typography, Tooltip, Button } from "@mui/material"
+import { useNavigate } from "react-router-dom"
+import { Paper, Grid, Box, Stack, Typography, Tooltip, Button } from "@mui/material"
 import { getRelativeTime } from "../utils/helpers"
 import Auth from "../utils/auth"
 import playBtn from "../assets/stream-backer-play.png"
+import EditAndDeleteMenu from './EditAndDeleteMenu'
 
 const ThumbnailCard = ({ videoPost }) => {
 	const { _id, thumbnail, title, createdAt, postedBy } = videoPost
 
-	const { profileId } = useParams()
-	const loggedInUserId = Auth.getProfile()?.data?._id
-	const isMyProfile = profileId === loggedInUserId
+	const isLoggedIn = Auth.loggedIn()
+	const videoPostedById = postedBy?._id
+	const loggedInUserId = isLoggedIn ? Auth.getProfile()?.data?._id : null
+	const isMyVideo = videoPostedById === loggedInUserId
 
 	const relativeTime = getRelativeTime(createdAt)
 
@@ -45,21 +47,35 @@ const ThumbnailCard = ({ videoPost }) => {
 							// opacity: '.9',
 							zIndex: 1,
 							filter: 'drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4))',
-						} 
+						}
 					}}
 				>
 					{/* TODO: Add thumbnails to data */}
 					<img src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" />
 				</Button>
-				<Box paddingX={1}>
-					<Box
-						sx={{
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "space-between",
-							padding: 0
-						}}
+				<Box
+					paddingX={0.8}
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "space-between",
+					}}
+				>
+					<Stack 
+						direction="row" 
+            spacing={1}
+						width="100%"
 					>
+						<Box 
+							sx={{
+								display: "flex",
+								alignItems: "center",
+							}}
+						>
+							<Tooltip title={postedBy.username}>
+								<ProfileAvatar profile={postedBy} />
+							</Tooltip>
+						</Box>
 						<Box sx={{ maxWidth: 'calc(100% - 50px)' }}>
 							<Typography
 								variant="h6"
@@ -91,10 +107,8 @@ const ThumbnailCard = ({ videoPost }) => {
 								{relativeTime}
 							</Typography>
 						</Box>
-						<Tooltip title={postedBy.username}>
-							<ProfileAvatar profile={postedBy} />
-						</Tooltip>
-					</Box>
+					</Stack>
+					{isMyVideo && <EditAndDeleteMenu />}
 				</Box>
 			</Paper>
 		</Grid>

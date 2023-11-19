@@ -32,7 +32,7 @@ function Header() {
   const settings = Auth.loggedIn()
     ? [
       { title: "Profile", link: `/profile/${userId}`, icon: <PersonIcon sx={{ fontSize: '1.25rem' }} /> },
-      { title: "Account", link: "/account", icon: <SettingsIcon sx={{ fontSize: '1.25rem' }} /> },
+      // { title: "Account", link: "/account", icon: <SettingsIcon sx={{ fontSize: '1.25rem' }} /> },
       { title: "Upload", link: "/upload", icon: <UploadIcon sx={{ fontSize: '1.25rem' }} /> },
       { title: "Log out", action: logout, icon: <LogoutIcon sx={{ fontSize: '1.25rem', transform: 'translateX(2px)' }} /> }
     ] : [
@@ -40,7 +40,6 @@ function Header() {
       { title: "Sign up", link: "/signup", icon: <SignupIcon sx={{ fontSize: '1.25rem' }} /> }
     ]
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
 
   const handleOpenUserMenu = (event) => {

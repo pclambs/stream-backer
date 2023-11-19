@@ -1,11 +1,16 @@
 import ProfileAvatar from "./ProfileAvatar"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Paper, Grid, Box, Typography, Tooltip, Button } from "@mui/material"
 import { getRelativeTime } from "../utils/helpers"
+import Auth from "../utils/auth"
 import playBtn from "../assets/stream-backer-play.png"
 
 const ThumbnailCard = ({ videoPost }) => {
 	const { _id, thumbnail, title, createdAt, postedBy } = videoPost
+
+	const { profileId } = useParams()
+	const loggedInUserId = Auth.getProfile()?.data?._id
+	const isMyProfile = profileId === loggedInUserId
 
 	const relativeTime = getRelativeTime(createdAt)
 

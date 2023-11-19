@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
-import { QUERY_SINGLE_PROFILE } from "../utils/queries";
-import { UPDATE_PROFILE } from "../utils/mutations";
-import UserForm from "../components/UserForm";
-import ProfileAvatar from "../components/ProfileAvatar";
+import { useParams } from "react-router-dom"
+import { useQuery, useMutation } from "@apollo/client"
+import Auth from "../utils/auth"
+import { QUERY_SINGLE_PROFILE } from "../utils/queries"
+import { UPDATE_PROFILE } from "../utils/mutations"
+import UserForm from "../components/UserForm"
+import ProfileAvatar from "../components/ProfileAvatar"
 import CustomTextField from '../components/CustomTextField'
 import { Container, Box, Stack, Paper, CardHeader, Tooltip, IconButton, CardContent, Typography, Grid, Fab } from "@mui/material"
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import ModeEditIcon from '@mui/icons-material/ModeEdit'
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn'
 import { getRelativeTime } from "../utils/helpers"
 import ThumbnailCard from "../components/ThumbnailCard"
+import theme from '../utils/theme'
 
 
 const Profile = () => {
@@ -88,7 +89,10 @@ const Profile = () => {
                   >
                     <ProfileAvatar
                       profile={profile}
-                      // sx={{ width: 150, height: 150 }}
+                      // sx={{ 
+                      //   width: theme.spacing(4), 
+                      //   height: theme.spacing(4) 
+                      // }}
                     />
                   </Tooltip>
                 }

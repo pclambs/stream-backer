@@ -11,13 +11,16 @@ import Auth from "../utils/auth"
 import ProfileAvatar from './ProfileAvatar'
 
 const CommentCard = ({ comment }) => {
+  // console.log(comment)
+  const { postedBy } = comment
+  
   const [updateComment] = useMutation(UPDATE_COMMENT)
   const [removeComment] = useMutation(REMOVE_COMMENT)
   const [isEditing, setIsEditing] = useState(false)
 
   const isLoggedIn = Auth.loggedIn()
-  // const username = Auth.getProfile()?.data?.username;
-  const { postedBy } = comment
+  const loggedInUserId = Auth.getProfile()?.data?._id
+  const isMyComment = postedBy._id === loggedInUserId
 
   const relativeTime = getRelativeTime(comment.createdAt)
 
@@ -114,21 +117,25 @@ const CommentCard = ({ comment }) => {
                   transform: "translateY(5px)"
                 }}
               >
-                <IconButton
-                  size="small"
-                  color="info"
-                  onClick={() => setIsEditing(true)}
-                >
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  size="small"
-                  id="deleteButton"
-                  color="info"
-                  onClick={handleDelete}
-                >
-                  <DeleteIcon />
-                </IconButton>
+                {isMyComment &&
+                  <>
+                    <IconButton
+                      size="small"
+                      color="info"
+                      onClick={() => setIsEditing(true)}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      id="deleteButton"
+                      color="info"
+                      onClick={handleDelete}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </>
+                }
               </Stack>
             }
             title={postedBy.username}

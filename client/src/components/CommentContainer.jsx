@@ -1,11 +1,12 @@
 // CommentContainer.jsx
 import React, { useState } from 'react'
+import { useMutation, useQuery } from '@apollo/client'
+import { useParams } from "react-router-dom"
 import CommentCard from './CommentCard'
 import CommentForm from './CommentForm'
-import { Button, Box, Container } from '@mui/material'
-import { useMutation } from '@apollo/client'
 import { ADD_COMMENT } from '../utils/mutations'
-import { useParams } from "react-router-dom"
+import { QUERY_COMMENTS } from '../utils/queries'
+import { Button, Box, Container } from '@mui/material'
 
 import Auth from "../utils/auth"
 
@@ -14,7 +15,15 @@ const CommentContainer = ({ comments }) => {
     const [addComment] = useMutation(ADD_COMMENT)
     const { videoPostId } = useParams()
     const loggedInUserId = Auth.getProfile()?.data?._id
-    // console.log("Profile Data", Auth.getProfile()?.data)
+
+    const { loading, error, data } = useQuery(QUERY_COMMENTS, {
+        variables: { videoPostId }
+    })
+
+    if (loading) return <p>Loading...</p>
+    if (error) return <p>Error: {error.message}</p>
+
+    const commentsData = data?.comments || comments || []
 
     const handlePostCommentClick = () => {
         setIsEditingForm(true)       
@@ -25,9 +34,6 @@ const CommentContainer = ({ comments }) => {
     }
 
     const handleCommentSubmit = async (newCommentBody) => {
-        // TODO push comment to VideoPost comments array
-
-        //creates new comment object
         const newComment = {
             commentBody: newCommentBody,
             postedTo: videoPostId,
@@ -36,15 +42,27 @@ const CommentContainer = ({ comments }) => {
 
         try {
             await addComment({
-                variables: newComment
+                variables: newComment,
+                // Update cache if needed to reflect the new comment
+                update: (cache, { data: { addComment } }) => {
+                    const existingComments = cache.readQuery({
+                        query: QUERY_COMMENTS,
+                        variables: { videoPostId },
+                    });
+
+                    cache.writeQuery({
+                        query: QUERY_COMMENTS,
+                        variables: { videoPostId },
+                        data: {
+                            comments: [...existingComments.comments, addComment],
+                        },
+                    })
+                },
             })
-            //TODO replace alert with better option
-            alert('Comment Added!')
-            //TODO replace this with better option
-            setTimeout(() => {
-                window.location.reload();
-            }, 500)
-        } catch(error) {
+
+            // alert('Comment Added!')
+            closeForm()
+        } catch (error) {
             console.error(error)
         }
     }
@@ -54,6 +72,7 @@ const CommentContainer = ({ comments }) => {
             component="div"
             className="comment-container"
             disableGutters
+            comments={data?.comments || []}
         >
             
             {!isEditingForm && loggedInUserId && (
@@ -86,7 +105,7 @@ const CommentContainer = ({ comments }) => {
                     />
                 </>
             )}
-            {comments.map((comment, index) => (
+            {commentsData.map((comment, index) => (
                 <CommentCard
                     key={index}
                     comment={comment}

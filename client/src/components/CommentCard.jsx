@@ -13,15 +13,14 @@ import ProfileAvatar from './ProfileAvatar'
 const CommentCard = ({ comment }) => {
   // console.log(comment)
   const { postedBy } = comment
-  
+
   const [updateComment] = useMutation(UPDATE_COMMENT)
   const [removeComment] = useMutation(REMOVE_COMMENT)
   const [isEditing, setIsEditing] = useState(false)
 
   const isLoggedIn = Auth.loggedIn()
-  const commentId = postedBy?._id
-  const loggedInUserId = isLoggedIn ? Auth.getProfile()?.data?._id : null
-  const isMyComment = commentId === loggedInUserId
+  const loggedInUserId = Auth.getProfile()?.data?._id
+  const isMyComment = postedBy._id === loggedInUserId
 
   const relativeTime = getRelativeTime(comment.createdAt)
 
@@ -61,14 +60,14 @@ const CommentCard = ({ comment }) => {
       console.error('Error deleting comment:', error)
     }
   };
-  
+
   return (
     <Box
       component="div"
       className="comment-card"
       sx={{
         // '& .MuiTextField-root': { m: 1, width: '25ch' },
-        marginBottom: "20px",
+        marginBottom: ".5rem",
         width: "100%"
       }}>
       {isEditing && isLoggedIn ? (
@@ -81,19 +80,29 @@ const CommentCard = ({ comment }) => {
 
         />
       ) : (
-        <Paper 
+        <Paper
           elevation={2}
-          sx={{ width: "100%" }}
+          sx={{
+            width: "100%",
+            padding: '0'
+          }}
         >
           <CardHeader
             sx={{
               borderBottom: 1,
               borderColor: "primary.main",
-              mx:"16px",
-              px: "0px"
+              mx: ".5rem",
+              px: "0px",
+              py: ".5rem",
+              '& .MuiCardHeader-avatar': {
+                marginRight: '.5rem',
+              },
+              '& .MuiCardHeader-subheader': {
+                color: '#808080'
+              },
             }}
             avatar={
-              <Tooltip 
+              <Tooltip
                 title={postedBy.username}
                 PopperProps={{
                   modifiers: [
@@ -106,15 +115,15 @@ const CommentCard = ({ comment }) => {
                   ],
                 }}
               >
-                <ProfileAvatar profile={postedBy}/>
+                <ProfileAvatar profile={postedBy} />
               </Tooltip>
             }
             action={
-              <Stack 
-                direction="row" 
+              <Stack
+                direction="row"
                 spacing={1}
                 sx={{
-                  marginRight: "10px",
+                  marginRight: "8px",
                   transform: "translateY(5px)"
                 }}
               >
@@ -142,8 +151,14 @@ const CommentCard = ({ comment }) => {
             title={postedBy.username}
             subheader={relativeTime}
           />
-          <CardContent>
-            <Typography component="p" variant="body2" color="text.secondary">
+          <CardContent 
+            sx={{
+              padding: '1rem',
+              "&:last-child": {
+                paddingBottom: '.75rem'
+              }
+            }}>
+            <Typography component="p" variant="body2" color="white" p={0}>
               {comment.commentBody}
             </Typography>
           </CardContent>

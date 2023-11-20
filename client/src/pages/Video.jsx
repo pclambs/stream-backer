@@ -21,12 +21,7 @@ const Video = () => {
 
   return (
     <Container disableGutters>
-      <Box 
-      display="flex"
-      flexDirection="column" 
-      justifyContent="center" 
-      alignItems="center" 
-      sx={{marginTop: 1}}>
+      <Box marginTop={1.1}> 
         {/* display error */}
         {error && <p>{error.message}</p>}
         {/* display loading */}

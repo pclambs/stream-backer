@@ -78,14 +78,13 @@ form {
   object-fit: cover;
 }
 
-/* .cardThumbnail:hover {
-  transform: scale(1.05);
-} */
-
 video {
   width: 100%; 
   height: auto; 
   max-width: 100%;
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
 }
 
 .file-drop {
@@ -97,6 +96,13 @@ video {
 }
 
 /* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+  .header-avatar {
+    margin-right: .5rem;
+  }
+}
+
+/* Media query for larger screens */
 @media screen and (min-width: 1245px) {
   .logo {
     padding-left: 0;

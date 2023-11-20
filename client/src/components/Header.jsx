@@ -52,7 +52,7 @@ function Header() {
 
   return (
     <header>
-      <AppBar position="static">
+      <AppBar position="static" sx={{borderRadius: '4px'}}>
         <Container disableGutters maxWidth="lg" sx={{ minHeight: '50px' }}>
           <Toolbar disableGutters sx={{
             alignItems: 'center',

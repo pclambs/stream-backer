@@ -29,15 +29,19 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, closeForm, isEdit
       elevation={2}
       sx={{ 
         width: "100%",
-        marginBottom: "20px"
+        marginBottom: ".5rem"
       }}
     >
       <CardHeader
         sx={{
           borderBottom: 1,
           borderColor: "primary.main",
-          mx:"16px",
-          px: "0px"
+          mx: ".5rem",
+          px: "0px",
+          py: ".5rem",
+          '& .MuiCardHeader-avatar': {
+            marginRight: '.5rem',
+          },
         }}
         avatar={
           <UserAvatar />
@@ -62,15 +66,27 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, closeForm, isEdit
           </Stack>
         }
         title={username}
-      subheader={format(Date.now(), "h:mm aaa")}
+        subheader={format(Date.now(), "h:mm aaa")}
       />
-      <CardContent>
+      <CardContent
+    
+        sx={{
+          "&:last-child": {
+            paddingBottom: '1rem',
+            paddingTop: '.5rem'
+          },
+          '& .MuiCardContent-root': {
+            margin: '.5rem',
+          },
+        }}
+      >
         <Box
           component="form"
           noValidate
           autoComplete="off"
           sx={{
-            width: "100%"
+            width: "100%",
+
           }}
         >
           <CustomTextField

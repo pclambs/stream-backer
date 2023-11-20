@@ -89,7 +89,7 @@ const CommentContainer = ({ comments }) => {
 					color="primary"
 					onClick={handlePostCommentClick}
 					sx={{
-						margin: "9px"
+						marginBottom: "8px"
 					}}
 				>
 					Add a Comment
@@ -102,7 +102,7 @@ const CommentContainer = ({ comments }) => {
 						color="primary"
 						onClick={closeForm}
 						sx={{
-							margin: "9px"
+							marginBottom: "8px"
 						}}
 					>Cancel
 					</Button>
@@ -117,6 +117,7 @@ const CommentContainer = ({ comments }) => {
 				<CommentCard
 					key={index}
 					comment={comment}
+					p={0}
 				/>
 			))}
 		</Container>

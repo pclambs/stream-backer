@@ -30,7 +30,7 @@ const CustomTextField = styled(TextField)({
     },
   },
   '& .MuiInputLabel-root': {
-    color: theme.palette.secondary.main, // inactive label color
+    color: theme.palette.secondary.info, // inactive label color
   },
   '& .MuiInputLabel-root.Mui-focused': {
     color: theme.palette.primary.main, // focused label color

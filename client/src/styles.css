@@ -92,6 +92,9 @@ video {
   transition: all .2s ease-in-out;
 }
 
+.file-drop-text span {
+  color: var(--accent)
+}
 
 /* Media query for smaller screens */
 @media screen and (min-width: 1245px) {

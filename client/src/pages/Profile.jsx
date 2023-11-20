@@ -17,7 +17,8 @@ import theme from '../utils/theme'
 
 const Profile = () => {
   const isLoggedIn = Auth.loggedIn()
-  const loggedInUserId = Auth.getProfile()?.data?._id
+	const loggedInUserId = isLoggedIn ? Auth.getProfile()?.data?._id : null
+  
 
   const { profileId } = useParams()
   // console.log("URL PARAM", profileId)

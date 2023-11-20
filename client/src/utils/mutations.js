@@ -92,12 +92,6 @@ export const REMOVE_VIDEO_POST = gql`
   mutation removeVideoPost($videoPostId: ID!) {
     removeVideoPost(videoPostId: $videoPostId) {
       _id
-      title
-      description
-      videoSRC
-      postedBy
-      createdAt
-      thumbnail
     }
   }
 `
@@ -131,13 +125,6 @@ export const REMOVE_COMMENT = gql`
   mutation removeComment($commentId: ID!) {
     removeComment(commentId: $commentId) {
       _id
-      commentBody
-      createdAt
-      postedTo
-      postedBy {
-        _id
-        username
-      }
     }
   }
 `

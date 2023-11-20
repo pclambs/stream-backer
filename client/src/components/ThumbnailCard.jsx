@@ -108,7 +108,7 @@ const ThumbnailCard = ({ videoPost }) => {
 							</Typography>
 						</Box>
 					</Stack>
-					{isMyVideo && <EditAndDeleteMenu />}
+					{isMyVideo && <EditAndDeleteMenu videoPost={videoPost}/>}
 				</Box>
 			</Paper>
 		</Grid>

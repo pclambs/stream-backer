@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { useMutation } from '@apollo/client'
 import { Typography, Tooltip, IconButton, ListItemIcon } from "@mui/material"
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
+import { REMOVE_VIDEO_POST } from '../utils/mutations';
 
-const EditAndDeleteMenu = () => {
+const EditAndDeleteMenu = ({ videoPost, comment }) => {
 
   const [anchorElUser, setAnchorElUser] = React.useState(null)
 
@@ -16,6 +18,19 @@ const EditAndDeleteMenu = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
+  }
+
+  const [removeVideoPost] = useMutation(REMOVE_VIDEO_POST)
+
+  const handleDeleteVideoPost = async () => {
+    try {
+      await removeVideoPost({
+        variables: { videoPostId: videoPost._id}
+      })
+      handleCloseUserMenu()
+    } catch(err) {
+      console.error(err)
+    }
   }
 
   return (
@@ -47,18 +62,18 @@ const EditAndDeleteMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem onClick={() => {handleCloseUserMenu()}}>
+        <MenuItem onClick={() => {handleDeleteVideoPost()}}>
           <ListItemIcon>
             <EditIcon sx={{ fontSize: '1.25rem' }} />
           </ListItemIcon>
           <Typography sx={{ fontSize: '0.875rem' }}>Edit</Typography>
         </MenuItem>
 
-        <MenuItem onClick={() => {handleCloseUserMenu()}}>
+        <MenuItem onClick={() => {handleDeleteVideoPost()}}>
           <ListItemIcon>
-            <DeleteIcon sx={{ fontSize: '1.25rem' }} />
+            <DeleteIcon color="error" sx={{ fontSize: '1.25rem' }} />
           </ListItemIcon>
-          <Typography sx={{ fontSize: '0.875rem' }}>Delete</Typography>
+          <Typography color="error" sx={{ fontSize: '0.875rem' }}>Delete</Typography>
         </MenuItem>
       </Menu>
     </>

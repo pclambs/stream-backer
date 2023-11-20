@@ -15,7 +15,9 @@ const CommentContainer = ({ comments }) => {
 	const [isEditingForm, setIsEditingForm] = useState(false)
 	const [addComment] = useMutation(ADD_COMMENT)
 	const { videoPostId } = useParams()
-	const loggedInUserId = Auth.getProfile()?.data?._id
+
+	const isLoggedIn = Auth.loggedIn()
+	const loggedInUserId = isLoggedIn ? Auth.getProfile()?.data?._id : null
 
 	const { loading, error, data } = useQuery(QUERY_COMMENTS, {
 		variables: { videoPostId }

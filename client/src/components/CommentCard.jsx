@@ -19,8 +19,9 @@ const CommentCard = ({ comment }) => {
   const [isEditing, setIsEditing] = useState(false)
 
   const isLoggedIn = Auth.loggedIn()
-  const loggedInUserId = Auth.getProfile()?.data?._id
-  const isMyComment = postedBy._id === loggedInUserId
+  const commentId = postedBy?._id
+  const loggedInUserId = isLoggedIn ? Auth.getProfile()?.data?._id : null
+  const isMyComment = commentId === loggedInUserId
 
   const relativeTime = getRelativeTime(comment.createdAt)
 

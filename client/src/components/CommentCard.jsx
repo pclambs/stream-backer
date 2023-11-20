@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { getRelativeTime } from "../utils/helpers"
 import Auth from "../utils/auth"
 import ProfileAvatar from './ProfileAvatar'
+import { QUERY_COMMENTS } from '../utils/queries'
 
 const CommentCard = ({ comment }) => {
   // console.log(comment)
@@ -47,19 +48,33 @@ const CommentCard = ({ comment }) => {
   const handleDelete = async () => {
     try {
       await removeComment({
-        variables: { commentId: comment._id }
-      });
-      //TODO replace alert with ebtter option
-      alert("Comment deleted successfully!")
-      // Refreshes the page after 2 seconds
-      //TODO replace this with better option
-      setTimeout(() => {
-        window.location.reload();
-      }, 500)
+        variables: { commentId: comment._id },
+        update: (cache) => {
+          // read existing comments from the cache
+          const existingComments = cache.readQuery({
+            query: QUERY_COMMENTS,
+            variables: { videoPostId: comment.postedTo },
+          })
+  
+          // remove deleted comment from the existing comments
+          const updatedComments = existingComments.comments.filter(
+            (c) => c._id !== comment._id
+          )
+  
+          // write updated comments back to the cache
+          cache.writeQuery({
+            query: QUERY_COMMENTS,
+            variables: { videoPostId: comment.postedTo },
+            data: {
+              comments: updatedComments,
+            },
+          })
+        },
+      })
     } catch (error) {
       console.error('Error deleting comment:', error)
     }
-  };
+  }
 
   return (
     <Box

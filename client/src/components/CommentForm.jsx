@@ -1,5 +1,5 @@
 // CommentForm.jsx
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Button, Box, Card, CardHeader, CardContent, Stack, Paper } from '@mui/material'
 import CustomTextField from './CustomTextField'
 import UserAvatar from "./UserAvatar"
@@ -7,18 +7,26 @@ import { format } from "date-fns"
 import Auth from "../utils/auth"
 
 
+
 const CommentForm = ({ initialValue, initialComment, onSubmit, closeForm, isEditing }) => {
   const [commentBody, setCommentBody] = useState(initialValue)
+  const commentInputRef = useRef(null)
 
   useEffect(() => {
     setCommentBody(initialValue)
+    commentInputRef.current.focus()
   }, [initialValue])
+
+  const handleCommentChange = (e) => {
+    setCommentBody(e.target.value)
+  }
 
   const submitComment = () => {
     if (!commentBody) {
       return alert('Must include a comment')
     }
     onSubmit(commentBody)
+    setCommentBody('')
     closeForm()
   }
 
@@ -58,7 +66,8 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, closeForm, isEdit
             <Button
               size="small"
               variant="outlined"
-              color="info"
+              color={commentBody ? "secondary" : "info"}
+              onChange={handleCommentChange}
               onClick={submitComment}
             >
               Submit
@@ -96,12 +105,19 @@ const CommentForm = ({ initialValue, initialComment, onSubmit, closeForm, isEdit
             value={commentBody}
             onChange={(e) => setCommentBody(e.target.value)}
             variant='standard'
-            rows={4}
+            // rows={4}
             multiline
             label='Add a comment'
             helperText=""
             sx={{
               width: "100%"
+            }}
+            ref={commentInputRef}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault()
+                submitComment()
+              }
             }}
           />
         </Box>

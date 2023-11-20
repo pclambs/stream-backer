@@ -16,6 +16,7 @@ const Upload = () => {
 	const [addVideoPost] = useMutation(ADD_VIDEO_POST)
 	const [updateVideoPost] = useMutation(UPDATE_VIDEO_POST)
 	const [uploading, setUploading] = useState(false)
+	const [validTitle, setValidTitle] = useState(false)
 
 	const { videoPostId } = useParams()
 	const navigate = useNavigate()
@@ -70,6 +71,7 @@ const Upload = () => {
 			...formState,
 			[name]: value,
 		})
+		setValidTitle(value.trim() !== '')
 	}
 
 	const handleFormSubmit = async (event) => {
@@ -174,6 +176,7 @@ const Upload = () => {
 						loading={uploading}
 						loadingIndicator={null}
 						loadingPosition="start"
+						disabled={!validTitle || uploadedFiles.length === 0}
 						startIcon={!uploading && <CloudUploadIcon sx={{ marginRight: 1 }} />}
 						sx={{
 							width: '100%',

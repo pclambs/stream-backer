@@ -16,7 +16,6 @@ const tags = [
   { name: 'DIY', id: 'diy' },
 ]
 
-
 const Home = () => {
   const { selectedTags, setSelectedTags } = useSearch()
 

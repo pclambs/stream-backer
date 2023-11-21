@@ -18,11 +18,8 @@ import theme from '../utils/theme'
 const Profile = () => {
   const isLoggedIn = Auth.loggedIn()
 	const loggedInUserId = isLoggedIn ? Auth.getProfile()?.data?._id : null
-  
 
   const { profileId } = useParams()
-  // console.log("URL PARAM", profileId)
-
   const isMyProfile = profileId === loggedInUserId
 
   const [isEditMode, setIsEditMode] = useState(false)
@@ -32,7 +29,6 @@ const Profile = () => {
     variables: { profileId },
     fetchPolicy: "cache-and-network"
   })
-  // console.log("data", data)
 
   const profile = data?.profile || {}
   const videos = profile?.uploadedVideos || []
@@ -45,7 +41,6 @@ const Profile = () => {
   }, [profile])
 
   const [updateUser] = useMutation(UPDATE_PROFILE)
-  // console.log("profile", profile, Object.keys(profile).length)
 
   const relativeTime = getRelativeTime(profile.createdAt)
 
@@ -60,7 +55,6 @@ const Profile = () => {
       }}
     >
       {profile && Object.keys(profile).length > 0 ? (
-
         <Grid container spacing={2}>
           {/* Profile Info Card */}
           <Grid item xs={4}>

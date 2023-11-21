@@ -68,7 +68,6 @@ const CommentContainer = ({ comments }) => {
 			audio.volume = 0.15
 			audio.play()
 
-			// alert('Comment Added!')
 			closeForm()
 		} catch (error) {
 			console.error(error)

@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import CustomTextField from '../components/CustomTextField'
 import FileDrop from '../components/FileDrop'
 import { ADD_VIDEO_POST, UPDATE_VIDEO_POST } from '../utils/mutations'
-import { QUERY_SINGLE_PROFILE } from '../utils/queries'
+import { QUERY_SINGLE_PROFILE, QUERY_VIDEOPOSTS } from '../utils/queries'
 import Auth from "../utils/auth"
 import { Button, Typography, Container, Paper, CircularProgress } from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
@@ -60,8 +60,6 @@ const Upload = () => {
 			const data = await response.json()
 			const videoUrl = data.secure_url
 			const thumbnailUrl = `${videoUrl.slice(0, -4)}.jpg`	
-			// console.log('Video URL:', videoUrl)
-			// console.log('Thumbnail URL:', thumbnailUrl)
 	
 			return { videoUrl, thumbnailUrl }
 		} catch (error) {
@@ -120,8 +118,8 @@ const Upload = () => {
 				// tags 
 			},
 			refetchQueries: [
-				QUERY_SINGLE_PROFILE, // DocumentNode object parsed with gql
-				'singleProfile' // Query name
+      { query: QUERY_VIDEOPOSTS },
+      { query: QUERY_SINGLE_PROFILE, variables: { userId } },
 			],
 		})
 

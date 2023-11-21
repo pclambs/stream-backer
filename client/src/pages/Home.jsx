@@ -42,7 +42,10 @@ const Home = () => {
   const { loading, error, data } = useQuery(QUERY_VIDEOPOSTS)
 
   const videoPosts = data?.videoPosts || []
+  const sortedVideoPosts = [...videoPosts].sort((a, b) => parseInt(b.createdAt, 10) - parseInt(a.createdAt, 10))
 
+  console.log('Original videoPosts:', videoPosts.map((post) => post.createdAt))
+  console.log('Sorted videoPosts:', sortedVideoPosts.map((post) => post.createdAt))
   return (
     <Container maxWidth="xl" disableGutters>
       <div>
@@ -55,7 +58,7 @@ const Home = () => {
 
       <Container disableGutters sx={{marginY: 1.2}}>
         <Grid container spacing={2}>
-          {videoPosts.map((videoPost) => {
+          {sortedVideoPosts.map((videoPost) => {
             return (
               <ThumbnailCard videoPost={videoPost} key={videoPost._id}/>
             )

@@ -140,12 +140,6 @@ const Upload = () => {
 			<Paper sx={{ borderRadius: 0, padding: '.7rem', display: 'flex' }}>
 				<FileDrop onFilesAdded={handleFileAdded} />
 			</Paper>
-
-			<Paper>
-				<Typography variant='h6' sx={{ borderRadius: 0, padding: '.7rem', display: 'flex' }}>Thumbnail Stuffs</Typography>
-				{/* <img style={{padding: '.7rem', objectFit: 'fill', height: 'auto', width: '100%'}} src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" /> */}
-			</Paper>
-
 			<Paper sx={{ padding: '.7rem', borderRadius: 0 }}>
 				<form onSubmit={handleFormSubmit} encType="multipart/form-data">
 					<CustomTextField

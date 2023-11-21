@@ -59,9 +59,9 @@ const Upload = () => {
 	
 			const data = await response.json()
 			const videoUrl = data.secure_url
-			const thumbnailUrl = `${videoUrl.slice(0, -4)}.jpg`	// TODO: generate thumbnail from video
-			console.log('Video URL:', videoUrl)
-			console.log('Thumbnail URL:', thumbnailUrl)
+			const thumbnailUrl = `${videoUrl.slice(0, -4)}.jpg`	
+			// console.log('Video URL:', videoUrl)
+			// console.log('Thumbnail URL:', thumbnailUrl)
 	
 			return { videoUrl, thumbnailUrl }
 		} catch (error) {

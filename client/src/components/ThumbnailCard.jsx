@@ -51,7 +51,7 @@ const ThumbnailCard = ({ videoPost }) => {
 					}}
 				>
 					{/* TODO: Add thumbnails to data */}
-					<img src="https://tcproduction.blob.core.windows.net/media/%7B240f8b72-1159-4fd3-a150-0a837f50ba4a%7D.2573758641_297d6d19fa_o.jpg" alt="Video Thumbnail" className="cardThumbnail" />
+					<img src={thumbnail} alt="Video Thumbnail" className="cardThumbnail" />
 				</Button>
 				<Box
 					paddingX={0.8}

@@ -23,6 +23,7 @@ db.once('open', async () => {
       })
       await Profile.findByIdAndUpdate(profileId, { $push: { uploadedVideos: video._id } })
       videos.push(video)
+      // console.log(video)
     }
 
     for ( const comment of commentSeeds) {
@@ -34,7 +35,7 @@ db.once('open', async () => {
         postedTo: randomVideo._id
       })
       
-      console.log(createdComment)
+      // console.log(createdComment)
 
       await VideoPost.findByIdAndUpdate(
         randomVideo._id, 

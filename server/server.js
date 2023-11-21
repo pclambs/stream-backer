@@ -22,7 +22,7 @@ const startApolloServer = async () => {
   await server.start();
   
   app.use(express.urlencoded({ extended: false }));
-  app.use(express.json());  
+  app.use(express.json());
   
   // multer file upload route
   app.post('/upload', upload.single('file'), (req, res) => {

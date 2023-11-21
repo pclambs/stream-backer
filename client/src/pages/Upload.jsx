@@ -48,19 +48,28 @@ const Upload = () => {
 
 		try {
 			setUploading(true)
+	
+			// Upload video to Cloudinary
 			const response = await fetch(`https://api.cloudinary.com/v1_1/streamback/video/upload`, {
 				method: 'POST',
 				body: formData,
 			})
-			if (!response.ok) throw new Error('Upload failed')
-
+	
+			if (!response.ok) throw new Error('Video upload failed')
+	
 			const data = await response.json()
-			// setUploading(false)
-			return data.secure_url // The URL of the uploaded video
+			const videoUrl = data.secure_url
+			const thumbnailUrl = `${videoUrl.slice(0, -4)}.jpg`	// TODO: generate thumbnail from video
+			console.log('Video URL:', videoUrl)
+			console.log('Thumbnail URL:', thumbnailUrl)
+	
+			return { videoUrl, thumbnailUrl }
 		} catch (error) {
-			// setUploading(false)
+
 			// TODO: snackbar error message
 			console.error('Error uploading file:', error)
+		} finally {
+			setUploading(false)
 		}
 	}
 
@@ -91,26 +100,23 @@ const Upload = () => {
 		}
 
 		// upload file to Cloudinary and get URL
-		const uploadedVideoUrl = await handleFileUpload(fileToUpload)
+		const { videoUrl, thumbnailUrl } = await handleFileUpload(fileToUpload)
 
-		if (!uploadedVideoUrl) {
+		if (!videoUrl) {
 			// TODO: snackbar error message
 			console.log('Failed to upload video')
 			setUploading(false)
 			return
 		}
 
-		// TODO: generate and upload a thumbnail, then get the URL
-		const uploadedThumbnailUrl = '../assets/stream-backer-play-logo.png'
-
 		// use Cloudinary URLs in GraphQL mutation
 		const response = await addVideoPost({
 			variables: {
 				title,
 				description,
-				thumbnail: uploadedThumbnailUrl,
+				thumbnail: thumbnailUrl,
 				postedBy: userId,
-				videoSrc: uploadedVideoUrl,
+				videoSrc: videoUrl,
 				// tags 
 			},
 			refetchQueries: [

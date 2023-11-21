@@ -36,6 +36,7 @@ const Profile = () => {
 
   const profile = data?.profile || {}
   const videos = profile?.uploadedVideos || []
+  const sortedVideoPosts = [...videos].sort((a, b) => parseInt(b.createdAt, 10) - parseInt(a.createdAt, 10))
 
   useEffect(() => {
     if (profile?.bio) {
@@ -187,7 +188,7 @@ const Profile = () => {
           {/* Profile's Posted Videos Section */}
           <Grid item xs={8} sx={{}}>
             <Grid container spacing={2}>
-              {videos.map(videoPost => <ThumbnailCard videoPost={videoPost} key={videoPost._id} />)}
+              {sortedVideoPosts.map(videoPost => <ThumbnailCard videoPost={videoPost} key={videoPost._id} />)}
             </Grid>
           </Grid>
         </Grid>
